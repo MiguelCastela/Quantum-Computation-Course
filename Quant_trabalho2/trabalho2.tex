@@ -1,0 +1,1325 @@
+\documentclass[11pt]{article}
+
+    \usepackage[breakable]{tcolorbox}
+    \usepackage{parskip} % Stop auto-indenting (to mimic markdown behaviour)
+    
+
+    % Basic figure setup, for now with no caption control since it's done
+    % automatically by Pandoc (which extracts ![](path) syntax from Markdown).
+    \usepackage{graphicx}
+    % Keep aspect ratio if custom image width or height is specified
+    \setkeys{Gin}{keepaspectratio}
+    % Maintain compatibility with old templates. Remove in nbconvert 6.0
+    \let\Oldincludegraphics\includegraphics
+    % Ensure that by default, figures have no caption (until we provide a
+    % proper Figure object with a Caption API and a way to capture that
+    % in the conversion process - todo).
+    \usepackage{caption}
+    \DeclareCaptionFormat{nocaption}{}
+    \captionsetup{format=nocaption,aboveskip=0pt,belowskip=0pt}
+
+    \usepackage{float}
+    \floatplacement{figure}{H} % forces figures to be placed at the correct location
+    \usepackage{xcolor} % Allow colors to be defined
+    \usepackage{enumerate} % Needed for markdown enumerations to work
+    \usepackage{geometry} % Used to adjust the document margins
+    \usepackage{amsmath} % Equations
+    \usepackage{amssymb} % Equations
+    \usepackage{textcomp} % defines textquotesingle
+    % Hack from http://tex.stackexchange.com/a/47451/13684:
+    \AtBeginDocument{%
+        \def\PYZsq{\textquotesingle}% Upright quotes in Pygmentized code
+    }
+    \usepackage{upquote} % Upright quotes for verbatim code
+    \usepackage{eurosym} % defines \euro
+
+    \usepackage{iftex}
+    \ifPDFTeX
+        \usepackage[T1]{fontenc}
+        \IfFileExists{alphabeta.sty}{
+              \usepackage{alphabeta}
+          }{
+              \usepackage[mathletters]{ucs}
+              \usepackage[utf8x]{inputenc}
+          }
+    \else
+        \usepackage{fontspec}
+        \usepackage{unicode-math}
+    \fi
+
+    \usepackage{fancyvrb} % verbatim replacement that allows latex
+    \usepackage{grffile} % extends the file name processing of package graphics
+                         % to support a larger range
+    \makeatletter % fix for old versions of grffile with XeLaTeX
+    \@ifpackagelater{grffile}{2019/11/01}
+    {
+      % Do nothing on new versions
+    }
+    {
+      \def\Gread@@xetex#1{%
+        \IfFileExists{"\Gin@base".bb}%
+        {\Gread@eps{\Gin@base.bb}}%
+        {\Gread@@xetex@aux#1}%
+      }
+    }
+    \makeatother
+    \usepackage[Export]{adjustbox} % Used to constrain images to a maximum size
+    \adjustboxset{max size={0.9\linewidth}{0.9\paperheight}}
+
+    % The hyperref package gives us a pdf with properly built
+    % internal navigation ('pdf bookmarks' for the table of contents,
+    % internal cross-reference links, web links for URLs, etc.)
+    \usepackage{hyperref}
+    % The default LaTeX title has an obnoxious amount of whitespace. By default,
+    % titling removes some of it. It also provides customization options.
+    \usepackage{titling}
+    \usepackage{longtable} % longtable support required by pandoc >1.10
+    \usepackage{booktabs}  % table support for pandoc > 1.12.2
+    \usepackage{array}     % table support for pandoc >= 2.11.3
+    \usepackage{calc}      % table minipage width calculation for pandoc >= 2.11.1
+    \usepackage[inline]{enumitem} % IRkernel/repr support (it uses the enumerate* environment)
+    \usepackage[normalem]{ulem} % ulem is needed to support strikethroughs (\sout)
+                                % normalem makes italics be italics, not underlines
+    \usepackage{soul}      % strikethrough (\st) support for pandoc >= 3.0.0
+    \usepackage{mathrsfs}
+    
+
+    
+    % Colors for the hyperref package
+    \definecolor{urlcolor}{rgb}{0,.145,.698}
+    \definecolor{linkcolor}{rgb}{.71,0.21,0.01}
+    \definecolor{citecolor}{rgb}{.12,.54,.11}
+
+    % ANSI colors
+    \definecolor{ansi-black}{HTML}{3E424D}
+    \definecolor{ansi-black-intense}{HTML}{282C36}
+    \definecolor{ansi-red}{HTML}{E75C58}
+    \definecolor{ansi-red-intense}{HTML}{B22B31}
+    \definecolor{ansi-green}{HTML}{00A250}
+    \definecolor{ansi-green-intense}{HTML}{007427}
+    \definecolor{ansi-yellow}{HTML}{DDB62B}
+    \definecolor{ansi-yellow-intense}{HTML}{B27D12}
+    \definecolor{ansi-blue}{HTML}{208FFB}
+    \definecolor{ansi-blue-intense}{HTML}{0065CA}
+    \definecolor{ansi-magenta}{HTML}{D160C4}
+    \definecolor{ansi-magenta-intense}{HTML}{A03196}
+    \definecolor{ansi-cyan}{HTML}{60C6C8}
+    \definecolor{ansi-cyan-intense}{HTML}{258F8F}
+    \definecolor{ansi-white}{HTML}{C5C1B4}
+    \definecolor{ansi-white-intense}{HTML}{A1A6B2}
+    \definecolor{ansi-default-inverse-fg}{HTML}{FFFFFF}
+    \definecolor{ansi-default-inverse-bg}{HTML}{000000}
+
+    % common color for the border for error outputs.
+    \definecolor{outerrorbackground}{HTML}{FFDFDF}
+
+    % commands and environments needed by pandoc snippets
+    % extracted from the output of `pandoc -s`
+    \providecommand{\tightlist}{%
+      \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+    \DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\{\}}
+    % Add ',fontsize=\small' for more characters per line
+    \newenvironment{Shaded}{}{}
+    \newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{{#1}}}}
+    \newcommand{\DataTypeTok}[1]{\textcolor[rgb]{0.56,0.13,0.00}{{#1}}}
+    \newcommand{\DecValTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\BaseNTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\FloatTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\CharTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\StringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\CommentTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textit{{#1}}}}
+    \newcommand{\OtherTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{{#1}}}
+    \newcommand{\AlertTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{{#1}}}}
+    \newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.02,0.16,0.49}{{#1}}}
+    \newcommand{\RegionMarkerTok}[1]{{#1}}
+    \newcommand{\ErrorTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{{#1}}}}
+    \newcommand{\NormalTok}[1]{{#1}}
+
+    % Additional commands for more recent versions of Pandoc
+    \newcommand{\ConstantTok}[1]{\textcolor[rgb]{0.53,0.00,0.00}{{#1}}}
+    \newcommand{\SpecialCharTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\VerbatimStringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\SpecialStringTok}[1]{\textcolor[rgb]{0.73,0.40,0.53}{{#1}}}
+    \newcommand{\ImportTok}[1]{{#1}}
+    \newcommand{\DocumentationTok}[1]{\textcolor[rgb]{0.73,0.13,0.13}{\textit{{#1}}}}
+    \newcommand{\AnnotationTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\CommentVarTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\VariableTok}[1]{\textcolor[rgb]{0.10,0.09,0.49}{{#1}}}
+    \newcommand{\ControlFlowTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{{#1}}}}
+    \newcommand{\OperatorTok}[1]{\textcolor[rgb]{0.40,0.40,0.40}{{#1}}}
+    \newcommand{\BuiltInTok}[1]{{#1}}
+    \newcommand{\ExtensionTok}[1]{{#1}}
+    \newcommand{\PreprocessorTok}[1]{\textcolor[rgb]{0.74,0.48,0.00}{{#1}}}
+    \newcommand{\AttributeTok}[1]{\textcolor[rgb]{0.49,0.56,0.16}{{#1}}}
+    \newcommand{\InformationTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\WarningTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+
+
+    % Define a nice break command that doesn't care if a line doesn't already
+    % exist.
+    \def\br{\hspace*{\fill} \\* }
+    % Math Jax compatibility definitions
+    \def\gt{>}
+    \def\lt{<}
+    \let\Oldtex\TeX
+    \let\Oldlatex\LaTeX
+    \renewcommand{\TeX}{\textrm{\Oldtex}}
+    \renewcommand{\LaTeX}{\textrm{\Oldlatex}}
+    % Document parameters
+    % Document title
+    \title{trabalho2}
+    
+    
+    
+    
+    
+    
+    
+% Pygments definitions
+\makeatletter
+\def\PY@reset{\let\PY@it=\relax \let\PY@bf=\relax%
+    \let\PY@ul=\relax \let\PY@tc=\relax%
+    \let\PY@bc=\relax \let\PY@ff=\relax}
+\def\PY@tok#1{\csname PY@tok@#1\endcsname}
+\def\PY@toks#1+{\ifx\relax#1\empty\else%
+    \PY@tok{#1}\expandafter\PY@toks\fi}
+\def\PY@do#1{\PY@bc{\PY@tc{\PY@ul{%
+    \PY@it{\PY@bf{\PY@ff{#1}}}}}}}
+\def\PY#1#2{\PY@reset\PY@toks#1+\relax+\PY@do{#2}}
+
+\@namedef{PY@tok@w}{\def\PY@tc##1{\textcolor[rgb]{0.73,0.73,0.73}{##1}}}
+\@namedef{PY@tok@c}{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.24,0.48,0.48}{##1}}}
+\@namedef{PY@tok@cp}{\def\PY@tc##1{\textcolor[rgb]{0.61,0.40,0.00}{##1}}}
+\@namedef{PY@tok@k}{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\@namedef{PY@tok@kp}{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\@namedef{PY@tok@kt}{\def\PY@tc##1{\textcolor[rgb]{0.69,0.00,0.25}{##1}}}
+\@namedef{PY@tok@o}{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\@namedef{PY@tok@ow}{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.67,0.13,1.00}{##1}}}
+\@namedef{PY@tok@nb}{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\@namedef{PY@tok@nf}{\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\@namedef{PY@tok@nc}{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\@namedef{PY@tok@nn}{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\@namedef{PY@tok@ne}{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.80,0.25,0.22}{##1}}}
+\@namedef{PY@tok@nv}{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\@namedef{PY@tok@no}{\def\PY@tc##1{\textcolor[rgb]{0.53,0.00,0.00}{##1}}}
+\@namedef{PY@tok@nl}{\def\PY@tc##1{\textcolor[rgb]{0.46,0.46,0.00}{##1}}}
+\@namedef{PY@tok@ni}{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.44,0.44,0.44}{##1}}}
+\@namedef{PY@tok@na}{\def\PY@tc##1{\textcolor[rgb]{0.41,0.47,0.13}{##1}}}
+\@namedef{PY@tok@nt}{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\@namedef{PY@tok@nd}{\def\PY@tc##1{\textcolor[rgb]{0.67,0.13,1.00}{##1}}}
+\@namedef{PY@tok@s}{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\@namedef{PY@tok@sd}{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\@namedef{PY@tok@si}{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.64,0.35,0.47}{##1}}}
+\@namedef{PY@tok@se}{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.67,0.36,0.12}{##1}}}
+\@namedef{PY@tok@sr}{\def\PY@tc##1{\textcolor[rgb]{0.64,0.35,0.47}{##1}}}
+\@namedef{PY@tok@ss}{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\@namedef{PY@tok@sx}{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\@namedef{PY@tok@m}{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\@namedef{PY@tok@gh}{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,0.50}{##1}}}
+\@namedef{PY@tok@gu}{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.50,0.00,0.50}{##1}}}
+\@namedef{PY@tok@gd}{\def\PY@tc##1{\textcolor[rgb]{0.63,0.00,0.00}{##1}}}
+\@namedef{PY@tok@gi}{\def\PY@tc##1{\textcolor[rgb]{0.00,0.52,0.00}{##1}}}
+\@namedef{PY@tok@gr}{\def\PY@tc##1{\textcolor[rgb]{0.89,0.00,0.00}{##1}}}
+\@namedef{PY@tok@ge}{\let\PY@it=\textit}
+\@namedef{PY@tok@gs}{\let\PY@bf=\textbf}
+\@namedef{PY@tok@ges}{\let\PY@bf=\textbf\let\PY@it=\textit}
+\@namedef{PY@tok@gp}{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,0.50}{##1}}}
+\@namedef{PY@tok@go}{\def\PY@tc##1{\textcolor[rgb]{0.44,0.44,0.44}{##1}}}
+\@namedef{PY@tok@gt}{\def\PY@tc##1{\textcolor[rgb]{0.00,0.27,0.87}{##1}}}
+\@namedef{PY@tok@err}{\def\PY@bc##1{{\setlength{\fboxsep}{\string -\fboxrule}\fcolorbox[rgb]{1.00,0.00,0.00}{1,1,1}{\strut ##1}}}}
+\@namedef{PY@tok@kc}{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\@namedef{PY@tok@kd}{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\@namedef{PY@tok@kn}{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\@namedef{PY@tok@kr}{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\@namedef{PY@tok@bp}{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\@namedef{PY@tok@fm}{\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\@namedef{PY@tok@vc}{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\@namedef{PY@tok@vg}{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\@namedef{PY@tok@vi}{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\@namedef{PY@tok@vm}{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\@namedef{PY@tok@sa}{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\@namedef{PY@tok@sb}{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\@namedef{PY@tok@sc}{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\@namedef{PY@tok@dl}{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\@namedef{PY@tok@s2}{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\@namedef{PY@tok@sh}{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\@namedef{PY@tok@s1}{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\@namedef{PY@tok@mb}{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\@namedef{PY@tok@mf}{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\@namedef{PY@tok@mh}{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\@namedef{PY@tok@mi}{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\@namedef{PY@tok@il}{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\@namedef{PY@tok@mo}{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\@namedef{PY@tok@ch}{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.24,0.48,0.48}{##1}}}
+\@namedef{PY@tok@cm}{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.24,0.48,0.48}{##1}}}
+\@namedef{PY@tok@cpf}{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.24,0.48,0.48}{##1}}}
+\@namedef{PY@tok@c1}{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.24,0.48,0.48}{##1}}}
+\@namedef{PY@tok@cs}{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.24,0.48,0.48}{##1}}}
+
+\def\PYZbs{\char`\\}
+\def\PYZus{\char`\_}
+\def\PYZob{\char`\{}
+\def\PYZcb{\char`\}}
+\def\PYZca{\char`\^}
+\def\PYZam{\char`\&}
+\def\PYZlt{\char`\<}
+\def\PYZgt{\char`\>}
+\def\PYZsh{\char`\#}
+\def\PYZpc{\char`\%}
+\def\PYZdl{\char`\$}
+\def\PYZhy{\char`\-}
+\def\PYZsq{\char`\'}
+\def\PYZdq{\char`\"}
+\def\PYZti{\char`\~}
+% for compatibility with earlier versions
+\def\PYZat{@}
+\def\PYZlb{[}
+\def\PYZrb{]}
+\makeatother
+
+
+    % For linebreaks inside Verbatim environment from package fancyvrb.
+    \makeatletter
+        \newbox\Wrappedcontinuationbox
+        \newbox\Wrappedvisiblespacebox
+        \newcommand*\Wrappedvisiblespace {\textcolor{red}{\textvisiblespace}}
+        \newcommand*\Wrappedcontinuationsymbol {\textcolor{red}{\llap{\tiny$\m@th\hookrightarrow$}}}
+        \newcommand*\Wrappedcontinuationindent {3ex }
+        \newcommand*\Wrappedafterbreak {\kern\Wrappedcontinuationindent\copy\Wrappedcontinuationbox}
+        % Take advantage of the already applied Pygments mark-up to insert
+        % potential linebreaks for TeX processing.
+        %        {, <, #, %, $, ' and ": go to next line.
+        %        _, }, ^, &, >, - and ~: stay at end of broken line.
+        % Use of \textquotesingle for straight quote.
+        \newcommand*\Wrappedbreaksatspecials {%
+            \def\PYGZus{\discretionary{\char`\_}{\Wrappedafterbreak}{\char`\_}}%
+            \def\PYGZob{\discretionary{}{\Wrappedafterbreak\char`\{}{\char`\{}}%
+            \def\PYGZcb{\discretionary{\char`\}}{\Wrappedafterbreak}{\char`\}}}%
+            \def\PYGZca{\discretionary{\char`\^}{\Wrappedafterbreak}{\char`\^}}%
+            \def\PYGZam{\discretionary{\char`\&}{\Wrappedafterbreak}{\char`\&}}%
+            \def\PYGZlt{\discretionary{}{\Wrappedafterbreak\char`\<}{\char`\<}}%
+            \def\PYGZgt{\discretionary{\char`\>}{\Wrappedafterbreak}{\char`\>}}%
+            \def\PYGZsh{\discretionary{}{\Wrappedafterbreak\char`\#}{\char`\#}}%
+            \def\PYGZpc{\discretionary{}{\Wrappedafterbreak\char`\%}{\char`\%}}%
+            \def\PYGZdl{\discretionary{}{\Wrappedafterbreak\char`\$}{\char`\$}}%
+            \def\PYGZhy{\discretionary{\char`\-}{\Wrappedafterbreak}{\char`\-}}%
+            \def\PYGZsq{\discretionary{}{\Wrappedafterbreak\textquotesingle}{\textquotesingle}}%
+            \def\PYGZdq{\discretionary{}{\Wrappedafterbreak\char`\"}{\char`\"}}%
+            \def\PYGZti{\discretionary{\char`\~}{\Wrappedafterbreak}{\char`\~}}%
+        }
+        % Some characters . , ; ? ! / are not pygmentized.
+        % This macro makes them "active" and they will insert potential linebreaks
+        \newcommand*\Wrappedbreaksatpunct {%
+            \lccode`\~`\.\lowercase{\def~}{\discretionary{\hbox{\char`\.}}{\Wrappedafterbreak}{\hbox{\char`\.}}}%
+            \lccode`\~`\,\lowercase{\def~}{\discretionary{\hbox{\char`\,}}{\Wrappedafterbreak}{\hbox{\char`\,}}}%
+            \lccode`\~`\;\lowercase{\def~}{\discretionary{\hbox{\char`\;}}{\Wrappedafterbreak}{\hbox{\char`\;}}}%
+            \lccode`\~`\:\lowercase{\def~}{\discretionary{\hbox{\char`\:}}{\Wrappedafterbreak}{\hbox{\char`\:}}}%
+            \lccode`\~`\?\lowercase{\def~}{\discretionary{\hbox{\char`\?}}{\Wrappedafterbreak}{\hbox{\char`\?}}}%
+            \lccode`\~`\!\lowercase{\def~}{\discretionary{\hbox{\char`\!}}{\Wrappedafterbreak}{\hbox{\char`\!}}}%
+            \lccode`\~`\/\lowercase{\def~}{\discretionary{\hbox{\char`\/}}{\Wrappedafterbreak}{\hbox{\char`\/}}}%
+            \catcode`\.\active
+            \catcode`\,\active
+            \catcode`\;\active
+            \catcode`\:\active
+            \catcode`\?\active
+            \catcode`\!\active
+            \catcode`\/\active
+            \lccode`\~`\~
+        }
+    \makeatother
+
+    \let\OriginalVerbatim=\Verbatim
+    \makeatletter
+    \renewcommand{\Verbatim}[1][1]{%
+        %\parskip\z@skip
+        \sbox\Wrappedcontinuationbox {\Wrappedcontinuationsymbol}%
+        \sbox\Wrappedvisiblespacebox {\FV@SetupFont\Wrappedvisiblespace}%
+        \def\FancyVerbFormatLine ##1{\hsize\linewidth
+            \vtop{\raggedright\hyphenpenalty\z@\exhyphenpenalty\z@
+                \doublehyphendemerits\z@\finalhyphendemerits\z@
+                \strut ##1\strut}%
+        }%
+        % If the linebreak is at a space, the latter will be displayed as visible
+        % space at end of first line, and a continuation symbol starts next line.
+        % Stretch/shrink are however usually zero for typewriter font.
+        \def\FV@Space {%
+            \nobreak\hskip\z@ plus\fontdimen3\font minus\fontdimen4\font
+            \discretionary{\copy\Wrappedvisiblespacebox}{\Wrappedafterbreak}
+            {\kern\fontdimen2\font}%
+        }%
+
+        % Allow breaks at special characters using \PYG... macros.
+        \Wrappedbreaksatspecials
+        % Breaks at punctuation characters . , ; ? ! and / need catcode=\active
+        \OriginalVerbatim[#1,codes*=\Wrappedbreaksatpunct]%
+    }
+    \makeatother
+
+    % Exact colors from NB
+    \definecolor{incolor}{HTML}{303F9F}
+    \definecolor{outcolor}{HTML}{D84315}
+    \definecolor{cellborder}{HTML}{CFCFCF}
+    \definecolor{cellbackground}{HTML}{F7F7F7}
+
+    % prompt
+    \makeatletter
+    \newcommand{\boxspacing}{\kern\kvtcb@left@rule\kern\kvtcb@boxsep}
+    \makeatother
+    \newcommand{\prompt}[4]{
+        {\ttfamily\llap{{\color{#2}[#3]:\hspace{3pt}#4}}\vspace{-\baselineskip}}
+    }
+    
+
+    
+    % Prevent overflowing lines due to hard-to-break entities
+    \sloppy
+    % Setup hyperref package
+    \hypersetup{
+      breaklinks=true,  % so long urls are correctly broken across lines
+      colorlinks=true,
+      urlcolor=urlcolor,
+      linkcolor=linkcolor,
+      citecolor=citecolor,
+      }
+    % Slightly bigger margins than the latex defaults
+    
+    \geometry{verbose,tmargin=1in,bmargin=1in,lmargin=1in,rmargin=1in}
+    
+    
+
+\begin{document}
+    
+    \maketitle
+    
+    
+
+    
+    \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
+\prompt{In}{incolor}{151}{\boxspacing}
+\begin{Verbatim}[commandchars=\\\{\}]
+\PY{o}{\PYZpc{}}\PY{k}{matplotlib} inline
+
+\PY{k+kn}{import} \PY{n+nn}{numpy} \PY{k}{as} \PY{n+nn}{np}
+\PY{k+kn}{from} \PY{n+nn}{matplotlib} \PY{k+kn}{import} \PY{n}{pyplot} \PY{k}{as} \PY{n}{plt}
+\PY{k+kn}{from} \PY{n+nn}{qiskit} \PY{k+kn}{import} \PY{n}{QuantumCircuit}
+\PY{k+kn}{from} \PY{n+nn}{qiskit}\PY{n+nn}{.}\PY{n+nn}{primitives} \PY{k+kn}{import} \PY{n}{StatevectorSampler}
+\PY{k+kn}{from} \PY{n+nn}{qiskit}\PY{n+nn}{.}\PY{n+nn}{quantum\PYZus{}info} \PY{k+kn}{import} \PY{n}{Operator}
+\PY{k+kn}{from} \PY{n+nn}{qiskit}\PY{n+nn}{.}\PY{n+nn}{quantum\PYZus{}info} \PY{k+kn}{import} \PY{n}{Statevector}
+
+\PY{n}{sampler} \PY{o}{=} \PY{n}{StatevectorSampler}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+\end{tcolorbox}
+
+    \hypertarget{iiqc-trabalho-2-miguel-curto-castela-uc2022212972}{%
+\subsubsection{\texorpdfstring{IIQC Trabalho 2, Miguel Curto Castela,
+uc2022212972
+}{IIQC Trabalho 2, Miguel Curto Castela, uc2022212972 }}\label{iiqc-trabalho-2-miguel-curto-castela-uc2022212972}}
+
+    \hypertarget{exercuxedcios-simples-1}{%
+\subsubsection{\texorpdfstring{2.1 Exercícios simples 1
+}{2.1 Exercícios simples 1 }}\label{exercuxedcios-simples-1}}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  Escrever o produto Kronecker (produto tensorial) dos qubits:
+
+  \begin{enumerate}
+  \def\labelenumii{\alph{enumii})}
+  \tightlist
+  \item
+    \(|0\rangle\otimes|1\rangle\)\\
+  \item
+    \(|0\rangle\otimes|+\rangle\)\\
+  \item
+    \(|+\rangle\otimes|1\rangle\)\\
+  \item
+    \(|-\rangle\otimes|+\rangle\)
+  \end{enumerate}
+\end{enumerate}
+
+tendo em conta que:
+
+\[ |+\rangle = \tfrac{1}{\sqrt{2}}(|0\rangle + |1\rangle) = \tfrac{1}{\sqrt{2}}\begin{bmatrix} 1 \\ 1 \end{bmatrix}\]
+\[ |-\rangle = \tfrac{1}{\sqrt{2}}(|0\rangle - |1\rangle) = \tfrac{1}{\sqrt{2}}\begin{bmatrix} 1 \\ -1 \end{bmatrix} \]
+
+    Resposta ao exercício no PDF exercicios\_manuscritos\_2022212972.pdf
+incluído na entrega
+
+    \begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\setcounter{enumi}{1}
+\tightlist
+\item
+  Escreva o estado: \$\textbar{}\psi\rangle =
+  \tfrac{1}{\sqrt{2}}\textbar00\rangle +
+  \tfrac{i}{\sqrt{2}}\textbar01\rangle \$ como dois qubits seperarados.
+\end{enumerate}
+
+    Resposta ao exercício no PDF exercicios\_manuscritos\_2022212972.pdf
+incluído na entrega
+
+    \hypertarget{exercuxedcios-simples-2}{%
+\subsubsection{\texorpdfstring{2.2 Exercícios simples 2
+}{2.2 Exercícios simples 2 }}\label{exercuxedcios-simples-2}}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  Calcule a unitária (\(U\)) de um circuito de um quibit criado pela
+  sequência de portas: \(U = XZH\). Utilize o Qiskit para verificar os
+  seus resultados.
+\end{enumerate}
+
+    Resposta ao exercício no PDF exercicios\_manuscritos\_2022212972.pdf
+incluído na entrega
+
+    \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
+\prompt{In}{incolor}{152}{\boxspacing}
+\begin{Verbatim}[commandchars=\\\{\}]
+\PY{c+c1}{\PYZsh{}verificação feita com Qiskit}
+\PY{n}{qc} \PY{o}{=} \PY{n}{QuantumCircuit}\PY{p}{(}\PY{l+m+mi}{1}\PY{p}{)}
+\PY{n}{qc}\PY{o}{.}\PY{n}{x}\PY{p}{(}\PY{l+m+mi}{0}\PY{p}{)}
+\PY{n}{qc}\PY{o}{.}\PY{n}{z}\PY{p}{(}\PY{l+m+mi}{0}\PY{p}{)}
+\PY{n}{qc}\PY{o}{.}\PY{n}{h}\PY{p}{(}\PY{l+m+mi}{0}\PY{p}{)}
+
+\PY{n}{unitary} \PY{o}{=} \PY{n}{Operator}\PY{p}{(}\PY{n}{qc}\PY{p}{)}\PY{o}{.}\PY{n}{data}
+\PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{unitary matrix:}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+\PY{n+nb}{print}\PY{p}{(}\PY{n}{unitary}\PY{p}{)}
+\end{Verbatim}
+\end{tcolorbox}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+unitary matrix:
+[[-0.70710678+0.j  0.70710678+0.j]
+ [ 0.70710678+0.j  0.70710678+0.j]]
+    \end{Verbatim}
+
+    \begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\setcounter{enumi}{1}
+\tightlist
+\item
+  Considere um circuito diferente com as mesmas portas, mas
+  ``empilhadas'' para ter um circuito com 3 qubits, aplicando cada porta
+  a um qubit diferente. Calcule o seu produto kronecker (produto
+  tensorial) para obter a unitária (\(U\)) do circuito de 3 quibits, em
+  seguida, verifique a sua resposta utilizando o Qiskit.
+\end{enumerate}
+
+    Resposta ao exercício no PDF exercicios\_manuscritos\_2022212972.pdf
+incluído na entrega
+
+    \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
+\prompt{In}{incolor}{153}{\boxspacing}
+\begin{Verbatim}[commandchars=\\\{\}]
+\PY{c+c1}{\PYZsh{}verificação feita com Qiskit}
+\PY{n}{qc} \PY{o}{=} \PY{n}{QuantumCircuit}\PY{p}{(}\PY{l+m+mi}{3}\PY{p}{)}
+\PY{n}{qc}\PY{o}{.}\PY{n}{x}\PY{p}{(}\PY{l+m+mi}{2}\PY{p}{)}
+\PY{n}{qc}\PY{o}{.}\PY{n}{z}\PY{p}{(}\PY{l+m+mi}{1}\PY{p}{)}
+\PY{n}{qc}\PY{o}{.}\PY{n}{h}\PY{p}{(}\PY{l+m+mi}{0}\PY{p}{)}
+
+\PY{n}{unitary} \PY{o}{=} \PY{n}{Operator}\PY{p}{(}\PY{n}{qc}\PY{p}{)}\PY{o}{.}\PY{n}{data}
+\PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{unitary matrix:}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+\PY{n+nb}{print}\PY{p}{(}\PY{n}{unitary}\PY{p}{)}
+\end{Verbatim}
+\end{tcolorbox}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+unitary matrix:
+[[ 0.        +0.j  0.        +0.j  0.        +0.j  0.        +0.j
+   0.70710678+0.j  0.70710678+0.j  0.        +0.j  0.        +0.j]
+ [ 0.        +0.j  0.        +0.j  0.        +0.j  0.        +0.j
+   0.70710678+0.j -0.70710678+0.j  0.        +0.j  0.        +0.j]
+ [ 0.        +0.j  0.        +0.j  0.        +0.j  0.        +0.j
+   0.        +0.j  0.        +0.j -0.70710678+0.j -0.70710678+0.j]
+ [ 0.        +0.j  0.        +0.j  0.        +0.j  0.        +0.j
+   0.        +0.j  0.        +0.j -0.70710678+0.j  0.70710678+0.j]
+ [ 0.70710678+0.j  0.70710678+0.j  0.        +0.j  0.        +0.j
+   0.        +0.j  0.        +0.j  0.        +0.j  0.        +0.j]
+ [ 0.70710678+0.j -0.70710678+0.j  0.        +0.j  0.        +0.j
+   0.        +0.j  0.        +0.j  0.        +0.j  0.        +0.j]
+ [ 0.        +0.j  0.        +0.j -0.70710678+0.j -0.70710678+0.j
+   0.        +0.j  0.        +0.j  0.        +0.j  0.        +0.j]
+ [ 0.        +0.j  0.        +0.j -0.70710678+0.j  0.70710678+0.j
+   0.        +0.j  0.        +0.j  0.        +0.j  0.        +0.j]]
+    \end{Verbatim}
+
+    \hypertarget{exercuxedcios-simples-3}{%
+\subsubsection{\texorpdfstring{Exercícios simples 3
+}{Exercícios simples 3 }}\label{exercuxedcios-simples-3}}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  Crie um circuito quântico que produza o estado de Bell:
+  \(\tfrac{1}{\sqrt{2}}(|01\rangle + |10\rangle)\). Utilize o Qiskit
+  para construir o circuito e statevector para verificar o seu
+  resultado.
+\end{enumerate}
+
+    \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
+\prompt{In}{incolor}{154}{\boxspacing}
+\begin{Verbatim}[commandchars=\\\{\}]
+\PY{c+c1}{\PYZsh{}Bell state: |psi⟩ = 1/sqrt(2) (|01⟩ + |10⟩)}
+\PY{c+c1}{\PYZsh{}Circuit to create the Bell state}
+\PY{n}{bell\PYZus{}state\PYZus{}expected} \PY{o}{=} \PY{n}{Statevector}\PY{p}{(}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{,} \PY{l+m+mi}{1}\PY{p}{,} \PY{l+m+mi}{1}\PY{p}{,} \PY{l+m+mi}{0}\PY{p}{]}\PY{p}{)} \PY{o}{/} \PY{n}{np}\PY{o}{.}\PY{n}{sqrt}\PY{p}{(}\PY{l+m+mi}{2}\PY{p}{)}
+
+\PY{n}{qc} \PY{o}{=} \PY{n}{QuantumCircuit}\PY{p}{(}\PY{l+m+mi}{2}\PY{p}{)}
+\PY{n}{qc}\PY{o}{.}\PY{n}{x}\PY{p}{(}\PY{l+m+mi}{1}\PY{p}{)}
+\PY{n}{qc}\PY{o}{.}\PY{n}{h}\PY{p}{(}\PY{l+m+mi}{0}\PY{p}{)}
+\PY{n}{qc}\PY{o}{.}\PY{n}{cx}\PY{p}{(}\PY{l+m+mi}{0}\PY{p}{,} \PY{l+m+mi}{1}\PY{p}{)}
+
+\PY{n+nb}{print}\PY{p}{(}\PY{n}{qc}\PY{p}{)}
+
+\PY{n}{statevector} \PY{o}{=} \PY{n}{Statevector}\PY{o}{.}\PY{n}{from\PYZus{}instruction}\PY{p}{(}\PY{n}{qc}\PY{p}{)}
+\PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{circuit statevector}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{statevector}\PY{p}{)}
+
+\PY{k}{if} \PY{n}{statevector}\PY{o}{.}\PY{n}{equiv}\PY{p}{(}\PY{n}{bell\PYZus{}state\PYZus{}expected}\PY{p}{)}\PY{p}{:}
+    \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{O circuito produz o bell state esperado}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+\PY{k}{else}\PY{p}{:}
+    \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{O circuito não produz o bell state esperado}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+\end{Verbatim}
+\end{tcolorbox}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+     ┌───┐
+q\_0: ┤ H ├──■──
+     ├───┤┌─┴─┐
+q\_1: ┤ X ├┤ X ├
+     └───┘└───┘
+circuit statevector Statevector([0.        +0.j, 0.70710678+0.j, 0.70710678+0.j,
+             0.        +0.j],
+            dims=(2, 2))
+O circuito produz o bell state esperado
+    \end{Verbatim}
+
+    \begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\setcounter{enumi}{1}
+\tightlist
+\item
+  O circuito que criou acima transforma o estado \(|00\rangle\) em
+  \(\tfrac{1}{\sqrt{2}}(|01\rangle + |10\rangle)\), calcule a matriz
+  unitária deste circuito utilizando o Qiskit. Verifique se esta
+  unitária realiza de facto a transformação correta.
+\end{enumerate}
+
+    \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
+\prompt{In}{incolor}{155}{\boxspacing}
+\begin{Verbatim}[commandchars=\\\{\}]
+\PY{c+c1}{\PYZsh{}Matriz unitária do circuito}
+\PY{n}{unit} \PY{o}{=} \PY{n}{Operator}\PY{p}{(}\PY{n}{qc}\PY{p}{)}\PY{o}{.}\PY{n}{data}
+\PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{unitary matrix:}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+\PY{n+nb}{print}\PY{p}{(}\PY{n}{unit}\PY{p}{)}
+
+\PY{n}{initial\PYZus{}state} \PY{o}{=} \PY{n}{Statevector}\PY{o}{.}\PY{n}{from\PYZus{}label}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{00}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+
+
+\PY{n}{final\PYZus{}state} \PY{o}{=} \PY{n}{initial\PYZus{}state}\PY{o}{.}\PY{n}{evolve}\PY{p}{(}\PY{n}{unit}\PY{p}{)}
+\PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{final state:}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{n}{final\PYZus{}state}\PY{p}{)}
+
+\PY{k}{if} \PY{n}{statevector}\PY{o}{.}\PY{n}{equiv}\PY{p}{(}\PY{n}{bell\PYZus{}state\PYZus{}expected}\PY{p}{)}\PY{p}{:}
+    \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{A matriz unitária produz o bell state esperado}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+\PY{k}{else}\PY{p}{:}
+    \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{A matriz unitária não produz o bell state esperado}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+\end{Verbatim}
+\end{tcolorbox}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+unitary matrix:
+[[ 0.        +0.j  0.        +0.j  0.70710678+0.j  0.70710678+0.j]
+ [ 0.70710678+0.j -0.70710678+0.j  0.        +0.j  0.        +0.j]
+ [ 0.70710678+0.j  0.70710678+0.j  0.        +0.j  0.        +0.j]
+ [ 0.        +0.j  0.        +0.j  0.70710678+0.j -0.70710678+0.j]]
+final state: Statevector([0.        +0.j, 0.70710678+0.j, 0.70710678+0.j,
+             0.        +0.j],
+            dims=(2, 2))
+A matriz unitária produz o bell state esperado
+    \end{Verbatim}
+
+    \hypertarget{algoritmo-deutsch-jozsa}{%
+\subsubsection{\texorpdfstring{2.4 Algoritmo Deutsch-Jozsa
+}{2.4 Algoritmo Deutsch-Jozsa }}\label{algoritmo-deutsch-jozsa}}
+
+Apresente a sua implementação, simulação de alguns casos, e execução em
+hardware real de pelo menos dois casos aproventando o número de qubits
+disponiveis.
+
+    \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
+\prompt{In}{incolor}{156}{\boxspacing}
+\begin{Verbatim}[commandchars=\\\{\}]
+\PY{k+kn}{import} \PY{n+nn}{numpy} \PY{k}{as} \PY{n+nn}{np}
+\PY{k+kn}{import} \PY{n+nn}{matplotlib}\PY{n+nn}{.}\PY{n+nn}{pyplot} \PY{k}{as} \PY{n+nn}{plt}
+\PY{k+kn}{from} \PY{n+nn}{qiskit}\PY{n+nn}{.}\PY{n+nn}{visualization} \PY{k+kn}{import} \PY{n}{plot\PYZus{}histogram}
+\PY{k+kn}{from} \PY{n+nn}{qiskit} \PY{k+kn}{import} \PY{n}{QuantumCircuit}\PY{p}{,} \PY{n}{transpile}
+\PY{k+kn}{from} \PY{n+nn}{qiskit\PYZus{}aer} \PY{k+kn}{import} \PY{n}{Aer}
+\PY{k+kn}{from} \PY{n+nn}{qiskit}\PY{n+nn}{.}\PY{n+nn}{visualization} \PY{k+kn}{import} \PY{n}{plot\PYZus{}histogram}
+\PY{k+kn}{from} \PY{n+nn}{qiskit\PYZus{}aer} \PY{k+kn}{import} \PY{n}{AerSimulator}
+\PY{k+kn}{from} \PY{n+nn}{qiskit\PYZus{}ibm\PYZus{}runtime} \PY{k+kn}{import} \PY{n}{QiskitRuntimeService}
+\PY{k+kn}{import} \PY{n+nn}{os}
+\PY{k+kn}{from} \PY{n+nn}{dotenv} \PY{k+kn}{import} \PY{n}{load\PYZus{}dotenv}
+
+\PY{k}{if} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{IBM\PYZus{}TOKEN}\PY{l+s+s2}{\PYZdq{}} \PY{o+ow}{in} \PY{n}{os}\PY{o}{.}\PY{n}{environ}\PY{p}{:}
+    \PY{k}{del} \PY{n}{os}\PY{o}{.}\PY{n}{environ}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{IBM\PYZus{}TOKEN}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}
+\PY{n}{load\PYZus{}dotenv}\PY{p}{(}\PY{p}{)}
+\PY{n}{IBM\PYZus{}TOKEN} \PY{o}{=} \PY{n}{os}\PY{o}{.}\PY{n}{getenv}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{IBM\PYZus{}TOKEN}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+\PY{c+c1}{\PYZsh{}print(f\PYZdq{}IBM\PYZus{}TOKEN: \PYZob{}IBM\PYZus{}TOKEN\PYZcb{}\PYZdq{})}
+\PY{n}{service} \PY{o}{=} \PY{n}{QiskitRuntimeService}\PY{p}{(}\PY{n}{channel}\PY{o}{=}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{ibm\PYZus{}quantum}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{token}\PY{o}{=}\PY{n}{IBM\PYZus{}TOKEN}\PY{p}{)}
+\PY{n}{backend} \PY{o}{=} \PY{n}{service}\PY{o}{.}\PY{n}{least\PYZus{}busy}\PY{p}{(}\PY{n}{operational}\PY{o}{=}\PY{k+kc}{True}\PY{p}{,} \PY{n}{simulator}\PY{o}{=}\PY{k+kc}{False}\PY{p}{)}
+\PY{n}{sim} \PY{o}{=} \PY{n}{AerSimulator}\PY{p}{(}\PY{p}{)}
+\PY{n+nb}{print}\PY{p}{(}\PY{n}{backend}\PY{p}{)}
+\end{Verbatim}
+\end{tcolorbox}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+<IBMBackend('ibm\_kyiv')>
+    \end{Verbatim}
+
+    \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
+\prompt{In}{incolor}{157}{\boxspacing}
+\begin{Verbatim}[commandchars=\\\{\}]
+\PY{k}{def} \PY{n+nf}{constantOracle}\PY{p}{(}\PY{n+nb}{len}\PY{p}{)}\PY{p}{:}
+    \PY{n}{oracle} \PY{o}{=} \PY{n}{QuantumCircuit}\PY{p}{(}\PY{n+nb}{len}\PY{o}{+}\PY{l+m+mi}{1}\PY{p}{)}
+    
+    \PY{n}{oracle}\PY{o}{.}\PY{n}{barrier}\PY{p}{(}\PY{p}{)}
+    
+    \PY{n}{output} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{random}\PY{o}{.}\PY{n}{randint}\PY{p}{(}\PY{l+m+mi}{2}\PY{p}{)}
+    \PY{k}{if}\PY{p}{(}\PY{n}{output} \PY{o}{==} \PY{l+m+mi}{1}\PY{p}{)}\PY{p}{:}
+        \PY{n}{oracle}\PY{o}{.}\PY{n}{x}\PY{p}{(}\PY{n+nb}{len}\PY{p}{)}
+
+    \PY{n}{oracle}\PY{o}{.}\PY{n}{barrier}\PY{p}{(}\PY{p}{)}
+
+    \PY{k}{return} \PY{n}{oracle}
+
+\PY{k}{def} \PY{n+nf}{balancedOracle}\PY{p}{(}\PY{n+nb}{len}\PY{p}{)}\PY{p}{:}
+    \PY{n}{oracle} \PY{o}{=} \PY{n}{QuantumCircuit}\PY{p}{(}\PY{n+nb}{len}\PY{o}{+}\PY{l+m+mi}{1}\PY{p}{)}
+    
+    \PY{n}{oracle}\PY{o}{.}\PY{n}{barrier}\PY{p}{(}\PY{p}{)}
+
+    \PY{c+c1}{\PYZsh{}Random implementation}
+    \PY{n}{b} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{random}\PY{o}{.}\PY{n}{randint}\PY{p}{(}\PY{l+m+mi}{1}\PY{p}{,} \PY{l+m+mi}{2}\PY{o}{*}\PY{o}{*}\PY{n+nb}{len}\PY{p}{)}
+    \PY{n}{b\PYZus{}str} \PY{o}{=} \PY{n+nb}{format}\PY{p}{(}\PY{n}{b}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{0}\PY{l+s+s1}{\PYZsq{}}\PY{o}{+}\PY{n+nb}{str}\PY{p}{(}\PY{n+nb}{len}\PY{p}{)}\PY{o}{+}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{b}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+    
+    \PY{k}{for} \PY{n}{qb} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{n+nb}{len}\PY{p}{)}\PY{p}{:}
+        \PY{k}{if}\PY{p}{(}\PY{n}{b\PYZus{}str}\PY{p}{[}\PY{n}{qb}\PY{p}{]} \PY{o}{==} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{1}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}\PY{p}{:}
+            \PY{n}{oracle}\PY{o}{.}\PY{n}{x}\PY{p}{(}\PY{n}{qb}\PY{p}{)}
+
+        
+    \PY{k}{for} \PY{n}{qb} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{n+nb}{len}\PY{p}{)}\PY{p}{:}
+        \PY{n}{oracle}\PY{o}{.}\PY{n}{cx}\PY{p}{(}\PY{n}{qb}\PY{p}{,} \PY{n+nb}{len}\PY{p}{)}
+        
+    \PY{k}{for} \PY{n}{qb} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{n+nb}{len}\PY{p}{)}\PY{p}{:}
+        \PY{k}{if}\PY{p}{(}\PY{n}{b\PYZus{}str}\PY{p}{[}\PY{n}{qb}\PY{p}{]} \PY{o}{==} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{1}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}\PY{p}{:}
+            \PY{n}{oracle}\PY{o}{.}\PY{n}{x}\PY{p}{(}\PY{n}{qb}\PY{p}{)}    
+
+    \PY{n}{oracle}\PY{o}{.}\PY{n}{barrier}\PY{p}{(}\PY{p}{)}
+
+    \PY{c+c1}{\PYZsh{}Static implementation }
+\PY{+w}{    }\PY{l+s+sd}{\PYZsq{}\PYZsq{}\PYZsq{}}
+\PY{l+s+sd}{    oracle = QuantumCircuit(len+1)}
+
+\PY{l+s+sd}{    oracle.barrier()}
+
+\PY{l+s+sd}{    for qb in range(len):}
+\PY{l+s+sd}{        if(qb \PYZpc{} 2 == 0):}
+\PY{l+s+sd}{            oracle.x(qb)}
+
+\PY{l+s+sd}{    oracle.barrier()}
+
+\PY{l+s+sd}{    for qb in range(len):}
+\PY{l+s+sd}{        oracle.cx(qb, len)}
+
+\PY{l+s+sd}{    oracle.barrier()}
+
+\PY{l+s+sd}{    for qb in range(len):}
+\PY{l+s+sd}{        if(qb \PYZpc{} 2 == 0):}
+\PY{l+s+sd}{            oracle.x(qb)    }
+
+\PY{l+s+sd}{    oracle.barrier()}
+\PY{l+s+sd}{    \PYZsq{}\PYZsq{}\PYZsq{}}
+
+    \PY{k}{return} \PY{n}{oracle}
+\end{Verbatim}
+\end{tcolorbox}
+
+    \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
+\prompt{In}{incolor}{158}{\boxspacing}
+\begin{Verbatim}[commandchars=\\\{\}]
+\PY{k}{def} \PY{n+nf}{createOracle}\PY{p}{(}\PY{n+nb}{len}\PY{p}{)}\PY{p}{:}
+    \PY{n}{constant} \PY{o}{=} \PY{n}{constantOracle}\PY{p}{(}\PY{n+nb}{len}\PY{p}{)}
+    \PY{n}{balanced} \PY{o}{=} \PY{n}{balancedOracle}\PY{p}{(}\PY{n+nb}{len}\PY{p}{)}
+    
+    \PY{k}{return} \PY{n}{constant}\PY{p}{,} \PY{n}{balanced}
+\end{Verbatim}
+\end{tcolorbox}
+
+    \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
+\prompt{In}{incolor}{159}{\boxspacing}
+\begin{Verbatim}[commandchars=\\\{\}]
+\PY{k}{def} \PY{n+nf}{createCircuit\PYZus{}dj}\PY{p}{(}\PY{n+nb}{len}\PY{p}{,} \PY{n}{oracle}\PY{p}{)}\PY{p}{:}
+    \PY{n}{dj} \PY{o}{=} \PY{n}{QuantumCircuit}\PY{p}{(}\PY{n+nb}{len}\PY{o}{+}\PY{l+m+mi}{1}\PY{p}{,} \PY{n+nb}{len}\PY{p}{)}
+    
+    \PY{c+c1}{\PYZsh{}input qubits}
+    \PY{k}{for} \PY{n}{qb} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{n+nb}{len}\PY{p}{)}\PY{p}{:}
+        \PY{n}{dj}\PY{o}{.}\PY{n}{h}\PY{p}{(}\PY{n}{qb}\PY{p}{)}
+        
+    \PY{c+c1}{\PYZsh{}output qubit}
+    \PY{n}{dj}\PY{o}{.}\PY{n}{x}\PY{p}{(}\PY{n+nb}{len}\PY{p}{)}
+    \PY{n}{dj}\PY{o}{.}\PY{n}{h}\PY{p}{(}\PY{n+nb}{len}\PY{p}{)}
+    
+    \PY{c+c1}{\PYZsh{}apply the oracle}
+    \PY{n}{dj} \PY{o}{=} \PY{n}{dj}\PY{o}{.}\PY{n}{compose}\PY{p}{(}\PY{n}{oracle}\PY{p}{)}
+    
+    \PY{c+c1}{\PYZsh{}apply Hadamard gates to the first n qubits}
+    \PY{k}{for} \PY{n}{qb} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{n+nb}{len}\PY{p}{)}\PY{p}{:}
+        \PY{n}{dj}\PY{o}{.}\PY{n}{h}\PY{p}{(}\PY{n}{qb}\PY{p}{)}
+        
+    \PY{c+c1}{\PYZsh{}measure the first n qubits}
+    \PY{k}{for} \PY{n}{qb} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{n+nb}{len}\PY{p}{)}\PY{p}{:}
+        \PY{n}{dj}\PY{o}{.}\PY{n}{measure}\PY{p}{(}\PY{n}{qb}\PY{p}{,} \PY{n}{qb}\PY{p}{)}
+    
+    \PY{k}{return} \PY{n}{dj}    
+
+\PY{k}{def} \PY{n+nf}{simulateCircuit\PYZus{}dj}\PY{p}{(}\PY{n}{dj}\PY{p}{)}\PY{p}{:}
+    \PY{n}{job} \PY{o}{=} \PY{n}{sim}\PY{o}{.}\PY{n}{run}\PY{p}{(}\PY{n}{dj}\PY{p}{)}
+    \PY{n}{results} \PY{o}{=} \PY{n}{job}\PY{o}{.}\PY{n}{result}\PY{p}{(}\PY{p}{)}
+    \PY{n}{graph} \PY{o}{=} \PY{n}{results}\PY{o}{.}\PY{n}{get\PYZus{}counts}\PY{p}{(}\PY{p}{)}
+    \PY{n}{plot\PYZus{}histogram}\PY{p}{(}\PY{n}{graph}\PY{p}{)}
+
+\PY{k}{def} \PY{n+nf}{runCircuit\PYZus{}dj}\PY{p}{(}\PY{n}{dj}\PY{p}{)}\PY{p}{:}
+    \PY{n}{transpiledCircuit} \PY{o}{=} \PY{n}{transpile}\PY{p}{(}\PY{n}{dj}\PY{p}{,} \PY{n}{backend}\PY{p}{,} \PY{n}{optimization\PYZus{}level}\PY{o}{=}\PY{l+m+mi}{3}\PY{p}{)}
+    \PY{n}{transpiledCircuit}\PY{o}{.}\PY{n}{draw}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{mpl}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{idle\PYZus{}wires}\PY{o}{=}\PY{k+kc}{False}\PY{p}{)}
+    
+    \PY{n}{job} \PY{o}{=} \PY{n}{backend}\PY{o}{.}\PY{n}{run}\PY{p}{(}\PY{p}{[}\PY{n}{transpiledCircuit}\PY{p}{]}\PY{p}{,} \PY{n}{shots}\PY{o}{=}\PY{l+m+mi}{1024}\PY{p}{)}
+    \PY{n}{job}\PY{o}{.}\PY{n}{job\PYZus{}id}\PY{p}{(}\PY{p}{)}
+    
+    \PY{n}{results} \PY{o}{=} \PY{n}{job}\PY{o}{.}\PY{n}{result}\PY{p}{(}\PY{p}{)}
+    \PY{n}{graph} \PY{o}{=} \PY{n}{results}\PY{o}{.}\PY{n}{get\PYZus{}counts}\PY{p}{(}\PY{p}{)}
+    
+    \PY{n}{plot\PYZus{}histogram}\PY{p}{(}\PY{n}{graph}\PY{p}{)}
+    
+\PY{k}{def} \PY{n+nf}{fetch\PYZus{}job\PYZus{}results}\PY{p}{(}\PY{n}{job\PYZus{}id}\PY{p}{)}\PY{p}{:}
+    \PY{n}{job} \PY{o}{=} \PY{n}{service}\PY{o}{.}\PY{n}{job}\PY{p}{(}\PY{n}{job\PYZus{}id}\PY{p}{)}
+    \PY{n}{results} \PY{o}{=} \PY{n}{job}\PY{o}{.}\PY{n}{result}\PY{p}{(}\PY{p}{)}
+    \PY{n}{answer} \PY{o}{=} \PY{n}{results}\PY{o}{.}\PY{n}{get\PYZus{}counts}\PY{p}{(}\PY{p}{)}
+    \PY{n}{plot\PYZus{}histogram}\PY{p}{(}\PY{n}{answer}\PY{p}{)}
+    \PY{n}{plt}\PY{o}{.}\PY{n}{show}\PY{p}{(}\PY{p}{)}
+
+\PY{c+c1}{\PYZsh{}número de qubits (no Deutsh\PYZhy{}Josza e no grover)}
+\PY{n+nb}{len} \PY{o}{=} \PY{l+m+mi}{4}
+
+\PY{c+c1}{\PYZsh{}create the oracles}
+\PY{n}{constantOracle}\PY{p}{,} \PY{n}{balancedOracle} \PY{o}{=} \PY{n}{createOracle}\PY{p}{(}\PY{n+nb}{len}\PY{p}{)}
+\end{Verbatim}
+\end{tcolorbox}
+
+    \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
+\prompt{In}{incolor}{160}{\boxspacing}
+\begin{Verbatim}[commandchars=\\\{\}]
+\PY{c+c1}{\PYZsh{}Deutsch\PYZhy{}Jozsa circuit with balanced oracle}
+\PY{n}{balancedDj} \PY{o}{=} \PY{n}{createCircuit\PYZus{}dj}\PY{p}{(}\PY{n+nb}{len}\PY{p}{,} \PY{n}{balancedOracle}\PY{p}{)}
+
+\PY{c+c1}{\PYZsh{}run it on real hardware}
+\PY{c+c1}{\PYZsh{}runCircuit\PYZus{}dj(balancedDj)}
+
+\PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Deutch\PYZhy{}Jozsa circuit with balanced oracle }\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+\PY{n}{balancedDj}\PY{o}{.}\PY{n}{draw}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{mpl}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{idle\PYZus{}wires}\PY{o}{=}\PY{k+kc}{False}\PY{p}{)}
+\end{Verbatim}
+\end{tcolorbox}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+Deutch-Jozsa circuit with balanced oracle
+    \end{Verbatim}
+ 
+            
+\prompt{Out}{outcolor}{160}{}
+    
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{trabalho2_files/trabalho2_21_1.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{trabalho2_files/trabalho2_21_2.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
+\prompt{In}{incolor}{161}{\boxspacing}
+\begin{Verbatim}[commandchars=\\\{\}]
+\PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{simulation of the Deutch\PYZhy{}Jozsa circuit with balanced oracle }\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+\PY{n+nb}{print}\PY{p}{(}\PY{n}{balancedDj}\PY{p}{)}
+\end{Verbatim}
+\end{tcolorbox}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+simulation of the Deutch-Jozsa circuit with balanced oracle
+     ┌───┐      ░ ┌───┐     ┌───┐                ░ ┌───┐┌─┐
+q\_0: ┤ H ├──────░─┤ X ├──■──┤ X ├────────────────░─┤ H ├┤M├─────────
+     ├───┤      ░ ├───┤  │  └───┘┌───┐           ░ ├───┤└╥┘┌─┐
+q\_1: ┤ H ├──────░─┤ X ├──┼────■──┤ X ├───────────░─┤ H ├─╫─┤M├──────
+     ├───┤      ░ └───┘  │    │  └───┘           ░ ├───┤ ║ └╥┘┌─┐
+q\_2: ┤ H ├──────░────────┼────┼────■─────────────░─┤ H ├─╫──╫─┤M├───
+     ├───┤      ░ ┌───┐  │    │    │       ┌───┐ ░ ├───┤ ║  ║ └╥┘┌─┐
+q\_3: ┤ H ├──────░─┤ X ├──┼────┼────┼────■──┤ X ├─░─┤ H ├─╫──╫──╫─┤M├
+     ├───┤┌───┐ ░ └───┘┌─┴─┐┌─┴─┐┌─┴─┐┌─┴─┐└───┘ ░ └───┘ ║  ║  ║ └╥┘
+q\_4: ┤ X ├┤ H ├─░──────┤ X ├┤ X ├┤ X ├┤ X ├──────░───────╫──╫──╫──╫─
+     └───┘└───┘ ░      └───┘└───┘└───┘└───┘      ░       ║  ║  ║  ║
+c: 4/════════════════════════════════════════════════════╩══╩══╩══╩═
+                                                         0  1  2  3
+    \end{Verbatim}
+
+    \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
+\prompt{In}{incolor}{162}{\boxspacing}
+\begin{Verbatim}[commandchars=\\\{\}]
+\PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{results of the simulation}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+\PY{n}{simulateCircuit\PYZus{}dj}\PY{p}{(}\PY{n}{balancedDj}\PY{p}{)}
+\end{Verbatim}
+\end{tcolorbox}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+results of the simulation
+    \end{Verbatim}
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{trabalho2_files/trabalho2_23_1.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
+\prompt{In}{incolor}{163}{\boxspacing}
+\begin{Verbatim}[commandchars=\\\{\}]
+\PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{balanced iracle job results:}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+\PY{n}{fetch\PYZus{}job\PYZus{}results}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{cxcrjgaztp300083372g}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+\end{Verbatim}
+\end{tcolorbox}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+balanced iracle job results:
+    \end{Verbatim}
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{trabalho2_files/trabalho2_24_1.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
+\prompt{In}{incolor}{164}{\boxspacing}
+\begin{Verbatim}[commandchars=\\\{\}]
+\PY{c+c1}{\PYZsh{}Deutsch\PYZhy{}Jozsa circuit with the constant oracle}
+\PY{n}{constantDj} \PY{o}{=} \PY{n}{createCircuit\PYZus{}dj}\PY{p}{(}\PY{n+nb}{len}\PY{p}{,} \PY{n}{constantOracle}\PY{p}{)}
+\PY{c+c1}{\PYZsh{} run it on real hardware}
+\PY{c+c1}{\PYZsh{}runCircuit\PYZus{}dj(constantOracle)}
+\PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Deutch\PYZhy{}Jozsa circuit with constant oracle }\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+\PY{n}{constantDj}\PY{o}{.}\PY{n}{draw}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{mpl}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{idle\PYZus{}wires}\PY{o}{=}\PY{k+kc}{False}\PY{p}{)}
+\end{Verbatim}
+\end{tcolorbox}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+Deutch-Jozsa circuit with constant oracle
+    \end{Verbatim}
+ 
+            
+\prompt{Out}{outcolor}{164}{}
+    
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{trabalho2_files/trabalho2_25_1.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{trabalho2_files/trabalho2_25_2.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
+\prompt{In}{incolor}{165}{\boxspacing}
+\begin{Verbatim}[commandchars=\\\{\}]
+\PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{simulation of the Deutch\PYZhy{}Jozsa circuit with constant oracle }\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+\PY{n+nb}{print}\PY{p}{(}\PY{n}{constantDj}\PY{p}{)}
+\end{Verbatim}
+\end{tcolorbox}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+simulation of the Deutch-Jozsa circuit with constant oracle
+     ┌───┐      ░       ░ ┌───┐┌─┐
+q\_0: ┤ H ├──────░───────░─┤ H ├┤M├─────────
+     ├───┤      ░       ░ ├───┤└╥┘┌─┐
+q\_1: ┤ H ├──────░───────░─┤ H ├─╫─┤M├──────
+     ├───┤      ░       ░ ├───┤ ║ └╥┘┌─┐
+q\_2: ┤ H ├──────░───────░─┤ H ├─╫──╫─┤M├───
+     ├───┤      ░       ░ ├───┤ ║  ║ └╥┘┌─┐
+q\_3: ┤ H ├──────░───────░─┤ H ├─╫──╫──╫─┤M├
+     ├───┤┌───┐ ░ ┌───┐ ░ └───┘ ║  ║  ║ └╥┘
+q\_4: ┤ X ├┤ H ├─░─┤ X ├─░───────╫──╫──╫──╫─
+     └───┘└───┘ ░ └───┘ ░       ║  ║  ║  ║
+c: 4/═══════════════════════════╩══╩══╩══╩═
+                                0  1  2  3
+    \end{Verbatim}
+
+    \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
+\prompt{In}{incolor}{166}{\boxspacing}
+\begin{Verbatim}[commandchars=\\\{\}]
+\PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{results of the simulation}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+\PY{n}{simulateCircuit\PYZus{}dj}\PY{p}{(}\PY{n}{constantDj}\PY{p}{)}
+\end{Verbatim}
+\end{tcolorbox}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+results of the simulation
+    \end{Verbatim}
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{trabalho2_files/trabalho2_27_1.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
+\prompt{In}{incolor}{167}{\boxspacing}
+\begin{Verbatim}[commandchars=\\\{\}]
+\PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{constant oracle job results:}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+\PY{n}{fetch\PYZus{}job\PYZus{}results}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{cxcrjntztp300083373g}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+\end{Verbatim}
+\end{tcolorbox}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+constant oracle job results:
+    \end{Verbatim}
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{trabalho2_files/trabalho2_28_1.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \hypertarget{grovers-algorithm}{%
+\subsubsection{\texorpdfstring{2.5 Grover's Algorithm
+}{2.5 Grover's Algorithm }}\label{grovers-algorithm}}
+
+Apresente a sua implementação, simulação de alguns casos, e execução em
+hardware real de pelo menos dois casos aproventando o número de qubits
+disponiveis.
+
+    \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
+\prompt{In}{incolor}{168}{\boxspacing}
+\begin{Verbatim}[commandchars=\\\{\}]
+\PY{k}{def} \PY{n+nf}{createPhaseOracle\PYZus{}1}\PY{p}{(}\PY{p}{)}\PY{p}{:}
+    \PY{c+c1}{\PYZsh{}states: |0101\PYZgt{}, |0110\PYZgt{}, |1100\PYZgt{}, |1111\PYZgt{}}
+    \PY{n}{oracle1} \PY{o}{=} \PY{n}{QuantumCircuit}\PY{p}{(}\PY{n+nb}{len}\PY{p}{)}
+    \PY{n}{oracle1}\PY{o}{.}\PY{n}{barrier}\PY{p}{(}\PY{p}{)}
+    \PY{n}{oracle1}\PY{o}{.}\PY{n}{cz}\PY{p}{(}\PY{l+m+mi}{0}\PY{p}{,} \PY{l+m+mi}{2}\PY{p}{)}
+    \PY{n}{oracle1}\PY{o}{.}\PY{n}{cz}\PY{p}{(}\PY{l+m+mi}{1}\PY{p}{,} \PY{l+m+mi}{2}\PY{p}{)}
+    \PY{n}{oracle1}\PY{o}{.}\PY{n}{cz}\PY{p}{(}\PY{l+m+mi}{2}\PY{p}{,} \PY{l+m+mi}{3}\PY{p}{)}
+    \PY{n}{oracle1}\PY{o}{.}\PY{n}{barrier}\PY{p}{(}\PY{p}{)}
+    \PY{k}{return} \PY{n}{oracle1}
+
+\PY{k}{def} \PY{n+nf}{createPhaseOracle\PYZus{}2}\PY{p}{(}\PY{p}{)}\PY{p}{:}
+    \PY{c+c1}{\PYZsh{}states: |0110\PYZgt{}, |0111\PYZgt{}, |1100\PYZgt{}, |1101\PYZgt{}}
+    \PY{n}{oracle2} \PY{o}{=} \PY{n}{QuantumCircuit}\PY{p}{(}\PY{n+nb}{len}\PY{p}{)}
+    \PY{n}{oracle2}\PY{o}{.}\PY{n}{barrier}\PY{p}{(}\PY{p}{)}
+    \PY{n}{oracle2}\PY{o}{.}\PY{n}{cz}\PY{p}{(}\PY{l+m+mi}{1}\PY{p}{,} \PY{l+m+mi}{2}\PY{p}{)}
+    \PY{n}{oracle2}\PY{o}{.}\PY{n}{cz}\PY{p}{(}\PY{l+m+mi}{2}\PY{p}{,} \PY{l+m+mi}{3}\PY{p}{)}
+    \PY{n}{oracle2}\PY{o}{.}\PY{n}{barrier}\PY{p}{(}\PY{p}{)}    
+    \PY{k}{return} \PY{n}{oracle2}
+\end{Verbatim}
+\end{tcolorbox}
+
+    \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
+\prompt{In}{incolor}{169}{\boxspacing}
+\begin{Verbatim}[commandchars=\\\{\}]
+\PY{k}{def} \PY{n+nf}{createDiffuser}\PY{p}{(}\PY{p}{)}\PY{p}{:}
+    \PY{n}{diffuser} \PY{o}{=} \PY{n}{QuantumCircuit}\PY{p}{(}\PY{n+nb}{len}\PY{p}{)}
+    \PY{n}{diffuser}\PY{o}{.}\PY{n}{barrier}\PY{p}{(}\PY{p}{)}
+    
+    \PY{k}{for} \PY{n}{qubit} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{n+nb}{len}\PY{p}{)}\PY{p}{:}
+        \PY{n}{diffuser}\PY{o}{.}\PY{n}{h}\PY{p}{(}\PY{n}{qubit}\PY{p}{)}
+        
+    \PY{k}{for} \PY{n}{qubit} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{n+nb}{len}\PY{p}{)}\PY{p}{:}
+        \PY{n}{diffuser}\PY{o}{.}\PY{n}{x}\PY{p}{(}\PY{n}{qubit}\PY{p}{)}
+        
+    \PY{n}{diffuser}\PY{o}{.}\PY{n}{h}\PY{p}{(}\PY{n+nb}{len}\PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{)}
+    \PY{n}{diffuser}\PY{o}{.}\PY{n}{mcx}\PY{p}{(}\PY{n+nb}{list}\PY{p}{(}\PY{n+nb}{range}\PY{p}{(}\PY{n+nb}{len}\PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{)}\PY{p}{)}\PY{p}{,} \PY{n+nb}{len}\PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{)}
+    \PY{n}{diffuser}\PY{o}{.}\PY{n}{h}\PY{p}{(}\PY{n+nb}{len}\PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{)}
+    
+    \PY{k}{for} \PY{n}{qubit} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{n+nb}{len}\PY{p}{)}\PY{p}{:}
+        \PY{n}{diffuser}\PY{o}{.}\PY{n}{x}\PY{p}{(}\PY{n}{qubit}\PY{p}{)}
+        
+    \PY{k}{for} \PY{n}{qubit} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{n+nb}{len}\PY{p}{)}\PY{p}{:}
+        \PY{n}{diffuser}\PY{o}{.}\PY{n}{h}\PY{p}{(}\PY{n}{qubit}\PY{p}{)}
+    \PY{n}{diffuser}\PY{o}{.}\PY{n}{barrier}\PY{p}{(}\PY{p}{)}
+        
+    \PY{k}{return} \PY{n}{diffuser}
+\end{Verbatim}
+\end{tcolorbox}
+
+    \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
+\prompt{In}{incolor}{170}{\boxspacing}
+\begin{Verbatim}[commandchars=\\\{\}]
+\PY{k}{def} \PY{n+nf}{createCircuit1\PYZus{}grover}\PY{p}{(}\PY{p}{)}\PY{p}{:}
+    \PY{n}{grover1} \PY{o}{=} \PY{n}{QuantumCircuit}\PY{p}{(}\PY{n+nb}{len}\PY{p}{)}
+    
+    \PY{k}{for} \PY{n}{qubit} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{n+nb}{len}\PY{p}{)}\PY{p}{:}
+        \PY{n}{grover1}\PY{o}{.}\PY{n}{h}\PY{p}{(}\PY{n}{qubit}\PY{p}{)}
+    
+    \PY{c+c1}{\PYZsh{}target states}
+    \PY{n}{grover1} \PY{o}{=} \PY{n}{grover1}\PY{o}{.}\PY{n}{compose}\PY{p}{(}\PY{n}{createPhaseOracle\PYZus{}1}\PY{p}{(}\PY{p}{)}\PY{p}{,} \PY{n+nb}{list}\PY{p}{(}\PY{n+nb}{range}\PY{p}{(}\PY{n+nb}{len}\PY{p}{)}\PY{p}{)}\PY{p}{)}
+
+    \PY{n}{grover1} \PY{o}{=} \PY{n}{grover1}\PY{o}{.}\PY{n}{compose}\PY{p}{(}\PY{n}{createDiffuser}\PY{p}{(}\PY{p}{)}\PY{p}{,} \PY{n+nb}{list}\PY{p}{(}\PY{n+nb}{range}\PY{p}{(}\PY{n+nb}{len}\PY{p}{)}\PY{p}{)}\PY{p}{)}
+    \PY{n}{grover1}\PY{o}{.}\PY{n}{measure\PYZus{}all}\PY{p}{(}\PY{p}{)}
+    
+    \PY{k}{return} \PY{n}{grover1}
+
+\PY{k}{def} \PY{n+nf}{createCircuit2\PYZus{}grover}\PY{p}{(}\PY{p}{)}\PY{p}{:}
+    \PY{n}{grover2} \PY{o}{=} \PY{n}{QuantumCircuit}\PY{p}{(}\PY{n+nb}{len}\PY{p}{)}
+    
+    \PY{k}{for} \PY{n}{qubit} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{n+nb}{len}\PY{p}{)}\PY{p}{:}
+        \PY{n}{grover2}\PY{o}{.}\PY{n}{h}\PY{p}{(}\PY{n}{qubit}\PY{p}{)}
+    
+    \PY{c+c1}{\PYZsh{}target states}
+    \PY{n}{grover2} \PY{o}{=} \PY{n}{grover2}\PY{o}{.}\PY{n}{compose}\PY{p}{(}\PY{n}{createPhaseOracle\PYZus{}2}\PY{p}{(}\PY{p}{)}\PY{p}{,} \PY{n+nb}{list}\PY{p}{(}\PY{n+nb}{range}\PY{p}{(}\PY{n+nb}{len}\PY{p}{)}\PY{p}{)}\PY{p}{)}
+        
+    \PY{n}{grover2} \PY{o}{=} \PY{n}{grover2}\PY{o}{.}\PY{n}{compose}\PY{p}{(}\PY{n}{createDiffuser}\PY{p}{(}\PY{p}{)}\PY{p}{,} \PY{n+nb}{list}\PY{p}{(}\PY{n+nb}{range}\PY{p}{(}\PY{n+nb}{len}\PY{p}{)}\PY{p}{)}\PY{p}{)}
+    \PY{n}{grover2}\PY{o}{.}\PY{n}{measure\PYZus{}all}\PY{p}{(}\PY{p}{)}
+    
+    \PY{k}{return} \PY{n}{grover2}
+\end{Verbatim}
+\end{tcolorbox}
+
+    \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
+\prompt{In}{incolor}{171}{\boxspacing}
+\begin{Verbatim}[commandchars=\\\{\}]
+\PY{k}{def} \PY{n+nf}{runCircuit\PYZus{}grover}\PY{p}{(}\PY{n}{grover}\PY{p}{)}\PY{p}{:}
+    \PY{n}{transpiledGrover} \PY{o}{=} \PY{n}{transpile}\PY{p}{(}\PY{n}{grover}\PY{p}{,} \PY{n}{backend}\PY{p}{)}
+    \PY{n}{transpiledGrover}\PY{o}{.}\PY{n}{draw}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{mpl}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{idle\PYZus{}wires}\PY{o}{=}\PY{k+kc}{False}\PY{p}{)}
+    
+    \PY{n}{job} \PY{o}{=} \PY{n}{backend}\PY{o}{.}\PY{n}{run}\PY{p}{(}\PY{p}{[}\PY{n}{transpiledGrover}\PY{p}{]}\PY{p}{,} \PY{n}{shots}\PY{o}{=}\PY{l+m+mi}{1024}\PY{p}{)}
+    \PY{n}{job}\PY{o}{.}\PY{n}{job\PYZus{}id}\PY{p}{(}\PY{p}{)}
+    
+    \PY{n}{results} \PY{o}{=} \PY{n}{job}\PY{o}{.}\PY{n}{result}\PY{p}{(}\PY{p}{)}
+    \PY{n}{graph} \PY{o}{=} \PY{n}{results}\PY{o}{.}\PY{n}{get\PYZus{}counts}\PY{p}{(}\PY{p}{)}
+    \PY{n}{plot\PYZus{}histogram}\PY{p}{(}\PY{n}{graph}\PY{p}{)}
+\end{Verbatim}
+\end{tcolorbox}
+
+    \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
+\prompt{In}{incolor}{172}{\boxspacing}
+\begin{Verbatim}[commandchars=\\\{\}]
+\PY{k}{def} \PY{n+nf}{simulateCircuit\PYZus{}grover}\PY{p}{(}\PY{n}{grover}\PY{p}{)}\PY{p}{:}
+    \PY{n}{job} \PY{o}{=} \PY{n}{sim}\PY{o}{.}\PY{n}{run}\PY{p}{(}\PY{n}{grover}\PY{p}{)}
+    \PY{n}{result} \PY{o}{=} \PY{n}{job}\PY{o}{.}\PY{n}{result}\PY{p}{(}\PY{p}{)}
+    \PY{n}{graph} \PY{o}{=} \PY{n}{result}\PY{o}{.}\PY{n}{get\PYZus{}counts}\PY{p}{(}\PY{p}{)}
+    \PY{n}{plot\PYZus{}histogram}\PY{p}{(}\PY{n}{graph}\PY{p}{)}
+\end{Verbatim}
+\end{tcolorbox}
+
+    \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
+\prompt{In}{incolor}{173}{\boxspacing}
+\begin{Verbatim}[commandchars=\\\{\}]
+\PY{c+c1}{\PYZsh{}create grover circuit (with oracle 1)}
+\PY{n}{grover\PYZus{}1} \PY{o}{=} \PY{n}{createCircuit1\PYZus{}grover}\PY{p}{(}\PY{p}{)}
+
+\PY{c+c1}{\PYZsh{}run it on real hardware}
+\PY{c+c1}{\PYZsh{}runCircuit\PYZus{}grover(grover\PYZus{}1)}
+
+\PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{grover\PYZus{}1 circuit:}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+\PY{n}{grover\PYZus{}1}\PY{o}{.}\PY{n}{draw}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{mpl}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{idle\PYZus{}wires}\PY{o}{=}\PY{k+kc}{False}\PY{p}{)}
+\end{Verbatim}
+\end{tcolorbox}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+grover\_1 circuit:
+    \end{Verbatim}
+ 
+            
+\prompt{Out}{outcolor}{173}{}
+    
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{trabalho2_files/trabalho2_35_1.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{trabalho2_files/trabalho2_35_2.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
+\prompt{In}{incolor}{174}{\boxspacing}
+\begin{Verbatim}[commandchars=\\\{\}]
+\PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{grover\PYZus{}1 simulation:}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+\PY{n+nb}{print} \PY{p}{(}\PY{n}{grover\PYZus{}1}\PY{p}{)}
+\end{Verbatim}
+\end{tcolorbox}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+grover\_1 simulation:
+        ┌───┐ ░           ░  ░ ┌───┐┌───┐          ┌───┐┌───┐      ░  ░ ┌─┐   »
+   q\_0: ┤ H ├─░──■────────░──░─┤ H ├┤ X ├───────■──┤ X ├┤ H ├──────░──░─┤M├───»
+        ├───┤ ░  │        ░  ░ ├───┤├───┤       │  ├───┤├───┤      ░  ░ └╥┘┌─┐»
+   q\_1: ┤ H ├─░──┼──■─────░──░─┤ H ├┤ X ├───────■──┤ X ├┤ H ├──────░──░──╫─┤M├»
+        ├───┤ ░  │  │     ░  ░ ├───┤├───┤       │  ├───┤├───┤      ░  ░  ║ └╥┘»
+   q\_2: ┤ H ├─░──■──■──■──░──░─┤ H ├┤ X ├───────■──┤ X ├┤ H ├──────░──░──╫──╫─»
+        ├───┤ ░        │  ░  ░ ├───┤├───┤┌───┐┌─┴─┐├───┤├───┤┌───┐ ░  ░  ║  ║ »
+   q\_3: ┤ H ├─░────────■──░──░─┤ H ├┤ X ├┤ H ├┤ X ├┤ H ├┤ X ├┤ H ├─░──░──╫──╫─»
+        └───┘ ░           ░  ░ └───┘└───┘└───┘└───┘└───┘└───┘└───┘ ░  ░  ║  ║ »
+meas: 4/═════════════════════════════════════════════════════════════════╩══╩═»
+                                                                         0  1 »
+«
+«   q\_0: ──────
+«
+«   q\_1: ──────
+«        ┌─┐
+«   q\_2: ┤M├───
+«        └╥┘┌─┐
+«   q\_3: ─╫─┤M├
+«         ║ └╥┘
+«meas: 4/═╩══╩═
+«         2  3
+    \end{Verbatim}
+
+    \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
+\prompt{In}{incolor}{175}{\boxspacing}
+\begin{Verbatim}[commandchars=\\\{\}]
+\PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{grover\PYZus{}1 simulation results:}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+\PY{n}{simulateCircuit\PYZus{}grover}\PY{p}{(}\PY{n}{grover\PYZus{}1}\PY{p}{)}
+\end{Verbatim}
+\end{tcolorbox}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+grover\_1 simulation results:
+    \end{Verbatim}
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{trabalho2_files/trabalho2_37_1.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
+\prompt{In}{incolor}{176}{\boxspacing}
+\begin{Verbatim}[commandchars=\\\{\}]
+\PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{grover\PYZus{}1 job results:}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+\PY{n}{fetch\PYZus{}job\PYZus{}results}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{cxcrjtvztp3000833740}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+\end{Verbatim}
+\end{tcolorbox}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+grover\_1 job results:
+    \end{Verbatim}
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{trabalho2_files/trabalho2_38_1.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
+\prompt{In}{incolor}{177}{\boxspacing}
+\begin{Verbatim}[commandchars=\\\{\}]
+\PY{c+c1}{\PYZsh{} create grover circuit (with oracle 2)}
+\PY{n}{grover\PYZus{}2} \PY{o}{=} \PY{n}{createCircuit2\PYZus{}grover}\PY{p}{(}\PY{p}{)}
+
+\PY{c+c1}{\PYZsh{}run it on real hardware}
+\PY{c+c1}{\PYZsh{}runCircuit\PYZus{}grover(grover\PYZus{}2)}
+
+\PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{grover\PYZus{}2 circuit:}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+\PY{n}{grover\PYZus{}2}\PY{o}{.}\PY{n}{draw}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{mpl}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{idle\PYZus{}wires}\PY{o}{=}\PY{k+kc}{False}\PY{p}{)}
+\end{Verbatim}
+\end{tcolorbox}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+grover\_2 circuit:
+    \end{Verbatim}
+ 
+            
+\prompt{Out}{outcolor}{177}{}
+    
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{trabalho2_files/trabalho2_39_1.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{trabalho2_files/trabalho2_39_2.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
+\prompt{In}{incolor}{178}{\boxspacing}
+\begin{Verbatim}[commandchars=\\\{\}]
+\PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{grover\PYZus{}2 simulation:}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+\PY{n+nb}{print} \PY{p}{(}\PY{n}{grover\PYZus{}2}\PY{p}{)}
+\end{Verbatim}
+\end{tcolorbox}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+grover\_2 simulation:
+        ┌───┐ ░        ░  ░ ┌───┐┌───┐          ┌───┐┌───┐      ░  ░ ┌─┐      »
+   q\_0: ┤ H ├─░────────░──░─┤ H ├┤ X ├───────■──┤ X ├┤ H ├──────░──░─┤M├──────»
+        ├───┤ ░        ░  ░ ├───┤├───┤       │  ├───┤├───┤      ░  ░ └╥┘┌─┐   »
+   q\_1: ┤ H ├─░──■─────░──░─┤ H ├┤ X ├───────■──┤ X ├┤ H ├──────░──░──╫─┤M├───»
+        ├───┤ ░  │     ░  ░ ├───┤├───┤       │  ├───┤├───┤      ░  ░  ║ └╥┘┌─┐»
+   q\_2: ┤ H ├─░──■──■──░──░─┤ H ├┤ X ├───────■──┤ X ├┤ H ├──────░──░──╫──╫─┤M├»
+        ├───┤ ░     │  ░  ░ ├───┤├───┤┌───┐┌─┴─┐├───┤├───┤┌───┐ ░  ░  ║  ║ └╥┘»
+   q\_3: ┤ H ├─░─────■──░──░─┤ H ├┤ X ├┤ H ├┤ X ├┤ H ├┤ X ├┤ H ├─░──░──╫──╫──╫─»
+        └───┘ ░        ░  ░ └───┘└───┘└───┘└───┘└───┘└───┘└───┘ ░  ░  ║  ║  ║ »
+meas: 4/══════════════════════════════════════════════════════════════╩══╩══╩═»
+                                                                      0  1  2 »
+«
+«   q\_0: ───
+«
+«   q\_1: ───
+«
+«   q\_2: ───
+«        ┌─┐
+«   q\_3: ┤M├
+«        └╥┘
+«meas: 4/═╩═
+«         3
+    \end{Verbatim}
+
+    \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
+\prompt{In}{incolor}{179}{\boxspacing}
+\begin{Verbatim}[commandchars=\\\{\}]
+\PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{grover\PYZus{}2 simulation results:}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+\PY{n}{simulateCircuit\PYZus{}grover}\PY{p}{(}\PY{n}{grover\PYZus{}2}\PY{p}{)}
+\end{Verbatim}
+\end{tcolorbox}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+grover\_2 simulation results:
+    \end{Verbatim}
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{trabalho2_files/trabalho2_41_1.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
+\prompt{In}{incolor}{180}{\boxspacing}
+\begin{Verbatim}[commandchars=\\\{\}]
+\PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{grover\PYZus{}2 job results:}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+\PY{n}{fetch\PYZus{}job\PYZus{}results}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{cxcrk0ctpsjg008mk13g}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+\end{Verbatim}
+\end{tcolorbox}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+grover\_2 job results:
+    \end{Verbatim}
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{trabalho2_files/trabalho2_42_1.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+
+    % Add a bibliography block to the postdoc
+    
+    
+    
+\end{document}
