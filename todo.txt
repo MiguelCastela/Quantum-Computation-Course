@@ -1,0 +1,7 @@
+- pesquisa bibliografica
+- qual a relevance da represantação das imagens com circuitos quanticos se é uma hybrid qnn (
+Flexible Representation of Quantum Images (FRQI): This method encodes both the color (grayscale intensity) and position of each pixel into a quantum state. Specifically, the intensity information is represented by rotating a qubit to a specific angle, while the pixel positions are mapped using basis states. ​
+Novel Enhanced Quantum Representation (NEQR): Unlike FRQI, NEQR uses multiple qubits to represent the grayscale value of each pixel directly, allowing for a more precise encoding of image information.
+)
+- differentes tipos 
+.-image representation : https://github.com/Qiskit/textbook/blob/main/notebooks/ch-applications/image-processing-frqi-neqr.ipynb

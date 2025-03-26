@@ -1,3 +1,0 @@
--Ler o primeiro tutorial de QNN
--Implementar logo localmente o tutorial da HQQN para image classification "Torch Connector and Hybrid QNNs"
--image representation : https://github.com/Qiskit/textbook/blob/main/notebooks/ch-applications/image-processing-frqi-neqr.ipynb
