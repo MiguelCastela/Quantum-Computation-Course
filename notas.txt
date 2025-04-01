@@ -1,0 +1,157 @@
+Torch_connector ans hybrid qnn:
+
+
+Parte Quântica:
+Criação do Circuito Quântico:
+
+    O circuito quântico (QuantumCircuit) tem 2 qubits.
+
+    Usa um ZZFeatureMap para codificar os dados clássicos nos qubits.
+
+    Aplica uma camada de ansatz (RealAmplitudes) com parâmetros treináveis.
+
+Quantum Neural Network (QNN):
+
+    O EstimatorQNN mede o circuito e extrai informações.
+
+    A TorchConnector permite que a QNN seja integrada como uma camada na rede PyTorch.
+
+Inferência Quântica:
+
+    A saída da camada quântica é processada por uma Linear(1, 1), para ajuste dos resultados.
+
+
+Parte Clássica  
+Pré-processamento de dados:
+
+    Usa o torchvision.datasets.MNIST para carregar imagens de dígitos manuscritos.
+
+    Filtra apenas os dígitos 0 e 1 e cria um DataLoader para alimentar o modelo.
+
+    Usa matplotlib para visualizar algumas amostras do dataset.
+
+Camadas Clássicas da Rede Neural:
+
+    Convoluções: Conv2d(1, 2, kernel_size=5) e Conv2d(2, 16, kernel_size=5).
+
+    Camadas totalmente conectadas (Linear(256, 64) e Linear(64, 2)).
+
+    Funções de ativação (ReLU, Dropout, MaxPool2d).
+
+Treinamento e Otimização:
+
+    A função de perda é NLLLoss().
+
+    O otimizador é Adam(model4.parameters(), lr=0.001), um método clássico de atualização de pesos.
+
+    O backpropagation ajusta os pesos, incluindo os do circuito quântico.
+
+
+
+
+
+O modelo começa com processamento clássico (convoluções, pooling, fully connected layers)
+passa pelos circuitos quânticos para extração de features
+finaliza com uma camada clássica para classificação.
+
+Hybrid convolutional Neural Network
+
+
+
+Parte Clássica 
+
+    Pré-processamento de dados:
+
+        O dataset contém imagens 8-pixel width que representam linhas horizontais ou verticais.
+
+        As imagens são geradas manualmente e ruidosas para simular variações reais.
+
+        O dataset é dividido em treino (70%) e teste (30%).
+
+    Visualização de Dados:
+
+        O código gera gráficos das amostras de treino e teste usando matplotlib.
+
+        As imagens são exibidas em formato 2x4 ou 4x2 dependendo da classe (horizontal/vertical).
+
+    Otimização e Treinamento:
+
+        O otimizador COBYLA é usado para ajustar os parâmetros do circuito quântico.
+
+        A métrica de acurácia é usada para avaliar o desempenho do modelo.
+
+        Um gráfico da função objetivo é atualizado dinamicamente durante o treinamento.
+
+
+Parte Quântica 
+
+    Convolução Quântica:
+
+        São aplicadas camadas de convolução quântica que processam os qubits em pares.
+
+        A convolução usa portas RZ, RY e CX para codificar a informação.
+
+        O circuito convolucional (conv_layer) é replicado para diferentes estágios.
+
+    Pooling Quântico:
+
+        O pooling quântico reduz o número de qubits, condensando informação.
+
+        Ele aplica transformações em pares de qubits e descarta parte da informação.
+
+    Mapeamento de Features:
+
+        O ZFeatureMap codifica os 8 pixels da imagem nos 8 qubits do circuito.
+
+        O mapeamento permite que os dados clássicos sejam interpretados pelo sistema quântico.
+
+    Construção do QCNN:
+
+        O circuito convolucional e o pooling são aplicados em camadas sucessivas.
+
+        O circuito final é reduzido progressivamente, indo de 8 qubits até 1.
+
+        Um observable Z é usado para medir a saída da rede.
+
+
+Os dados são processados classicamente e convertidos para um formato quântico.
+O QCNN usa camadas convolucionais e pooling para extrair features.
+O classificador NeuralNetworkClassifier treina o modelo.
+A precisão é avaliada e os resultados são exibidos graficamente, de maneira classica.
+
+
+
+
+O primeiro código está mais centrado na aplicação direta do QNN em uma rede neural híbrida clássica-quântica com um dataset conhecido (MNIST).
+O segundo código é mais experimental, focando na construção manual de circuitos quânticos e na criação de um conjunto de dados customizado, sendo uma abordagem mais voltada para a exploração de circuitos quânticos para redes neurais
+
+
+
+1. ZFeatureMap
+
+The ZFeatureMap is a simpler quantum feature map where each classical input is mapped to a quantum state by applying single-qubit rotations (typically using RzRz​ gates). This means that the feature map only introduces rotations on individual qubits based on the input values.
+
+    Structure: The classical data is used to parameterize rotation gates on individual qubits. For a nn-dimensional input, you would have nn qubits, and each qubit would undergo a rotation based on the corresponding classical input value.
+
+    Usage in Image Processing: The ZFeatureMap can be used in simpler quantum models to encode classical image data into a quantum state by rotating qubits. This type of feature map is often used in cases where a more straightforward mapping of classical data to quantum states is sufficient. It can be a good choice for simpler image datasets or models with lower computational complexity.
+
+2. ZZFeatureMap
+
+The ZZFeatureMap is a more complex quantum feature map where entangling operations (specifically, the ZZZZ-type entanglement) are used in addition to the single-qubit rotations. In this case, after applying rotations to each qubit based on the input data, the qubits are entangled using controlled-Z operations.
+
+    Structure: Like the ZFeatureMap, the ZZFeatureMap also uses rotations to encode classical data onto qubits. However, after the rotations, it applies a set of entangling gates (typically the ZZZZ interaction gates) to create correlations between the qubits.
+
+    Usage in Image Processing: The inclusion of entangling operations in the ZZFeatureMap allows it to capture more complex relationships between qubits and, by extension, between features of the classical data. This can be useful for more complex image processing tasks where the relationships between pixels or features are non-trivial and need to be captured through quantum entanglement. It is a better choice for models that require learning from more intricate and interrelated patterns in the image data.
+
+
+
+porque nao usar só qnn e passar o output por layers classicos
+Challenges
+
+    Gradient Backpropagation: One of the challenges in training quantum neural networks (QNNs) is that quantum circuits don't naturally support backpropagation the same way classical networks do. This is often overcome using techniques like parameter-shift rules or hybrid approaches where the quantum circuit computes gradients for the classical network.
+
+    Probabilistic Nature of Quantum Measurements: Quantum measurements are probabilistic, so your network's predictions might not always be deterministic. This means your output could be a probability distribution or a bitstring representing the quantum state, which requires careful handling.
+
+Summary:
+
+To stay purely quantum, you can use a quantum neural network (QNN) that processes the input through a quantum circuit, directly yielding the class probabilities or measurements as output. However, this requires careful consideration of how quantum measurements translate into classical outputs and how the training process handles the probabilistic nature of quantum computing. Additionally, quantum circuits usually require hybrid solutions for gradient-based optimization, so achieving a fully quantum-only model is a bit more complex but still feasible.
