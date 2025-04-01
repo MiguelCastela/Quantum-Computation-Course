@@ -1,6 +1,10 @@
-- pesquisa bibliografica
-- experimentar com frqi e nerq em vez desses metoos -> quantica iterativa em vez de machine learning logo : Flexible Representation of Quantum Images (FRQI): This method encodes both the color (grayscale intensity) and position of each pixel into a quantum state. Specifically, the intensity information is represented by rotating a qubit to a specific angle, while the pixel positions are mapped using basis states. ​Novel Enhanced Quantum Representation (NEQR): Unlike FRQI, NEQR uses multiple qubits to represent the grayscale value of each pixel directly, allowing for a more precise encoding of image information.
 - ver se é preciso sempre meter o output num circuito classico ou da para ser completamente quantico 
+- ver tutorial do sagar
+- pesquisa bibliografica
+- mail a dizer que com processamento iterativo (frqi e neqr) é muito lento e que posso concluir isso no relatorio
+- correr em hardware real com o zzfeature map
+- dizer para que servem as pooling layers
+- posso mostrar os dois tutoriais e dps o hibrido
 
-
--image representation : https://github.com/Qiskit/textbook/blob/main/notebooks/ch-applications/image-processing-frqi-neqr.ipynb
+Flexible Representation of Quantum Images (FRQI): This method encodes both the color (grayscale intensity) and position of each pixel into a quantum state. Specifically, the intensity information is represented by rotating a qubit to a specific angle, while the pixel positions are mapped using basis states. ​
+Novel Enhanced Quantum Representation (NEQR): Unlike FRQI, NEQR uses multiple qubits to represent the grayscale value of each pixel directly, allowing for a more precise encoding of image information.

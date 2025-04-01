@@ -155,3 +155,50 @@ Challenges
 Summary:
 
 To stay purely quantum, you can use a quantum neural network (QNN) that processes the input through a quantum circuit, directly yielding the class probabilities or measurements as output. However, this requires careful consideration of how quantum measurements translate into classical outputs and how the training process handles the probabilistic nature of quantum computing. Additionally, quantum circuits usually require hybrid solutions for gradient-based optimization, so achieving a fully quantum-only model is a bit more complex but still feasible.
+
+
+
+In your code, the fully connected (FC) layers like fc1, fc2, and fc3 are not explicitly defined, and yet the code is still able to work. This can be explained because the quantum neural network (QNN) you are using relies on quantum circuits that act directly as the model's layers for feature extraction and transformation, bypassing the need for classical FC layers typically used in traditional neural networks.
+
+Here’s a breakdown of how it works:
+1. Quantum Circuits as Feature Extractors:
+
+    The quantum circuits defined in the code (e.g., conv_circuit, pool_circuit, and the full quantum convolutional layers) perform the role of feature extraction and transformation.
+
+    Quantum circuits can take in quantum states, apply various quantum gates, and produce an output that can serve as learned representations of the input data, much like what classical neural networks do with FC layers.
+
+2. Feature Map and Ansatz:
+
+    You define the feature map (ZFeatureMap) and the ansatz (the sequence of convolutional and pooling layers).
+
+    The feature map encodes the input data into a quantum state. This quantum state is then transformed by the ansatz (which is essentially a series of quantum gates designed to model complex transformations of data).
+
+    This whole process in the quantum circuit can extract features and model the data in ways similar to how convolutional layers in classical networks work, but instead of FC layers, it uses quantum gates to modify the state.
+
+3. Estimator and Quantum Neural Network (QNN):
+
+    The EstimatorQNN class in your code is where the quantum neural network gets defined. This class takes in the quantum circuit (composed of the feature map and ansatz) and uses quantum measurements to output a prediction.
+
+    The quantum state resulting from the quantum circuit is measured, and this measurement is used to make a prediction. This works similarly to how FC layers process data, but in this case, the processing is done in the quantum realm.
+
+4. Classical Data and Training:
+
+    The training data (images and labels) are still classical, but they are transformed into quantum states before being fed into the quantum circuit.
+
+    The NeuralNetworkClassifier uses an optimizer (like COBYLA) to adjust the parameters of the quantum circuit, which allows it to learn from the training data, even without FC layers.
+
+5. No Need for FC Layers:
+
+    In a traditional neural network, FC layers would learn to combine extracted features into a final prediction. However, in your quantum approach, the quantum circuit itself performs this function.
+
+    The final output is based on quantum measurements and estimations from the quantum states created by the quantum circuit, without requiring additional classical layers to process the data.
+
+Key Points:
+
+    The quantum circuit serves as both a feature extractor and a classifier.
+
+    The output of the quantum circuit (through measurement) is used directly to make predictions.
+
+    The use of quantum gates and quantum measurements allows the model to bypass traditional fully connected layers in favor of quantum operations that can map data to a higher-dimensional space and perform classification.
+
+In summary, the quantum neural network in this code doesn’t rely on FC layers because the quantum circuits (composed of the feature map and ansatz) directly learn representations and classifications based on quantum state transformations.
