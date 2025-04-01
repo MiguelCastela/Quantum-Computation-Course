@@ -1,5 +1,5 @@
 - ver se é preciso sempre meter o output num circuito classico ou da para ser completamente quantico 
-- ver tutorial do sagar
+- ver tutorial do sagar, falar sobre esses tutoriais tb
 - pesquisa bibliografica
 - mail a dizer que com processamento iterativo (frqi e neqr) é muito lento e que posso concluir isso no relatorio
 - correr em hardware real com o zzfeature map
