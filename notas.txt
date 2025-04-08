@@ -202,3 +202,45 @@ Key Points:
     The use of quantum gates and quantum measurements allows the model to bypass traditional fully connected layers in favor of quantum operations that can map data to a higher-dimensional space and perform classification.
 
 In summary, the quantum neural network in this code doesn’t rely on FC layers because the quantum circuits (composed of the feature map and ansatz) directly learn representations and classifications based on quantum state transformations.
+
+
+
+
+Adam Optimizer
+
+Adam (short for Adaptive Moment Estimation) is an advanced gradient-based optimization algorithm that computes adaptive learning rates for each parameter by using both the first-order momentum (the moving average of the gradient) and the second-order velocity (the moving average of the squared gradients).
+How Adam Works:
+
+    Momentum: It tracks the exponentially decaying average of past gradients, which helps the optimizer avoid oscillations and speeds up convergence.
+
+    Adaptive Learning Rates: It adjusts the learning rates for each parameter based on past gradients' magnitudes, which helps improve convergence rates for different parameters in neural networks.
+
+    Bias Correction: Adam includes a correction for the initial bias in the moment estimates, especially for small t (iteration steps).
+
+Key Hyperparameters:
+
+    alpha (learning rate)
+
+    beta1 (exponential decay rate for the first moment estimate)
+
+    beta2 (exponential decay rate for the second moment estimate)
+
+    epsilon (a small constant to prevent division by zero)
+
+COBYLA Optimizer
+
+COBYLA (Constrained Optimization BY Linear Approximations) is a derivative-free optimization method used for problems where gradients are not available. It uses a linear approximation of the objective function to find optimal solutions under given constraints.
+
+    Key Difference from Adam: COBYLA does not require gradients, making it useful for problems where the objective function is not differentiable or where the gradient calculation is computationally expensive or unavailable.
+
+    Nature: Adam is a gradient-based method, while COBYLA is a direct search method (derivative-free), which makes it suitable for non-differentiable problems.
+
+Alternative to optimizer.zero_grad(set_to_none=True) in COBYLA
+
+In the context of the COBYLA optimizer (especially if you're using it in the Qiskit context or similar), you won't be using the typical gradient descent framework where you would normally clear gradients using optimizer.zero_grad() as with gradient-based optimizers like Adam. This is because COBYLA doesn't rely on gradients.
+
+However, if you're using COBYLA within a broader machine learning or optimization framework where you need to clear gradients manually (e.g., using PyTorch), there's no direct equivalent operation in COBYLA because it doesn’t compute gradients. In COBYLA, you are essentially just minimizing a function over a set of parameters without requiring gradient computation.
+
+If you're using COBYLA with a framework like PyTorch, and you want to clear gradients or handle a similar step, you can just avoid using gradient-related methods entirely, and focus on direct function evaluations (e.g., loss() or objective_function()). However, if you are still within a gradient-descent workflow and need to manually reset certain things, ensure you are not mixing gradient-based logic with COBYLA operations.
+
+Let me know if you need more clarification! (isto pode ser so com referencias)

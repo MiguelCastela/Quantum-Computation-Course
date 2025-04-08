@@ -1,9 +1,12 @@
-- ver se é preciso sempre meter o output num circuito classico ou da para ser completamente quantico 
+- meter documentos relevantes (que sejam mencionados no relatorio) no development da drive
+- meter referencias na drive
+- fazer ppt de apresentação ou um esqueleto do latex
+- ver se é preciso sempre meter o output num circuito classico ou da para ser completamente quantico (resposta no notas)
 - ver tutorial do sagar, falar sobre esses tutoriais tb
 - pesquisa bibliografica
-- mail a dizer que com processamento iterativo (frqi e neqr) é muito lento e que posso concluir isso no relatorio
-- correr em hardware real com o zzfeature map
+- correr em hardware real com o zzfeature map (pode ser só dps da entrega entermedia)
 - dizer para que servem as pooling layers
+- falar de como frqi e neqr é mt mais lento
 - posso mostrar os dois tutoriais e dps o hibrido
 
 Flexible Representation of Quantum Images (FRQI): This method encodes both the color (grayscale intensity) and position of each pixel into a quantum state. Specifically, the intensity information is represented by rotating a qubit to a specific angle, while the pixel positions are mapped using basis states. ​

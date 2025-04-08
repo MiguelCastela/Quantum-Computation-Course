@@ -16,6 +16,7 @@ from torch.nn import Module
 from torch.nn import Conv2d, Dropout2d, Linear
 from torch.nn import NLLLoss
 from torch.nn import functional as F
+from qiskit_machine_learning.optimizers import COBYLA
 
 # Initialize the Estimator
 estimator = Estimator()
@@ -240,11 +241,11 @@ def train_and_evaluate(encoding_method):
     for epoch in range(epochs):
         total_loss = []
         for batch_idx, (data, target) in enumerate(train_loader):
-            optimizer.zero_grad(set_to_none=True)
+            #optimizer.zero_grad(set_to_none=True) //so com o adam, meter no relatorio
             output = model(data)
             loss = loss_func(output, target)
             loss.backward()
-            optimizer.step()
+            #optimizer.step() //so com o adam, meter no relatorio
             total_loss.append(loss.item())
         loss_list.append(sum(total_loss) / len(total_loss))
         print(f"Encoding: {encoding_method}, Epoch [{epoch+1}/{epochs}] Loss: {loss_list[-1]:.4f}")
