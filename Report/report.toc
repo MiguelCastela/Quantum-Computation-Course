@@ -1,0 +1,4 @@
+\contentsline {section}{Introduction}{2}{section*.2}%
+\contentsline {section}{First evaluations with the Qiskit tutorials}{2}{section*.3}%
+\contentsline {section}{Diferent tipes of QNN}{2}{section*.4}%
+\contentsline {section}{Conclusions and future work}{2}{section*.5}%

@@ -1,0 +1,62 @@
+\documentclass[a4paper, 12pt, fleqn]{report}
+
+\usepackage{graphicx}
+\usepackage{geometry}
+\usepackage{caption}
+\geometry{a4paper, margin=1in}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{multirow}
+\usepackage{hyperref}
+\usepackage{float}
+\usepackage{pgfplots}
+\pgfplotsset{compat=1.17}
+
+\begin{document}
+
+% Cover page
+\begin{titlepage}
+    \centering
+    \vspace*{1cm}
+    \includegraphics[width=0.4\textwidth]{uc_logo.jpg}
+
+    {\Huge\bfseries QCML2- Image classification with Hybrid Quantum Convolutional Neural Networks\par}
+    \vspace{0.1cm}
+    {\Large\itshape Results \par}
+    \vfill
+    \vfill
+        \begin{center}
+            \large
+            \textbf{Members: \\}
+            Miguel Castela 2022212972\\
+            Supervised by Professor Doctor Jorge Lobo\\
+    \end{center}
+    
+    \vfill
+    
+    {\large March, 2025 \par}
+\end{titlepage}
+
+% Table of contents
+\renewcommand{\contentsname}{Table of Contents}
+\tableofcontents
+\newpage
+
+% Sections
+\section*{\fontsize{16}{20}\selectfont Introduction}
+\addcontentsline{toc}{section}{Introduction}
+
+
+\section*{\fontsize{16}{20}\selectfont First evaluations with the Qiskit tutorials}
+\addcontentsline{toc}{section}{First evaluations with the Qiskit tutorials}
+
+\section*{\fontsize{16}{20}\selectfont Diferent tipes of QNN}
+\addcontentsline{toc}{section}{Diferent tipes of QNN}
+
+\section*{\fontsize{16}{20}\selectfont Conclusions and future work}
+\addcontentsline{toc}{section}{Conclusions and future work}
+
+
+
+
+\end{document}  
