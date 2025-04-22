@@ -1,4 +1,8 @@
 \contentsline {section}{Introduction}{2}{section*.2}%
-\contentsline {section}{First evaluations with the Qiskit tutorials}{5}{section*.3}%
-\contentsline {section}{Diferent tipes of QNN}{5}{section*.4}%
-\contentsline {section}{Conclusions and future work}{5}{section*.5}%
+\contentsline {section}{First evaluations with the Qiskit tutorials}{2}{section*.3}%
+\contentsline {subsection}{First tutorial}{2}{section*.4}%
+\contentsline {subsection}{Second tutorial}{7}{section*.5}%
+\contentsline {section}{Diferent tipes of QNN}{12}{section*.6}%
+\contentsline {section}{Statistics and running on real hardware}{12}{section*.7}%
+\contentsline {section}{ What works best and creating of a custom HCQNN}{12}{section*.8}%
+\contentsline {section}{Conclusion}{12}{section*.9}%

@@ -122,6 +122,7 @@ A precisão é avaliada e os resultados são exibidos graficamente, de maneira c
 
 
 
+
 O primeiro código está mais centrado na aplicação direta do QNN em uma rede neural híbrida clássica-quântica com um dataset conhecido (MNIST).
 O segundo código é mais experimental, focando na construção manual de circuitos quânticos e na criação de um conjunto de dados customizado, sendo uma abordagem mais voltada para a exploração de circuitos quânticos para redes neurais
 

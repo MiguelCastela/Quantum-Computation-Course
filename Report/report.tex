@@ -59,6 +59,15 @@ early stages of development, quantum machine learning holds promise for revoluti
 certain computational tasks, particularly those involving large-scale optimization and data
 analysis.
 
+
+
+\section*{\fontsize{16}{20}\selectfont First evaluations with the Qiskit tutorials}
+\addcontentsline{toc}{section}{First evaluations with the Qiskit tutorials}
+
+\subsection*{\fontsize{16}{20}\selectfont First tutorial}
+\addcontentsline{toc}{subsection}{First tutorial}
+
+
 The first step of this project was using the Qiskit framwoerk, combined with pythorch to construct a HQNN.
 After studying the first three qiski tutorials ("Quantum Neural Networks", "Neural Network Classifier" \& "Training a Quantum Model on a Real Dataset") i began
 to implement the first version of the QNN. This was done by implementing the "Torch Connector and Hybrind QNNs" tutorialm:
@@ -184,34 +193,402 @@ to implement the first version of the QNN. This was done by implementing the "To
         \end{verbatim}
         }
 
-        \item The next step is to define the neural network with a quantum layer.
+        \item The next step is to define the neural network that includes a quantum layer.\\
 
+        This class Net is a custom neural network built using PyTorch. It combines classical layers (such as convolutional and linear layers) with a quantum neural network (QNN) layer created earlier with Qiskit. The QNN is integrated using the TorchConnector, which allows it to be used just like any other PyTorch layer and supports hybrid quantum-classical training via backpropagation.\\
 
+        There are two convolutional layers, typically used for image data.
 
+        $Conv2d(1, 2, kernel_size=5)$ means the first layer takes 1 input channel $(grayscale image)$ and outputs 2 feature maps using 5x5 filters.
 
+        The second layer takes 2 channels and produces 16 feature maps.\\
 
+        Dropout2d is a regularization layer that randomly zeros out entire channels during training to prevent overfitting.\\
 
+        fc1 and fc2 are fully connected (linear) layers. The first one takes the flattened output of the convolutional layers (256 features) and reduces it to 64 features. The second one takes the 64 features and outputs 2 features, which are then passed to the QNN.\\
 
+        The Qiskit quantum neural network is then wrapped using the TorchConnector, allowing it to be used as a layer in the PyTorch model. The QNN takes the 2-dimensional input from fc2 and produces a 1-dimensional output.\\
 
-
-
-
-
+        The parameters (weights) of the quantum circuit are initialized randomly in the interval $[-1,1]$.
+        
+        Finally, fc3 is another fully connected layer that takes the 1-dimensional output from the QNN and produces a final output of 2 features (which can be interpreted as probabilities for binary classification).\\
 
         
 
-    \item 
+
+        {\small
+        \begin{verbatim}
+            class Net(Module):
+            def __init__(self, qnn):
+                super().__init__()
+                self.conv1 = Conv2d(1, 2, kernel_size=5)
+                self.conv2 = Conv2d(2, 16, kernel_size=5)
+                self.dropout = Dropout2d()
+                self.fc1 = Linear(256, 64)
+                self.fc2 = Linear(64, 2)  # 2-dimensional input to QNN
+                self.qnn = TorchConnector(qnn)  # Apply torch connector, weights chosen
+                # uniformly at random from interval [-1,1].
+                self.fc3 = Linear(1, 1)  # 1-dimensional output from QNN
+        \end{verbatim}
+        }
+
+        \item The next step is to do the Forward pass.
+        
+        It applies the first convolutional layer with a ReLU activation, followed by 2x2 max pooling (downsampling). The same steps are repeated for the second convolutional layer.
+
+        After feature extraction with convolutional layers and dropout for regularization, the data is flattened and passed through two fully connected layers (fc1 and fc2). The output, a 2D vector, is then processed by the quantum neural network (QNN) layer. Its result goes through another linear layer (fc3), and the final output is a concatenation of the prediction and its complement, representing probabilities for binary classification (digit 0 vs 1).
+
+        
+        {\small
+        \begin{verbatim}
+            def forward(self, x):
+            x = F.relu(self.conv1(x))
+            x = F.max_pool2d(x, 2)
+            x = F.relu(self.conv2(x))
+            x = F.max_pool2d(x, 2)
+            x = self.dropout(x)
+            x = x.view(x.shape[0], -1)
+            x = F.relu(self.fc1(x))
+            x = self.fc2(x)
+            x = self.qnn(x)  # apply QNN
+            x = self.fc3(x)
+            return cat((x, 1 - x), -1)
+        \end{verbatim}}
+
+
+        \item Finally i need to inicialize the mode, optimizer and loss function.\\
+        The optimizer is responsible for updating the model's parameters during training. In this case, the Adam optimizer is used with a learning rate of 0.01.\\
+        The loss function is used to measure the difference between the predicted output and the true labels. In this case, the  Negative Log Likelihood Loss is used.\\
+
+        Adam is a first-order gradient-based optimizer that combines momentum, which uses past gradients, and adaptive learning rates, which scale the step size based on how frequently a parameter is updated. It is commonly used for most deep learning tasks due to its speed and robustness. One of its key advantages is the adaptive learning rate per parameter, which often leads to good convergence. However, one downside of Adam is that it can sometimes generalize worse than Stochastic Gradient Descent (SGD).
+
+
+        
+        The model is trained for 10 epochs. In each epoch, it iterates over the training batches:
+
+    \begin{itemize}
+        \item Gradients are reset with \texttt{optimizer.zero\_grad()}.
+        \item A forward pass is performed to get the model's predictions.
+        \item The loss between predictions and true labels is computed.
+        \item A backward pass computes gradients.
+        \item The model updates its weights using the optimizer.
+        \item Loss values for the epoch are stored and averaged.
+    \end{itemize}
+
+
+    \item A new quantum neural network is created and the trained weights are loaded: \\
+
+    The model is then evaluated on the test dataset. First, it is set to evaluation mode using \texttt{model.eval()}. Gradient computation is disabled using \texttt{no\_grad()} to speed up inference and save memory.\\
+
+    For each batch in the test set:
+    \begin{itemize}
+        \item The model outputs a prediction for the input data.
+        \item If the output has an unexpected shape, it is reshaped appropriately.
+        \item The predicted label is obtained using \texttt{argmax}.
+        \item The number of correct predictions is counted by comparing with the true labels.
+        \item The loss is computed using the same loss function as in training.
+    \end{itemize}
+
+    At the end, the average loss and accuracy are printed
 \end{itemize}
 
+\subsection*{\fontsize{16}{20}\selectfont Second tutorial}
+\addcontentsline{toc}{subsection}{Second tutorial}
 
-\section*{\fontsize{16}{20}\selectfont First evaluations with the Qiskit tutorials}
-\addcontentsline{toc}{section}{First evaluations with the Qiskit tutorials}
+The second tutorial added the concepts of pooling layers, creating the pooling and convolution circuits and a custom dataset.\\
+
+\begin{itemize}
+
+
+    \item Quantum Circuit Definitions
+
+
+    A two-qubit unitary circuit is defined for the convolutional layer. The circuit is parameterized and drawn.
+
+    {\small
+    \begin{verbatim}
+    def conv_circuit(params):
+        target = QuantumCircuit(2)
+        target.rz(-np.pi / 2, 1)
+        target.cx(1, 0)
+        target.rz(params[0], 0)
+        target.ry(params[1], 1)
+        target.cx(0, 1)
+        target.ry(params[2], 1)
+        target.cx(1, 0)
+        target.rz(np.pi / 2, 0)
+        return target
+    \end{verbatim}
+    }
+
+    The convolutional circuit is then drawn and saved as an image.
+
+    \item Convolutional Layer
+    A convolutional layer is constructed by composing multiple convolutional circuits. The result is a quantum circuit that can be applied to the qubits.
+
+    {\small
+    \begin{verbatim}
+    def conv_layer(num_qubits, param_prefix):
+        qc = QuantumCircuit(num_qubits, name="Convolutional Layer")
+        qubits = list(range(num_qubits))
+        param_index = 0
+        params = ParameterVector(param_prefix, length=num_qubits * 3)
+        for q1, q2 in zip(qubits[0::2], qubits[1::2]):
+            qc = qc.compose(conv_circuit(params[param_index : (param_index + 3)]), [q1, q2])
+            qc.barrier()
+            param_index += 3
+        for q1, q2 in zip(qubits[1::2], qubits[2::2] + [0]):
+            qc = qc.compose(conv_circuit(params[param_index : (param_index + 3)]), [q1, q2])
+            qc.barrier()
+            param_index += 3
+
+        qc_inst = qc.to_instruction()
+
+        qc = QuantumCircuit(num_qubits)
+        qc.append(qc_inst, qubits)
+        return qc
+    \end{verbatim}
+    }
+
+    \item Pooling Circuit
+    A similar approach is used to define a pooling layer, which uses a different set of operations.
+
+    A pooling layer's objective is to reduce the dimensionality of the data while retaining important features. This is done by applying a pooling circuit that combines qubits in a specific way.
+
+    {\small
+    \begin{verbatim}
+    def pool_circuit(params):
+        target = QuantumCircuit(2)
+        target.rz(-np.pi / 2, 1)
+        target.cx(1, 0)
+        target.rz(params[0], 0)
+        target.ry(params[1], 1)
+        target.cx(0, 1)
+        target.ry(params[2], 1)
+        return target
+    \end{verbatim}
+    }
+
+    \item Pooling Layer
+    The pooling layer is created by composing several pooling circuits.
+
+    {\small
+    \begin{verbatim}
+    def pool_layer(sources, sinks, param_prefix):
+        num_qubits = len(sources) + len(sinks)
+        qc = QuantumCircuit(num_qubits, name="Pooling Layer")
+        param_index = 0
+        params = ParameterVector(param_prefix, length=num_qubits // 2 * 3)
+        for source, sink in zip(sources, sinks):
+            qc = qc.compose(pool_circuit(params[param_index : (param_index + 3)]), [source, sink])
+            qc.barrier()
+            param_index += 3
+
+        qc_inst = qc.to_instruction()
+
+        qc = QuantumCircuit(num_qubits)
+        qc.append(qc_inst, range(num_qubits))
+        return qc
+    \end{verbatim}
+    }
+
+    \item Dataset Generation
+    A synthetic dataset of images is created to train the QCNN. Each image is either a horizontal or vertical line.
+
+    \item Model Training and Evaluation
+
+    The dataset is split into training and testing sets. The classifier is then trained using a quantum neural network with the defined convolutional and pooling layers.
+
+    {\small
+    \begin{verbatim}
+        train_images, test_images, train_labels, test_labels = train_test_split(
+            images, labels, test_size=0.3, random_state=246
+        )
+
+        classifier.fit(x, y)
+    \end{verbatim}
+    }
+
+    \item Define the ansatz and feature map:
+
+    We start by initializing a feature map (ZFeatureMap) and a quantum circuit (ansatz) that will serve as our ansatz. This circuit is responsible for transforming input data into a quantum state.
+
+
+    \item Define the quantum circuit:
+    
+    \begin{itemize}
+        \item \textbf{First Convolutional Layer:}
+        \begin{itemize}
+            \item A convolutional layer is composed on the ansatz. It operates on all 8 qubits and uses a set of parameters (denoted "c1") to define the unitary operations.
+        \end{itemize}
+
+        \item \textbf{First Pooling Layer:}
+        \begin{itemize}
+            \item A pooling layer is added after the first convolutional layer. This pooling layer combines qubits from the first half ([0, 1, 2, 3]) with those from the second half ([4, 5, 6, 7]), creating a reduced representation of the data.
+        \end{itemize}
+
+        \item \textbf{Second Convolutional Layer:}
+        \begin{itemize}
+            \item Another convolutional layer is added, this time operating on the 4 qubits from the second half of the previous layer ([4, 5, 6, 7]), and using the "c2" parameter set.
+        \end{itemize}
+
+        \item \textbf{Second Pooling Layer:}
+        \begin{itemize}
+            \item After the second convolutional layer, another pooling layer is applied, reducing the qubit set further to [0, 1] and [2, 3].
+        \end{itemize}
+
+        \item \textbf{Third Convolutional Layer:}
+        \begin{itemize}
+            \item A third convolutional layer operates on the 2 remaining qubits from the second pooling layer ([6, 7]), with the "c3" parameter set.
+        \end{itemize}
+
+        \item \textbf{Third Pooling Layer:}
+        \begin{itemize}
+            \item A final pooling layer is added, operating on the single remaining pair of qubits [0] and [1].
+        \end{itemize}
+    \end{itemize}
+
+
+    
+    After creating the convolutional and pooling layers, they are combined with the feature map in the circuit. The feature map is applied first, followed by the ansatz to complete the transformation.
+
+    \item Define the observable
+
+        The observable is defined as a SparsePauliOp with the operator ("Z" + "I" * 7), which will measure the Z component of the state on the first qubit while leaving the others unchanged.
+        This observable is used to extract information from the quantum state after the ansatz has been applied.
+
+        {\small
+        \begin{verbatim}
+            observable = SparsePauliOp.from_list([("Z" + "I" * 7, 1)])
+        \end{verbatim}
+        }
+
+    \item Decompose the circuit for the QNN:
+
+        The circuit is decomposed to avoid data duplication when passed to the quantum neural network (QNN). This ensures the circuit is executed efficiently in the EstimatorQNN model.
+
+        {\small
+        \begin{verbatim}
+            qnn = EstimatorQNN(
+            circuit=circuit.decompose(),
+            observables=observable,
+            input_params=feature_map.parameters,
+            weight_params=ansatz.parameters,
+            estimator=estimator,
+            )
+        \end{verbatim}
+        }
+
+    \item Initialize and train the classifier:
+
+        The NeuralNetworkClassifier is initialized with the QNN and the $COBYLA$ optimizer (with a maximum of 200 iterations). A callback function (callback\_graph) is passed to track the objective function during training.\\
+
+        The classifier is then trained using the training data (x, y).
+
+        {\small
+        \begin{verbatim}
+            # Initialize the classifier
+            initial_point = np.random.random(qnn.num_weights)
+            classifier = NeuralNetworkClassifier(
+                qnn,
+                optimizer=COBYLA(maxiter=200),  # Set max iterations here
+                callback=callback_graph,
+                initial_point=initial_point,
+            )
+            
+            # Convert training data to numpy arrays
+            x = np.asarray(train_images)
+            y = np.asarray(train_labels)
+            
+            # List to store objective function values
+            objective_func_vals = []
+            plt.rcParams["figure.figsize"] = (12, 6)
+            
+            # Train the classifier
+            classifier.fit(x, y)
+        \end{verbatim}
+        }
+
+
+        During classifier.fit(), the following occurs:\\
+
+        The NeuralNetworkClassifier performs a forward pass by computing the output for each input image \( x \) in \texttt{train\_images}. The data is passed through the quantum circuit defined by \texttt{feature\_map} and \texttt{ansatz}, and the output is compared to the true labels \( y \).
+        The quantum neural network (qnn) is a parameterized model, and this forward pass generates predictions by applying the quantum operations defined in the ansatz to the data encoded in the quantum feature map.
+
+    Backward Pass:
+
+    The backward pass involves calculating the gradients of the loss function with respect to the parameters (weights) of the network and updating those parameters to minimize the loss. This is where the optimization process happens.
+    In this case, the optimizer is COBYLA, which is a gradient-free optimization algorithm. While COBYLA does not explicitly require gradients (as it doesn't rely on gradient-based updates), it still operates by iterating through the optimization process to find the best set of weights for the QNN by minimizing the objective function.
+
+    Differenced betweenn Adam and COBYLA:
+    \begin{itemize}
+        \item \textbf{Adam Optimizer}:
+        \begin{itemize}
+            \item \textbf{Momentum}: Tracks the exponentially decaying average of past gradients to help avoid oscillations and speed up convergence.
+            \item \textbf{Adaptive Learning Rates}: Adjusts the learning rates for each parameter based on past gradients, improving convergence rates for different parameters in neural networks.
+            \item \textbf{Bias Correction}: Corrects the initial bias in the moment estimates, especially for small $t$ (iteration steps).
+        \end{itemize}
+    
+        \item \textbf{Key Hyperparameters of Adam}:
+        \begin{itemize}
+            \item \texttt{alpha}: Learning rate.
+            \item \texttt{beta1}: Exponential decay rate for the first moment estimate.
+            \item \texttt{beta2}: Exponential decay rate for the second moment estimate.
+            \item \texttt{epsilon}: Small constant to prevent division by zero.
+        \end{itemize}
+        
+        \item \textbf{COBYLA Optimizer}:
+        \begin{itemize}
+            \item \textbf{Derivative-Free}: COBYLA is a derivative-free optimization method suitable for problems without gradients or where gradient calculation is expensive.
+            \item \textbf{Key Difference from Adam}: Unlike Adam, COBYLA does not rely on gradients, making it suitable for non-differentiable problems.
+        \end{itemize}
+        
+        \item \textbf{Alternative to \texttt{optimizer.zero\_grad(set\_to\_none=True)}}:
+        \begin{itemize}
+            \item COBYLA does not require clearing gradients since it does not use gradients.
+            \item For gradient-based optimizers (like Adam), you typically use \texttt{optimizer.zero\_grad()}, but COBYLA does not need such a step.
+            \item When using COBYLA in frameworks like PyTorch, avoid gradient-based methods entirely and focus on function evaluations.
+        \end{itemize}
+    \end{itemize}
+
+
+    \item Model Evaluation:
+    
+    {\small
+    \begin{verbatim}
+        y_predict = classifier.predict(test_images)
+    \end{verbatim}
+    }
+\end{itemize}
+    
+
+
+
+
 
 \section*{\fontsize{16}{20}\selectfont Diferent tipes of QNN}
 \addcontentsline{toc}{section}{Diferent tipes of QNN}
 
-\section*{\fontsize{16}{20}\selectfont Conclusions and future work}
-\addcontentsline{toc}{section}{Conclusions and future work}
+The first tutorial focuses on a direct application of a quantum neural network (QNN) in a hybrid classical-quantum neural network, 
+using a known dataset like MNIST. The model begins with classical processing (convolutions, pooling, fully connected layers), 
+passes through quantum circuits for feature extraction, and concludes with a classical layer for classification. \\
+
+In contrast, 
+the second tutorial adopts a more experimental approach, where data is processed classically and then converted into a quantum format. 
+The QCNN uses convolutional and pooling layers to extract features, and the NeuralNetworkClassifier trains the model. 
+Precision is evaluated, and results are displayed in a classical manner. 
+
+\section*{\fontsize{16}{20}\selectfont Statistics and running on real hardware}
+\addcontentsline{toc}{section}{Statistics and running on real hardware}
+
+
+\section*{\fontsize{16}{20}\selectfont What works best and creating of a custom HCQNN}
+\addcontentsline{toc}{section}{ What works best and creating of a custom HCQNN}
+
+
+
+\section*{\fontsize{16}{20}\selectfont Conclusion}
+\addcontentsline{toc}{section}{Conclusion}
 
 
 
