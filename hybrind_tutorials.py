@@ -268,7 +268,6 @@ def train_and_evaluate(encoding_method):
     
     return loss_list, accuracy
 
-# Run training and evaluation with different encoding methods
 encoding_methods = ['ZZFeatureMap']
 for method in encoding_methods:
     train_and_evaluate(method)
