@@ -1,7 +1,15 @@
 # Fdb version 4
-["pdflatex"] 1747134928.1084 "/home/castela/Documents/GitHub/Quantica/Report/report.tex" "report.pdf" "report" 1747134929.00072 0
+["bibtex report"] 1747770228.48469 "report.aux" "report.bbl" "report" 1747770229.39152 0
+  "./references.bib" 1747768213.45664 5124 0c4da43c40adac44ef7b3ec3c4f6ee7d ""
+  "/usr/share/texlive/texmf-dist/bibtex/bst/ieeetran/IEEEtran.bst" 1440712899 57748 7c8250ecf02814ce6ddc0cdbb63df1dd ""
+  "report.aux" 1747770229.25622 3478 de2a50768fc38da4718c03cc4cea6053 "pdflatex"
+  (generated)
+  "report.bbl"
+  "report.blg"
+  (rewritten before read)
+["pdflatex"] 1747770228.51404 "/home/castela/Documents/GitHub/Quantica/Report/report.tex" "report.pdf" "report" 1747770229.39174 0
   "/etc/texmf/web2c/texmf.cnf" 1733106275.85044 475 c0e671620eb5563b2130f56340a5fde8 ""
-  "/home/castela/Documents/GitHub/Quantica/Report/report.tex" 1747134927.05811 32806 d39fc1d01f4b20186fc4c718d9254b8e ""
+  "/home/castela/Documents/GitHub/Quantica/Report/report.tex" 1747770227.37922 39915 28cf55d5b1a6481b614a788ba87cf581 ""
   "/usr/share/texlive/texmf-dist/fonts/enc/dvips/base/8r.enc" 1165713224 4850 80dc9bab7f31fb78a000ccfed0e27cab ""
   "/usr/share/texlive/texmf-dist/fonts/map/fontname/texfonts.map" 1577235249 3524 cb3e574dea2d1052e39280babc910dc8 ""
   "/usr/share/texlive/texmf-dist/fonts/tfm/adobe/courier/pcrb7t.tfm" 1136768653 960 4ab65358b8406f30ef5496c8c096d22b ""
@@ -218,10 +226,11 @@
   "/usr/share/texmf/web2c/texmf.cnf" 1707919699 40399 f2c302f7d2af602abb742093540a5834 ""
   "/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map" 1733107137.99265 128028 f533b797fba58d231669ea19e894e23e ""
   "/var/lib/texmf/web2c/pdftex/pdflatex.fmt" 1733922934 6800790 4f44c5be00cf6bb5c5639010e479b2cb ""
-  "report.aux" 1747134928.9031 1631 33fae0f62134cdffbcac40eb1e16cb97 "pdflatex"
-  "report.out" 1747134928.9041 2294 c7ad51de1d97f4a330ac73aec01f1d38 "pdflatex"
-  "report.tex" 1747134927.05811 32806 d39fc1d01f4b20186fc4c718d9254b8e ""
-  "report.toc" 1747134928.9041 841 88c928de9446738347120865562dce30 "pdflatex"
+  "report.aux" 1747770229.25622 3478 de2a50768fc38da4718c03cc4cea6053 "pdflatex"
+  "report.bbl" 1747770228.50622 4352 192cc69beb00c9c5e0aa7f6f1abd3e4d "bibtex report"
+  "report.out" 1747770229.25722 3646 0e5ce33c6986b3bdb6addede7481c1b0 "pdflatex"
+  "report.tex" 1747770227.37922 39915 28cf55d5b1a6481b614a788ba87cf581 ""
+  "report.toc" 1747770229.25722 1378 c9752d5125b20cf020f0b922a851f292 "pdflatex"
   (generated)
   "report.aux"
   "report.log"

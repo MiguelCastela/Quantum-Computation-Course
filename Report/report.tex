@@ -11,6 +11,7 @@
 \usepackage{float}
 \usepackage{pgfplots}
 \usepackage{hyperref}
+
 \pgfplotsset{compat=1.17}
 \begin{document}
 
@@ -67,7 +68,7 @@ analysis.
 \addcontentsline{toc}{subsection}{First tutorial}
 
 
-The first step of this project was using the Qiskit framwoerk, combined with pythorch to construct a HQNN.
+The first step of this project was using the Qiskit framework, combined with pythorch to construct a HQNN.
 After studying the first three qiski tutorials ("Quantum Neural Networks", "Neural Network Classifier" \& "Training a Quantum Model on a Real Dataset") i began
 to implement the first version of the QNN. This was done by implementing the "Torch Connector and Hybrind QNNs" tutorialm:
 
@@ -78,7 +79,7 @@ to implement the first version of the QNN. This was done by implementing the "To
         estimator = Estimator()
         \end{verbatim}
         }
-    \item I then, using torchvision, load the MNIST training dataset(The MNIST database is a large database of handwritten digits) and apply a transformation to convert images to tensors.\\
+    \item I then, using the torchvision API \cite{paszke2019pytorch}, load the MNIST training dataset(The MNIST database is a large database of handwritten digits \cite{lecun2010mnist}) and apply a transformation to convert images to tensors.\\
         A tensor is a generalization of vectors and matrices to any number of dimensions. They are the fundamental data structure in PyTorch, similar to NumPy arrays but with additional capabilities for GPU acceleration.
         
 {\raggedright
@@ -116,7 +117,7 @@ X_train.targets = X_train.targets[idx]
 \end{verbatim}
 }
         
-    \item I define the PyTorch DataLoader for the filtered training data, this is used to load the data in batches during training. The \texttt{shuffle=True} argument ensures that the data is shuffled before each epoch, which helps improve the model's generalization.
+    \item I define the PyTorch DataLoader \cite{DataLoader} for the filtered training data, this is used to load the data in batches during training. The \texttt{shuffle=True} argument ensures that the data is shuffled before each epoch, which helps improve the model's generalization.
 {\raggedright
 \small
 \begin{verbatim}
@@ -149,10 +150,10 @@ X_test = datasets.MNIST(
         
 
         \begin{itemize}
-            \item \textbf{ZFeatureMap} \\
+            \item \textbf{ZFeatureMap \cite{qiskit_zfeaturemap}} \\
             A simple quantum feature map where each input value is encoded as a rotation on a single qubit using Rz gates. This approach does \textbf{not include entanglement} and is typically used for simpler datasets or models with lower computational complexity.
         
-            \item \textbf{ZZFeatureMap} \\
+            \item \textbf{ZZFeatureMap \cite{qiskit_zzfeaturemap}} \\
             A more expressive feature map that includes both single-qubit rotations and \textbf{entangling gates (ZZ interactions)} between qubits. This allows the model to capture complex relationships between features, making it more suitable for richer or more structured datasets.
         \end{itemize}
         
@@ -160,7 +161,7 @@ X_test = datasets.MNIST(
         
         Other alternatives to these include:
         \begin{itemize}
-            \item \textbf{PauliFeatureMap} – a generalized feature map that supports different combinations of Pauli operators.
+            \item \textbf{PauliFeatureMap \cite{qiskit_paulifeaturemap}} – a generalized feature map that supports different combinations of Pauli operators.
             \item \textbf{Custom feature maps} – where users design their own encoding strategies tailored to specific datasets or problems. This was explored \hyperref[sec:NEQR_FRQI]{in the NEQR and FRQI section}
         \end{itemize}
         
@@ -169,13 +170,13 @@ X_test = datasets.MNIST(
 
         The next choice is the \textbf{ansatz} (the quantum circuit structure). The ansatz defines the architecture of the quantum neural network, including the number of qubits, layers, and gates used. Qiskit provides several predefined ansatz classes, such as:
         \begin{itemize}
-            \item \textbf{EfficientSU2} \\
+            \item \textbf{EfficientSU2 \cite{qiskit_efficientsu2}} \\
             A popular ansatz that uses a combination of single-qubit rotations and entangling gates. It is designed to be efficient in terms of circuit depth and is suitable for a wide range of problems.
         
-            \item \textbf{RealAmplitudes} \\
+            \item \textbf{RealAmplitudes \cite{qiskit_realamplitudes}} \\
             This ansatz uses real-valued parameters and is often used for variational algorithms. It can be more expressive than EfficientSU2 but may require more qubits and gates.
         
-            \item \textbf{TwoLocal} \\
+            \item \textbf{TwoLocal \cite{qiskit_twolocal}} \\
             A flexible ansatz that allows users to specify the types of gates and the connectivity between qubits. It can be tailored to specific problems but may require more tuning.
 
         \end{itemize}
@@ -212,7 +213,7 @@ qnn4 = create_qnn()
 
         \item The next step is to define the neural network that includes a quantum layer.\\
 
-        This class Net is a custom neural network built using PyTorch. It combines classical layers (such as convolutional and linear layers) with a quantum neural network (QNN) layer created earlier with Qiskit. The QNN is integrated using the TorchConnector, which allows it to be used just like any other PyTorch layer and supports hybrid quantum-classical training via backpropagation.\\
+        This class Net \cite{pytorch_net} is a custom neural network built using PyTorch. It combines classical layers (such as convolutional and linear layers) with a quantum neural network (QNN) layer created earlier with Qiskit. The QNN is integrated using the TorchConnector, which allows it to be used just like any other PyTorch layer and supports hybrid quantum-classical training via backpropagation.\\
 
         There are two convolutional layers, typically used for image data.
 
@@ -220,7 +221,7 @@ qnn4 = create_qnn()
 
         The second layer takes 2 channels and produces 16 feature maps.\\
 
-        Dropout2d is a regularization layer that randomly zeros out entire channels during training to prevent overfitting.\\
+        Dropout2d \cite{pytorch_dropout2d} is a regularization layer that randomly zeros out entire channels during training to prevent overfitting.\\
 
         fc1 and fc2 are fully connected (linear) layers. The first one takes the flattened output of the convolutional layers (256 features) and reduces it to 64 features. The second one takes the 64 features and outputs 2 features, which are then passed to the QNN.\\
 
@@ -256,7 +257,7 @@ def __init__(self, qnn):
 
         \item The next step is to do the Forward pass.
         
-        It applies the first convolutional layer with a ReLU activation, followed by 2x2 max pooling (downsampling). The same steps are repeated for the second convolutional layer.
+        It applies the first convolutional layer with a ReLU \cite{pytorch_relu} activation, followed by 2x2 max pooling (downsampling). The same steps are repeated for the second convolutional layer.
 
         After feature extraction with convolutional layers and dropout for regularization, the data is flattened and passed through two fully connected layers (fc1 and fc2). The output, a 2D vector, is then processed by the quantum neural network (QNN) layer. Its result goes through another linear layer (fc3), and the final output is a concatenation of the prediction and its complement, representing probabilities for binary classification (digit 0 vs 1).
 
@@ -279,7 +280,7 @@ def forward(self, x):
 
 
         \item Finally i need to inicialize the mode, optimizer and loss function.\\
-        The optimizer is responsible for updating the model's parameters during training. In this case, the Adam optimizer is used with a learning rate of 0.01.\\
+        The optimizer is responsible for updating the model's parameters during training. In this case, the Adam optimizer \cite{pytorch_adam} is used with a learning rate of 0.01.\\
         The loss function is used to measure the difference between the predicted output and the true labels. In this case, the  Negative Log Likelihood Loss is used.\\
 
         Adam is a first-order gradient-based optimizer that combines momentum, which uses past gradients, and adaptive learning rates, which scale the step size based on how frequently a parameter is updated. It is commonly used for most deep learning tasks due to its speed and robustness. One of its key advantages is the adaptive learning rate per parameter, which often leads to good convergence. However, one downside of Adam is that it can sometimes generalize worse than Stochastic Gradient Descent (SGD).
@@ -530,8 +531,8 @@ ansatz.compose(pool_layer([0], [1], "p3")
 
 
     \item Then, the ansatz circuit is combined with the feature map. 
-    The observable is defined as a SparsePauliOp with the operator ("Z" + "I" * 7), which will measure the Z component of the state on the first qubit while leaving the others unchanged. This observable is used to extract information from the quantum state after the ansatz has been applied.
-    The circuit is decomposed to avoid data duplication when passed to the quantum neural network (QNN). This ensures the circuit is executed efficiently in the EstimatorQNN model.
+    The observable is defined as a SparsePauliOp \cite{qiskit_sparsepauliop} with the operator ("Z" + "I" * 7), which will measure the Z component of the state on the first qubit while leaving the others unchanged. This observable is used to extract information from the quantum state after the ansatz has been applied.
+    The circuit is decomposed to avoid data duplication when passed to the quantum neural network (QNN). This ensures the circuit is executed efficiently in the EstimatorQNN \cite{qiskit_estimatorqnn} model.
     
 
     {\small
@@ -566,7 +567,7 @@ qnn = EstimatorQNN(
     Backward Pass:
 
     The backward pass involves calculating the gradients of the loss function with respect to the parameters (weights) of the network and updating those parameters to minimize the loss. This is where the optimization process happens.
-    In this case, the optimizer is COBYLA, which is a gradient-free optimization algorithm. While COBYLA does not explicitly require gradients (as it doesn't rely on gradient-based updates), it still operates by iterating through the optimization process to find the best set of weights for the QNN by minimizing the objective function.
+    In this case, the optimizer is COBYLA \cite{qiskit_cobyla}, which is a gradient-free optimization algorithm. While COBYLA does not explicitly require gradients (as it doesn't rely on gradient-based updates), it still operates by iterating through the optimization process to find the best set of weights for the QNN by minimizing the objective function.
 
     Differenced betweenn Adam and COBYLA:
     \begin{itemize}
@@ -730,21 +731,152 @@ def frqi_encoding(image):
 \end{verbatim}
 }
 
-The results of using NEQR and FRQI instead of quantum feature maps were not as good as expected.
-The NEQR and FRQI methods are more complex and require careful tuning of parameters, which can lead to longer training times and less intuitive results.
-Because of this, i decided to use the ZZFeatureMap.
 
 \subsubsection*{\fontsize{16}{20}\selectfont Deciding between Adam and COBYLA}
 \addcontentsline{toc}{subsection}{Deciding between Adam and COBYLA}
 
 In this hybrid quantum-classical neural network setup, using the Adam optimizer is more appropriate than COBYLA. The model integrates both classical layers (such as convolutional and fully connected layers) and a quantum neural network (QNN) wrapped with TorchConnector, which enables automatic differentiation through PyTorch's autograd system. This setup relies on gradient-based optimization, where the loss.backward() call computes gradients, and optimizer.step() updates the parameters accordingly. In contrast, COBYLA is a gradient-free optimizer from SciPy that does not integrate with PyTorch's autograd and cannot update parameters through backpropagation. Using COBYLA in this context would prevent the model from training properly, as it cannot optimize the classical network components or interface with PyTorch's training loop. Therefore, for training hybrid models end-to-end within PyTorch, gradient-based optimizers like Adam should be used to ensure all components are updated correctly.
 
+\subsubsection*{\fontsize{16}{20}\selectfont Deciding between zfeaturemap and zzfeaturemap}
+\addcontentsline{toc}{subsection}{Deciding between z and COBYLA}
 
+\subsection*{\fontsize{16}{20}\selectfont Deciding the feature extraction method}
+\addcontentsline{toc}{subsection}{Deciding the feature extraction method}
+
+The results of using NEQR and FRQI instead of quantum feature maps were not as good as expected.
+The NEQR and FRQI methods are more complex and require careful tuning of parameters, which can lead to longer training times and less intuitive results.
+
+Because of this, the decision came down to using the ZFeatureMap or ZZFeatureMap.\\
+The ZFeatureMap is a simpler feature map that encodes classical data into quantum states using single-qubit rotations. It is computationally less expensive and easier to implement, making it suitable for smaller datasets or simpler models. However, it may not capture complex relationships between features as effectively as the ZZFeatureMap.
+The ZZFeatureMap, on the other hand, includes both single-qubit rotations and entangling gates (ZZ interactions) between qubits. This allows the model to capture complex relationships between features, making it more suitable for richer or more structured datasets. However, it is computationally more expensive and may require more tuning to achieve optimal performance.
+
+\subsection*{\fontsize{16}{20}\selectfont Deciding the ansatz}
+\addcontentsline{toc}{subsection}{Deciding the ansatz}
+
+The ansatz is a crucial component of quantum neural networks, as it defines the structure and complexity of the quantum circuit used for feature extraction. The choice of ansatz can significantly impact the performance of the model.\\
+The chosen ansatz, from the ones listed in the first tutorial, was the TwoLocal ansatz. This ansatz is flexible and allows users to specify the types of gates and the connectivity between qubits. It can be tailored to specific problems, making it suitable for a wide range of applications. However, it may require more tuning compared to other ansatzes like EfficientSU2 or RealAmplitudes.\\
+
+
+\subsection*{\fontsize{16}{20}\selectfont The output layer}
+\addcontentsline{toc}{subsection}{The output layer}
+
+I used nn.sequential to create the output layer, which is a simple way to stack layers in PyTorch. The output layer consists of a linear layer followed by a softmax activation function. The linear layer maps the output of the quantum neural network (QNN) to the desired number of classes (in this case, 2 for binary classification). The softmax activation function converts the raw output scores into probabilities, making it suitable for multi-class classification tasks.\\
+This is better that the previous approach, where the output was a concatenation of the prediction and its complement. The new approach is more straightforward and aligns better with standard practices in neural network design.
+
+\subsection*{\fontsize{16}{20}\selectfont Pooling and convolution layers}
+\addcontentsline{toc}{subsection}{Pooling and convolution layers}
+
+These were used like in the second tutorial, but only one of each was created.
+
+
+\subsubsection*{\fontsize{16}{20}\selectfont Creating the custom HCQNN}
+\addcontentsline{toc}{subsection}{Creating the custom HCQNN}
+
+the cuda device is used to run the model on a GPU, which can significantly speed up training and inference times. The model is then moved to the GPU using the .to(device) method.\\
+
+this way the qnnn effectively:
+
+Extracts spatial features using convolution.
+
+Reduces to 4 classical features.
+
+Uses a quantum layer (EstimatorQNN).
+
+Classifies using LogSoftmax.
+
+the full code is as follows:
+
+{\small
+\begin{verbatim}
+    import torch
+import torch.nn as nn
+import torch.nn.functional as F
+from qiskit.circuit.library import ZZFeatureMap, TwoLocal
+from qiskit.utils import algorithm_globals
+from qiskit_machine_learning.connectors import TorchConnector
+from qiskit_machine_learning.neural_networks import EstimatorQNN
+from torchvision import datasets, transforms
+from torch.utils.data import DataLoader
+
+# Transform: Normalize to [0, 1] and keep size 28x28
+transform = transforms.Compose([
+    transforms.ToTensor()
+])
+
+transform = transforms.Compose([transforms.ToTensor()])
+test_data = datasets.MNIST(root='./data', train=False, transform=transform, download=True)
+test_loader = DataLoader(test_data, batch_size=4, shuffle=True)
+
+# Optional: for reproducibility
+algorithm_globals.random_seed = 42
+
+
+class ImprovedHybridQNN(nn.Module):
+    def __init__(self):
+        super().__init__()
+
+        # Feature extractor with convolution and pooling
+        self.feature_extractor = nn.Sequential(
+            nn.Conv2d(1, 8, kernel_size=3, stride=1, padding=1),   # -> (batch, 8, 28, 28)
+            nn.ReLU(),
+            nn.MaxPool2d(2, 2),                                     # -> (batch, 8, 14, 14)
+
+            nn.Conv2d(8, 16, kernel_size=3, stride=1, padding=1),  # -> (batch, 16, 14, 14)
+            nn.ReLU(),
+            nn.MaxPool2d(2, 2),                                     # -> (batch, 16, 7, 7)
+
+            nn.Flatten(),                                           # -> (batch, 16*7*7)
+            nn.Linear(16 * 7 * 7, 64),
+            nn.ReLU(),
+            nn.Linear(64, 4),                                       # -> 4 values (input to QNN)
+        )
+
+        # Define quantum feature map and ansatz
+        self.num_qubits = 4
+        feature_map = ZZFeatureMap(self.num_qubits, reps=1)
+        var_form = TwoLocal(self.num_qubits, reps=1, rotation_blocks="ry", entanglement_blocks="cz")
+        quantum_circuit = feature_map.compose(var_form)
+
+        # Define EstimatorQNN and TorchConnector
+        qnn = EstimatorQNN(
+            circuit=quantum_circuit,
+            input_params=feature_map.parameters,
+            weight_params=var_form.parameters,
+        )
+        self.q_layer = TorchConnector(qnn)
+
+        # Output layer for 10-class classification
+        self.output_layer = nn.Sequential(
+            nn.Linear(1, 10),             # QNN returns scalar output per example
+            nn.LogSoftmax(dim=1)          # Log-softmax for NLLLoss
+        )
+
+    def forward(self, x):
+        x = self.feature_extractor(x)      # shape: (batch, 4)
+        x = self.q_layer(x)                # shape: (batch, 1)
+        x = self.output_layer(x)           # shape: (batch, 10)
+        return x
     
+device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
+model = ImprovedHybridQNN().to(device)
+model.eval()  # inference mode
+
+# Test one batch
+with torch.no_grad():
+    images, labels = next(iter(test_loader))
+    images, labels = images.to(device), labels.to(device)
+    outputs = model(images)
+
+    print("Outputs:\n", outputs)
+    print("Predicted classes:", torch.argmax(outputs, dim=1).tolist())
+    print("True classes:", labels.tolist())
+
+\end{verbatim}
+}
 
 
-
-
+\subsection*{\fontsize{16}{20}\selectfont tests}
+\addcontentsline{toc}{subsection}{tests}
 
 \section*{\fontsize{16}{20}\selectfont Conclusion}
 \addcontentsline{toc}{section}{Conclusion}
@@ -759,6 +891,6 @@ The results obtained from the experiments demonstrated the potential of HCQNNs i
 
 
 
-
-
+\bibliographystyle{IEEEtran}
+\bibliography{references}
 \end{document}  
