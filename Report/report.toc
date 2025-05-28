@@ -5,16 +5,18 @@
 \contentsline {subsection}{Second tutorial}{4}{section*.6}%
 \contentsline {section}{Diferent types of QNN}{6}{section*.7}%
 \contentsline {section}{Statistics and running on real hardware}{7}{section*.8}%
-\contentsline {section}{ What works best and creating a custom HCQNN}{7}{section*.9}%
-\contentsline {subsection}{Trying to manually process the images using NEQR and FRQI}{7}{section*.10}%
-\contentsline {subsection}{Deciding between Adam and COBYLA}{7}{section*.11}%
-\contentsline {subsection}{Deciding between z and COBYLA}{7}{section*.12}%
-\contentsline {subsection}{Deciding the feature extraction method}{8}{section*.13}%
-\contentsline {subsection}{Deciding the ansatz}{8}{section*.14}%
-\contentsline {subsection}{The output layer}{8}{section*.15}%
-\contentsline {subsection}{Pooling and convolution layers}{8}{section*.16}%
-\contentsline {subsection}{Creating the custom HCQNN}{8}{section*.17}%
-\contentsline {subsection}{tests}{9}{section*.18}%
-\contentsline {section}{Conclusion}{9}{section*.19}%
-\contentsline {section}{References}{9}{section*.20}%
-\contentsline {section}{References}{9}{section*.21}%
+\contentsline {subsection}{First tutorial}{7}{section*.9}%
+\contentsline {subsection}{Second tutorial}{7}{section*.11}%
+\contentsline {section}{ What works best and creating a custom HCQNN}{8}{section*.13}%
+\contentsline {subsection}{Trying to manually process the images using NEQR and FRQI}{8}{section*.14}%
+\contentsline {subsection}{Deciding between Adam and COBYLA}{8}{section*.15}%
+\contentsline {subsection}{Deciding between z and COBYLA}{8}{section*.16}%
+\contentsline {subsection}{Deciding the feature extraction method}{8}{section*.17}%
+\contentsline {subsection}{Deciding the ansatz}{9}{section*.18}%
+\contentsline {subsection}{The output layer}{9}{section*.19}%
+\contentsline {subsection}{Pooling and convolution layers}{9}{section*.20}%
+\contentsline {subsection}{Creating the custom HCQNN}{9}{section*.21}%
+\contentsline {subsection}{tests}{9}{section*.22}%
+\contentsline {section}{Conclusion}{9}{section*.23}%
+\contentsline {section}{References}{9}{section*.24}%
+\contentsline {section}{References}{9}{section*.25}%

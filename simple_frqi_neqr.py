@@ -63,7 +63,7 @@ image = np.array([0.1, 0.5, 0.8, 0.3])
 frqi_circuit = frqi_encoding(image)
 neqr_circuit = neqr_encoding(image)
 
-# Draw the circuits
+# Draw the circuits     
 print("FRQI Circuit:")
 print(frqi_circuit.draw())
 

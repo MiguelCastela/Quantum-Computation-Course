@@ -1,10 +1,9 @@
-- meter documentos relevantes (que sejam mencionados no relatorio) no development da drive
 - meter referencias na drive
-- ver se é preciso sempre meter o output num circuito classico ou da para ser completamente quantico (resposta no notas)
-- pesquisa bibliografica-> JA TA NOS TEXTOS DO QISKIT
-- correr em hardware real com o zzfeature map (pode ser só dps da entrega entermedia)
-- falar de como frqi e neqr é mt mais lento
-- mostrar o tutorial hibrido
+- correr testes em hardware real
+- meter o hybridon.py no relatorio
+- meter testes do hybridon e dizer que usei corssover mutação e falar de elitismo
+- falar dos resultados hynridon2 no dataset do segundo tutorial
+- testar melhor os frqi e neqr, se n correrem mm manter
 - no ficheiro de frqi_neqr testar com DCT-EFRQI e QPIE (documento)
 
 

@@ -31,7 +31,7 @@ if not os.path.exists('tutorial1'):
 # -------------
 
 # Set train shuffle seed (for reproducibility)
-manual_seed(42)
+manual_seed(12)
 
 batch_size = 1
 n_samples = 100  # We will concentrate on the first 100 samples

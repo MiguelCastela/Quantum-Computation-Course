@@ -20,7 +20,7 @@ if not os.path.exists(output_dir):
     os.makedirs(output_dir)
 
 # Set random seed for reproducibility
-algorithm_globals.random_seed = 12345
+algorithm_globals.random_seed = 9021
 
 # Initialize the Estimator
 estimator = Estimator()
@@ -165,6 +165,7 @@ def callback_graph(weights, obj_func_eval):
     plt.ylabel("Objective function value")
     plt.plot(range(len(objective_func_vals)), objective_func_vals)
     plt.savefig('tutorial2/objective_function_value.png')
+    print(f"Iteration {len(objective_func_vals)} - Loss: {obj_func_eval}")
 
 # Visualize some training samples
 fig, ax = plt.subplots(2, 2, figsize=(10, 6), subplot_kw={"xticks": [], "yticks": []})
