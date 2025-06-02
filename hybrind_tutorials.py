@@ -145,7 +145,7 @@ def neqr_encoding(image):
     return qc
 
 # Function to create a Quantum Neural Network (QNN) with different feature maps
-def create_qnn(encoding_method='ZZFeatureMap', image=None):
+def create_qnn(encoding_method='FRQI', image=None):
     if encoding_method == 'ZZFeatureMap':
         feature_map = ZZFeatureMap(2)
         num_qubits = 2
@@ -198,16 +198,17 @@ class Net(Module):
         x = x.view(x.shape[0], -1)
         x = F.relu(self.fc1(x))
         x = self.fc2(x)
-        
-        # Access the underlying QNN to determine input size
-        qnn = self.qnn.neural_network  # Access the EstimatorQNN object
-        num_qubits = qnn.circuit.num_qubits
-        
-        # Ensure the input tensor matches the expected size
-        if x.shape[1] != num_qubits:
-            x = x[:, :num_qubits]  # Slice to the appropriate number of qubits
-        
-        x = self.qnn(x)  # Apply QNN
+
+        qnn = self.qnn.neural_network
+
+        # Only send input to QNN if it expects it
+        if qnn.input_params:
+            if x.shape[1] != len(qnn.input_params):
+                x = x[:, :len(qnn.input_params)]
+            x = self.qnn(x)
+        else:
+            x = self.qnn()  # No input required
+
         x = self.fc3(x)
         return cat((x, 1 - x), -1)
 
@@ -268,6 +269,6 @@ def train_and_evaluate(encoding_method):
     
     return loss_list, accuracy
 
-encoding_methods = ['ZZFeatureMap']
+encoding_methods = ['NEQR']
 for method in encoding_methods:
     train_and_evaluate(method)

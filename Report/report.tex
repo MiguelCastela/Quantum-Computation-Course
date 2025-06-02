@@ -816,12 +816,85 @@ accuracy & 66.67\% & 66.67\% & 100\% & 100\% & 33.33\% \\
 \caption{accuracy and final loss of the tests}
 \end{table}
 
-The model was trained using the COBYLA optimizer for a maximum of 200 iterations.
+The model was trained us
+ing the COBYLA optimizer for a maximum of 200 iterations.
 The results show that the model achieved varying accuracy across different tests, with some tests achieving 100\% accuracy while others had lower performance. The final loss values indicate that the model converged to different levels of performance depending on the test.\\
 The training progress of Test 1 was visualized, showing a steady decrease in loss as the iterations progressed. The loss values fluctuated but generally trended downwards, indicating that the model was learning and improving its performance over time.\\
 
 The performance disparity between the two tutorials stems from several architectural and implementation differences. The first tutorial integrates the quantum model as a hybrid layer inside a classical convolutional neural network (CNN), which first extracts spatial features from the MNIST images using two Conv2d layers followed by fully connected layers, before embedding a shallow 2-qubit quantum neural network (QNN) via TorchConnector.
 Conversely, the second tutorial adopts a fully quantum-centric approach with quantum convolutional and pooling circuit architecture that attempts to encode artifical images generated. However, it lacks any form of classical preprocessing or feature extraction, making it harder for the quantum model to generalize from high-dimensional input data. The usage of zfeature map (although with more qubits) in the second tutorial also limits the model's ability to capture complex patterns compared to the first tutorial's classical CNN layers. Additionally, the second tutorial's reliance on a derivative-free optimizer (COBYLA) contrasts with the first tutorial's Adam optimizer, which is more suited for gradient-based learning in hybrid models. These factors contribute to the observed differences in performance and accuracy between the two tutorials.
+
+The first tutorial also found success with the dataset used in the second tutorial.
+
+
+\begin{tikzpicture}
+\begin{axis}[
+    title={Training Progress vs. Loss},
+    xlabel={Training Progress (\%)},
+    ylabel={Loss},
+    xmin=0, xmax=100,
+    ymin=-3.5, ymax=-1,
+    xtick={10,20,...,100},
+    ytick={-3.5,-3.0,...,-1.0},
+    legend pos=south west,
+    grid=major,
+    width=0.48\textwidth,
+    height=6cm,
+]
+
+\addplot+[mark=*, thick] coordinates {
+    (10, -0.7579) (20, -1.0226) (30, -1.2354) (40, -1.3692)
+    (50, -1.5626) (60, -1.8660) (70, -1.9967) (80, -2.1835)
+    (90, -2.3930) (100, -2.6423)
+};
+\addlegendentry{Test 1}
+
+\addplot+[mark=triangle*, thick] coordinates {
+    (10, -0.6003) (20, -0.9667) (30, -1.3430) (40, -1.4131)
+    (50, -1.8388) (60, -2.1277) (70, -2.2624) (80, -2.6071)
+    (90, -2.7508) (100, -2.9738)
+};
+\addlegendentry{Test 2}
+
+\addplot+[mark=square*, thick] coordinates {
+    (10, -0.5230) (20, -0.7761) (30, -1.0289) (40, -1.1903)
+    (50, -1.4427) (60, -1.5363) (70, -1.8464) (80, -1.9408)
+    (90, -2.1892) (100, -2.4405)
+};
+\addlegendentry{Test 3}
+
+\addplot+[mark=diamond*, thick] coordinates {
+    (10, -0.6379) (20, -0.9983) (30, -1.3464) (40, -1.5921)
+    (50, -1.9312) (60, -2.1151) (70, -2.3249) (80, -2.5938)
+    (90, -2.7894) (100, -3.0480)
+};
+\addlegendentry{Test 4}
+
+\addplot+[mark=star, thick] coordinates {
+    (10, -0.6105) (20, -0.8967) (30, -1.0741) (40, -1.3113)
+    (50, -1.4555) (60, -1.7324) (70, -1.9074) (80, -2.0359)
+    (90, -2.3465) (100, -2.5214)
+};
+\addlegendentry{Test 5}
+
+\end{axis}
+\end{tikzpicture}
+
+\begin{table}[ht]
+\centering
+\resizebox{0.48\textwidth}{!}{%
+\begin{tabular}{|c|c|c|c|c|c|}
+\hline
+ & Test 1 & Test 2 & Test 3 & Test 4 & Test 5 \\
+\hline
+Final loss & -2.5541 & -3.2172 & -2.7470 & -3.1065 & -2.7612 \\
+\hline
+accuracy & 99\% & 100\% & 100\% & 100\% & 100\% \\
+\hline
+\end{tabular}
+}
+\caption{accuracy and final loss of the tests}
+\end{table}
 
 
 \section*{\fontsize{16}{20}\selectfont What works best and creating a custom HCQNN}
@@ -918,9 +991,6 @@ In this hybrid quantum-classical neural network setup, using the Adam optimizer 
 \subsection*{\fontsize{12}{16}\selectfont Deciding between zfeaturemap and zzfeaturemap}
 \addcontentsline{toc}{subsection}{Deciding between z and COBYLA}
 
-\subsection*{\fontsize{12}{16}\selectfont Deciding the feature extraction method}
-\addcontentsline{toc}{subsection}{Deciding the feature extraction method}
-
 The results of using NEQR and FRQI instead of quantum feature maps were not as good as expected.
 The NEQR and FRQI methods are more complex and require careful tuning of parameters, which can lead to longer training times and less intuitive results.
 
@@ -933,6 +1003,8 @@ The ZZFeatureMap, on the other hand, includes both single-qubit rotations and en
 
 The ansatz is a crucial component of quantum neural networks, as it defines the structure and complexity of the quantum circuit used for feature extraction. The choice of ansatz can significantly impact the performance of the model.\\
 The chosen ansatz, from the ones listed in the first tutorial, was the TwoLocal ansatz. This ansatz is flexible and allows users to specify the types of gates and the connectivity between qubits. It can be tailored to specific problems, making it suitable for a wide range of applications. However, it may require more tuning compared to other ansatzes like EfficientSU2 or RealAmplitudes.\\
+The parameters chosen were:$ansatz = TwoLocal(num_qubits=2, rotation_blocks='ry', entanglement_blocks='cz', reps=1)$.
+
 
 
 \subsection*{\fontsize{12}{16}\selectfont The output layer}
@@ -940,6 +1012,63 @@ The chosen ansatz, from the ones listed in the first tutorial, was the TwoLocal 
 
 I used nn.sequential to create the output layer, which is a simple way to stack layers in PyTorch. The output layer consists of a linear layer followed by a softmax activation function. The linear layer maps the output of the quantum neural network (QNN) to the desired number of classes (in this case, 2 for binary classification). The softmax activation function converts the raw output scores into probabilities, making it suitable for multi-class classification tasks.\\
 This is better that the previous approach, where the output was a concatenation of the prediction and its complement. The new approach is more straightforward and aligns better with standard practices in neural network design.
+
+
+\subsection*{\fontsize{12}{16}\selectfont adding evolutionary operators}
+\addcontentsline{toc}{subsection}{adding evolutionary operators}
+
+To complement the gradient-based optimization performed by the Adam optimizer, evolutionary-inspired strategies were also applied to the model parameters. This hybrid optimization approach introduces stochastic variation through crossover and mutation operators, inspired by genetic algorithms. These operators are applied at the end of each training epoch to promote exploration of the parameter space and potentially escape local minima.
+
+The crossover method used is a single-point crossover, commonly applied in evolutionary algorithms to combine traits from two parent solutions. It works by first flattening both parameter tensors into one-dimensional vectors. A random crossover point is then selected somewhere between the first and last index. At this point, the vectors exchange their tail segments, producing two new offspring vectors that blend characteristics of both parents. These new vectors are subsequently reshaped back into the original tensor dimensions to maintain compatibility with the model. This process enables the model to explore new combinations of parameters, encouraging diversity in the population while preserving useful traits from the previous generation.
+
+The mutation method employed is a Gaussian mutation with per-element mutation probability, a standard approach for introducing variability into model parameters. This technique begins by generating a mask tensor of the same shape as the parameter tensor, where each element has a fixed probability (e.g., 5\%) of being selected for mutation. For every element in the tensor, Gaussian noise with zero mean and a specified standard deviation (mutation strength, typically 0.1) is generated. This noise is then selectively added only to those elements flagged by the mask. As a result, a subset of the parameter values is perturbed by small, random amounts, introducing stochastic changes that help the model explore new solutions and avoid premature convergence.
+
+Together, these evolutionary operators create a hybrid learning paradigm, blending backpropagation with biologically inspired stochastic search. While this adds computational overhead, it can improve convergence and robustness in non-convex and high-dimensional optimization settings, especially when combined with noisy quantum components.
+
+
+
+
+
+\begin{tikzpicture}
+\begin{axis}[
+    title={Training Progress vs. Loss (Hybrid QNN)},
+    xlabel={Epoch},
+    ylabel={Loss},
+    xmin=1, xmax=10,
+    ymin=-2.0, ymax=-0.4,
+    xtick={1,...,10},
+    ytick={-2.0,-1.8,...,-0.4},
+    legend pos=south west,
+    grid=major,
+    width=0.48\textwidth,
+    height=6cm,
+        legend style={fill=white, fill opacity=0.6, draw opacity=1, text opacity=1}
+]
+
+% With Evolutionary Operators
+\addplot+[mark=*, thick] coordinates {
+    (1, -0.7096) (2, -0.7815) (3, -0.9066) (4, -1.0402)
+    (5, -1.0876) (6, -1.2955) (7, -1.3841) (8, -1.5573)
+    (9, -1.7222) (10, -1.8870)
+};
+\addlegendentry{evolutionary-inspired (93.4\%)}
+
+% Without Evolutionary Operators
+\addplot+[mark=triangle*, thick] coordinates {
+    (1, -0.4994) (2, -0.4984) (3, -0.4988) (4, -0.4987)
+    (5, -0.4990) (6, -0.4985) (7, -0.4987) (8, -0.4991)
+    (9, -0.4982) (10, -0.4991)
+};
+\addlegendentry{Without (50.0\%)}
+
+\end{axis}
+\end{tikzpicture}
+
+These results had the same seed, batch size and 500 testing samples with 100 training. The model was trained for 10 epochs, with the final loss calculated after the training process.\\
+The results show that the model achieved high accuracy with evolutionary operators, while the model without them did not improve significantly. The training progress was visualized, showing a steady decrease in loss as the training progressed.\\
+The evolutionary operators significantly improved the model's performance, demonstrating the effectiveness of combining gradient-based optimization with stochastic search methods in hybrid quantum-classical neural networks.
+
+
 
 \subsection*{\fontsize{12}{16}\selectfont Pooling and convolution layers}
 \addcontentsline{toc}{subsection}{Pooling and convolution layers}
@@ -950,20 +1079,186 @@ These were used like in the second tutorial, but only one of each was created.
 \subsection*{\fontsize{12}{16}\selectfont Creating the custom HCQNN}
 \addcontentsline{toc}{subsection}{Creating the custom HCQNN}
 
-the cuda device is used to run the model on a GPU, which can significantly speed up training and inference times. The model is then moved to the GPU using the .to(device) method.\\
-
-this way the qnnn effectively:
-\begin{itemize}
-    \item Extracts spatial features using convolution.
-    \item Reduces to 4 classical features.
-    \item Uses a quantum layer (EstimatorQNN).
-    \item Classifies using LogSoftmax.
-\end{itemize}
-
 the full code is as follows:
 
 {\small
 \begin{verbatim}
+
+estimator = Estimator()
+
+
+np.random.seed(121)
+
+batch_size = 1
+n_train_samples = 100
+n_test_samples = 500
+
+def load_filtered_fashion_mnist(
+    train=True, n_samples=100):
+    dataset = datasets.FashionMNIST(
+        root="./data", 
+        train=train, 
+        download=True,
+        transform=transforms.Compose(
+            [transforms.ToTensor()])
+    )
+
+    selected_classes = [0, 2]
+    idx = np.where(
+        np.isin(
+            dataset.targets,
+            selected_classes))[0]
+    
+    idx0 = idx[
+        dataset.targets[idx] == 0][
+            :n_samples]
+    idx2 = idx[
+        dataset.targets[idx] == 2][
+            :n_samples]
+    idx = np.append(idx0, idx2)
+    
+    dataset.data = dataset.data[idx]
+    dataset.targets = dataset.targets[idx]
+    
+    dataset.targets = 
+    torch.where(
+        dataset.targets == 2,
+        torch.tensor(1),
+        dataset.targets)
+    
+    loader = DataLoader(dataset, 
+    batch_size=batch_size, 
+    shuffle=True)
+    return loader
+
+train_loader = load_filtered_fashion_mnist(
+    train=True, 
+    n_samples=n_train_samples)
+test_loader = load_filtered_fashion_mnist(
+    train=False, 
+    n_samples=n_test_samples)
+
+def create_qnn():
+    feature_map = ZZFeatureMap(2)
+    ansatz = TwoLocal(num_qubits=2, 
+    rotation_blocks='ry', entanglement_blocks='cz', 
+    reps=1)
+    qc = QuantumCircuit(2)
+    qc.compose(feature_map, inplace=True)
+    qc.compose(ansatz, inplace=True)
+    qnn = EstimatorQNN(
+        circuit=qc,
+        input_params=feature_map.parameters,
+        weight_params=ansatz.parameters,
+        input_gradients=True,
+        estimator=estimator,
+    )
+    return qnn
+
+qnn = create_qnn()
+
+class HybridNet(Module):
+    def __init__(self, qnn):
+        super().__init__()
+        self.conv1 = Conv2d(1, 4, kernel_size=5)  
+        self.pool = torch.nn.MaxPool2d(2)         
+        self.fc1 = Linear(4*12*12, 2)              
+        self.qnn = TorchConnector(qnn)            
+        self.fc2 = Linear(1, 1)                    
+
+    def forward(self, x):
+        x = F.relu(self.conv1(x))
+        x = self.pool(x)
+        x = x.view(x.shape[0], -1)
+        x = F.relu(self.fc1(x))
+        x = self.qnn(x)
+        x = self.fc2(x)
+        # Output 2 classes as prob distribution
+        return cat((x, 1 - x), dim=-1)
+
+model = HybridNet(qnn)
+optimizer = optim.Adam(model.parameters(), 
+lr=0.001)
+loss_func = NLLLoss()
+
+def crossover(param1, param2):
+    flat1 = param1.flatten()
+    flat2 = param2.flatten()
+    length = flat1.size(0)
+    point = torch.randint(
+        1, length, (1,)).item() 
+    new1 = torch.cat([flat1[:point], 
+    flat2[point:]])
+    new2 = torch.cat([flat2[:point], 
+    flat1[point:]])
+    return new1.view(param1.shape), 
+    new2.view(param2.shape)
+
+def mutation(param, mutation_rate=0.05,
+ mutation_strength=0.1):
+    mask = (torch.rand_like(param) < 
+    mutation_rate).float()
+    noise = torch.randn_like(param) * 
+    mutation_strength
+    param.data.add_(mask * noise)
+    
+def apply_evolution(model):
+    params = list(model.parameters())
+    n = len(params)
+    for i in range(0, n - 1, 2):
+        if params[i].shape ==
+         params[i + 1].shape:
+            new1, new2 = crossover(params[i],
+             params[i + 1])
+            params[i].data.copy_(new1)
+            params[i + 1].data.copy_(new2)
+        else:
+            pass
+    for i in range(n):
+        mutation(params[i])
+
+epochs = 10
+loss_list = []
+
+model.train()
+for epoch in range(epochs):
+    total_loss = []
+    for data, target in train_loader:
+        optimizer.zero_grad()
+        output = model(data)
+        loss = loss_func(output, target)
+        loss.backward()
+        optimizer.step()
+        total_loss.append(loss.item())
+    loss_list.append(sum(total_loss) /
+     len(total_loss))
+    print(f"Epoch {epoch+1}/{epochs} - Loss: {
+        loss_list[-1]:.4f}")
+
+    apply_evolution(model)
+
+
+
+
+qnn_test = create_qnn()
+model_test = HybridNet(qnn_test)
+model_test.load_state_dict(
+    torch.load(
+        "model_evolution.pt"))
+model_test.eval()
+
+correct = 0
+total_loss = []
+with no_grad():
+    for data, target in test_loader:
+        output = model_test(data)
+        if len(output.shape) == 1:
+            output = output.unsqueeze(0)
+        pred = output.argmax(dim=1, keepdim=True)
+        correct += pred.eq(target.view_as(pred)).
+        sum().item()
+        loss = loss_func(output, target)
+        total_loss.append(loss.item())
 
 \end{verbatim}
 }
@@ -972,10 +1267,376 @@ the full code is as follows:
 \subsection*{\fontsize{12}{16}\selectfont tests}
 \addcontentsline{toc}{subsection}{tests}
 
+\subsection*{\fontsize{12}{16}\selectfont second dataset}
+\addcontentsline{toc}{subsection}{second dataset}
+
+These were the results obtained with the artificial dataset used in the second tutorial, with the custom HCQNN:
+
+\begin{tikzpicture}
+\begin{axis}[
+    title={Training Progress vs. Loss (Hybrid Model)},
+    xlabel={Training Epoch},
+    ylabel={Loss},
+    xmin=1, xmax=10,
+    ymin=0, ymax=1.1,
+    xtick={1,...,10},
+    ytick={0,0.2,...,1.0},
+    legend pos=north east,
+    grid=major,
+    width=0.48\textwidth,
+    height=6cm,
+]
+
+\addplot+[mark=*, thick] coordinates {
+    (1, 0.6509) (2, 0.4542) (3, 0.3945) (4, 0.3158)
+    (5, 0.2173) (6, 0.1842) (7, 0.1675) (8, 0.1153)
+    (9, 0.1203) (10, 0.0853)
+};
+\addlegendentry{Hybrid 1}
+
+\addplot+[mark=triangle*, thick] coordinates {
+    (1, 0.9539) (2, 0.7315) (3, 0.5905) (4, 0.4266)
+    (5, 0.3387) (6, 0.2781) (7, 0.2031) (8, 0.1564)
+    (9, 0.1406) (10, 0.1181)
+};
+\addlegendentry{Hybrid 2}
+
+\addplot+[mark=square*, thick] coordinates {
+    (1, 0.7188) (2, 0.6535) (3, 0.6142) (4, 0.5819)
+    (5, 0.5169) (6, 0.4814) (7, 0.4635) (8, 0.4058)
+    (9, 0.3311) (10, 0.3057)
+};
+\addlegendentry{Hybrid 3}
+
+\addplot+[mark=diamond*, thick] coordinates {
+    (1, 0.6161) (2, 0.4765) (3, 0.3741) (4, 0.3459)
+    (5, 0.2770) (6, 0.2196) (7, 0.2104) (8, 0.2403)
+    (9, 0.1517) (10, 0.2115)
+};
+\addlegendentry{Hybrid 4}
+
+\addplot+[mark=star, thick] coordinates {
+    (1, 0.7009) (2, 0.6428) (3, 0.5852) (4, 0.4823)
+    (5, 0.4290) (6, 0.3336) (7, 0.2732) (8, 0.2527)
+    (9, 0.2094) (10, 0.1845)
+};
+\addlegendentry{Hybrid 5}
+
+\end{axis}
+\end{tikzpicture}
+
+
+\begin{tikzpicture}
+\begin{axis}[
+    title={Training Progress vs. Accuracy},
+    xlabel={Training Progress (\%)},
+    ylabel={Accuracy (\%)},
+    xmin=0, xmax=100,
+    ymin=0, ymax=110,
+    xtick={10,20,...,100},
+    ytick={0,10,...,100},
+    legend pos=south east,
+    grid=major,
+    width=0.48\textwidth,
+    height=6cm,
+]
+
+\addplot+[mark=*, thick] coordinates {
+    (10, 88.00) (20, 100.00) (30, 100.00) (40, 100.00)
+    (50, 100.00) (60, 100.00) (70, 100.00) (80, 100.00)
+    (90, 100.00) (100, 100.00)
+};
+\addlegendentry{Test 1}
+
+\addplot+[mark=triangle*, thick] coordinates {
+    (10, 38.00) (20, 38.00) (30, 82.00) (40, 82.00)
+    (50, 100.00) (60, 100.00) (70, 100.00) (80, 100.00)
+    (90, 100.00) (100, 100.00)
+};
+\addlegendentry{Test 2}
+
+\addplot+[mark=square*, thick] coordinates {
+    (10, 80.00) (20, 80.00) (30, 80.00) (40, 80.00)
+    (50, 80.00) (60, 90.00) (70, 90.00) (80, 90.00)
+    (90, 100.00) (100, 100.00)
+};
+\addlegendentry{Test 3}
+
+\addplot+[mark=diamond*, thick] coordinates {
+    (10, 88.00) (20, 100.00) (30, 92.00) (40, 96.00)
+    (50, 100.00) (60, 92.00) (70, 100.00) (80, 100.00)
+    (90, 100.00) (100, 100.00)
+};
+\addlegendentry{Test 4}
+
+\addplot+[mark=star, thick] coordinates {
+    (10, 46.00) (20, 94.00) (30, 92.00) (40, 100.00)
+    (50, 100.00) (60, 100.00) (70, 100.00) (80, 100.00)
+    (90, 100.00) (100, 100.00)
+};
+\addlegendentry{Test 5}
+
+\end{axis}
+\end{tikzpicture}
+
+
+\subsection*{\fontsize{12}{16}\selectfont MNIST dataset}
+\addcontentsline{toc}{subsection}{MNIST dataset}
+
+The results obtained with the MNIST dataset, using the same test and training size as in the first tutorial were as follows:
+\begin{tikzpicture}
+\begin{axis}[
+    title={Training Progress vs. Loss},
+    xlabel={Epoch},
+    ylabel={Loss},
+    xmin=1, xmax=10,
+    ymin=-1.8, ymax=-0.5,
+    xtick={1,...,10},
+    ytick={-1.8,-1.6,...,-0.5},
+    legend pos=south west,
+    grid=major,
+    width=0.48\textwidth,
+    height=6cm,
+]
+
+% Run 1
+\addplot+[mark=*, thick] coordinates {
+    (1, -0.5191) (2, -0.5405) (3, -0.6017) (4, -0.6875)
+    (5, -0.7960) (6, -0.9213) (7, -1.1555) (8, -1.2852)
+    (9, -1.4856) (10, -1.6954)
+};
+\addlegendentry{Run 1}
+
+% Run 2
+\addplot+[mark=triangle*, thick] coordinates {
+    (1, -0.5184) (2, -0.5382) (3, -0.5941) (4, -0.6789)
+    (5, -0.7862) (6, -0.9110) (7, -1.1400) (8, -1.2773)
+    (9, -1.4697) (10, -1.6786)
+};
+\addlegendentry{Run 2}
+
+% Run 3
+\addplot+[mark=square*, thick] coordinates {
+    (1, -0.5192) (2, -0.5412) (3, -0.6060) (4, -0.6905)
+    (5, -0.8014) (6, -0.9240) (7, -1.1626) (8, -1.2952)
+    (9, -1.4893) (10, -1.6972)
+};
+\addlegendentry{Run 3}
+
+% Run 4
+\addplot+[mark=diamond*, thick] coordinates {
+    (1, -0.5183) (2, -0.5367) (3, -0.6015) (4, -0.6826)
+    (5, -0.7916) (6, -0.9165) (7, -1.1560) (8, -1.2839)
+    (9, -1.4796) (10, -1.6846)
+};
+\addlegendentry{Run 4}
+
+% Run 5
+\addplot+[mark=star, thick] coordinates {
+    (1, -0.5184) (2, -0.5391) (3, -0.5992) (4, -0.6836)
+    (5, -0.7931) (6, -0.9200) (7, -1.1505) (8, -1.2947)
+    (9, -1.4843) (10, -1.7033)
+};
+\addlegendentry{Run 5}
+
+\end{axis}
+\end{tikzpicture}
+
+\begin{table}[ht]
+\centering
+\resizebox{0.48\textwidth}{!}{%
+\begin{tabular}{|c|c|c|c|c|c|}
+\hline
+ & Test 1 & Test 2 & Test 3 & Test 4 & Test 5 \\
+\hline
+Final loss & -1.7407 & -1.7141 & -1.7451 & 1.7048 & 1.7465 \\
+\hline
+accuracy & 100\% & 99\% & 100\% & 100\% & 100\% \\
+\hline
+\end{tabular}
+}
+\caption{accuracy and final loss of the tests}
+\end{table}
+
+\subsection*{\fontsize{12}{16}\selectfont results of the three HQNN with a more chanlenging dataset}
+\addcontentsline{toc}{subsection}{results of the three HQNN with a more chanlenging dataset}
+
+
+
+
+
+These tests were performed using the fashion MNIST dataset, which is more challenging than the MNIST dataset used in the first tutorial. The same traininf and testing size was used. I selected a subset of classes (0 and 2, "T-shirt/top" and "Pullover") to keep binary classification.
+
+The results obtained were as follows:
+
+
+\begin{tikzpicture}
+\begin{axis}[
+    title={Training Progress vs. Loss (Torch\_con\_nd\_hybrid\_qnn.py)},
+    xlabel={Epoch},
+    ylabel={Loss},
+    xmin=1, xmax=10,
+    ymin=-2.8, ymax=-0.4,
+    xtick={1,...,10},
+    ytick={-2.8,-2.5,...,-0.5},
+    legend pos=south west,
+    grid=major,
+    width=0.48\textwidth,
+    height=6cm,
+]
+
+% Run 1
+\addplot+[mark=*, thick] coordinates {
+    (1, -0.5462) (2, -0.8678) (3, -1.2091) (4, -1.4216)
+    (5, -1.6096) (6, -1.8683) (7, -2.1203) (8, -2.2555)
+    (9, -2.5096) (10, -2.7324)
+};
+\addlegendentry{Run 1}
+
+% Run 2
+\addplot+[mark=triangle*, thick] coordinates {
+    (1, -0.5035) (2, -0.5001) (3, -0.4757) (4, -0.4994)
+    (5, -0.5181) (6, -0.5300) (7, -0.5202) (8, -0.4797)
+    (9, -0.4709) (10, -0.5046)
+};
+\addlegendentry{Run 2}
+
+% Run 3
+\addplot+[mark=square*, thick] coordinates {
+    (1, -0.5039) (2, -0.5047) (3, -0.4726) (4, -0.4858)
+    (5, -0.4985) (6, -0.5201) (7, -0.5340) (8, -0.6154)
+    (9, -0.6701) (10, -0.7001)
+};
+\addlegendentry{Run 3}
+
+% Run 4
+\addplot+[mark=diamond*, thick] coordinates {
+    (1, -0.5038) (2, -0.5008) (3, -0.4819) (4, -0.4922)
+    (5, -0.5080) (6, -0.5586) (7, -0.5681) (8, -0.5764)
+    (9, -0.4763) (10, -0.5072)
+};
+\addlegendentry{Run 4}
+
+% Run 5
+\addplot+[mark=star, thick] coordinates {
+    (1, -0.5038) (2, -0.5131) (3, -0.5162) (4, -0.4920)
+    (5, -0.4961) (6, -0.5115) (7, -0.5002) (8, -0.5402)
+    (9, -0.5748) (10, -0.6265)
+};
+\addlegendentry{Run 5}
+
+\end{axis}
+\end{tikzpicture}
+
+\begin{table}[ht]
+\centering
+\resizebox{0.48\textwidth}{!}{%
+\begin{tabular}{|c|c|c|c|c|c|}
+\hline
+ & Test 1 & Test 2 & Test 3 & Test 4 & Test 5 \\
+\hline
+Final loss & -2.6044 & -0.4413 & -0.8352 & -0.4623 & -0.7545 \\
+\hline
+accuracy & 93\% & 47\% & 89\% & 49\% & 89\% \\
+\hline
+\end{tabular}
+}
+\caption{accuracy and final loss of the tests}
+\end{table}
+
+
+
+
+
+
+\begin{tikzpicture}
+\begin{axis}[
+    title={Training Progress vs. Loss (custom model)},
+    xlabel={Epoch},
+    ylabel={Loss},
+    xmin=1, xmax=10,
+    ymin=-3, ymax=-0.4,
+    xtick={1,...,10},
+    ytick={-3,-2.5,...,-0.5},
+    legend pos=south west,
+    grid=major,
+    width=0.48\textwidth,
+    height=6cm,
+]
+
+% Run 1
+\addplot+[mark=*, thick] coordinates {
+    (1, -0.5223) (2, -0.5727) (3, -0.6121) (4, -0.6981)
+    (5, -0.8026) (6, -0.9117) (7, -1.1085) (8, -1.2703)
+    (9, -1.4327) (10, -1.5508)
+};
+\addlegendentry{Run 1}
+
+% Run 2
+\addplot+[mark=triangle*, thick] coordinates {
+    (1, -0.5249) (2, -0.5057) (3, -0.6126) (4, -0.6835)
+    (5, -0.7915) (6, -0.8632) (7, -0.9107) (8, -1.2018)
+    (9, -1.3982) (10, -1.8346)
+};
+\addlegendentry{Run 2}
+
+% Run 3
+\addplot+[mark=square*, thick] coordinates {
+    (1, -0.5264) (2, -0.6203) (3, -0.7671) (4, -0.9052)
+    (5, -1.2044) (6, -1.4532) (7, -1.7894) (8, -2.0244)
+    (9, -2.2432) (10, -2.4254)
+};
+\addlegendentry{Run 3}
+
+% Run 4
+\addplot+[mark=diamond*, thick] coordinates {
+    (1, -0.4987) (2, -0.4980) (3, -0.4988) (4, -0.4996)
+    (5, -0.4996) (6, -0.4994) (7, -0.4977) (8, -0.4987)
+    (9, -0.4991) (10, -0.4986)
+};
+\addlegendentry{Run 4}
+
+% Run 5
+\addplot+[mark=star, thick] coordinates {
+    (1, -0.5831) (2, -0.7334) (3, -1.1083) (4, -1.4341)
+    (5, -1.6864) (6, -1.9658) (7, -2.2168) (8, -2.4428)
+    (9, -2.6701) (10, -2.8466)
+};
+\addlegendentry{Run 5}
+
+\end{axis}
+\end{tikzpicture}
+
+
+\begin{table}[ht]
+\centering
+\resizebox{0.48\textwidth}{!}{%
+\begin{tabular}{|c|c|c|c|c|c|}
+\hline
+ & Test 1 & Test 2 & Test 3 & Test 4 & Test 5 \\
+\hline
+Final loss & -1.3442 & -1.7675 & -2.2366 & -0.4995 & -2.6039 \\
+\hline
+accuracy & 91\% & 94\% & 93\% & 50\% & 93\% \\
+\hline
+\end{tabular}
+}
+\caption{accuracy and final loss of the tests}
+\end{table}
+
+
+These results show that the custom HCQNN model performed well on the fashion MNIST dataset, achieving high accuracy across different tests. The final loss values indicate that the model converged to a good solution, with some tests achieving very low loss values. The training progress also shows a steady decrease in loss over the epochs, indicating that the model was learning effectively.
+The results, even with a small testing set, demonstrate the effectiveness of the built custom HCQNN, using the better features of the previous tutorials, while also testing different encoding methods and optimizers. These results were better than the direct comparison with the first tutorial.
+
+
+
+
+
+
 \section*{\fontsize{16}{20}\selectfont Conclusion}
 \addcontentsline{toc}{section}{Conclusion}
 
-In this report, we explored the implementation of hybrid quantum convolutional neural networks (HCQNNs) using Qiskit and PyTorch. We began by understanding the basics of quantum neural networks (QNNs) and their applications in image classification tasks. Through hands-on tutorials, we learned how to construct QNNs, integrate them with classical layers, and train them on datasets like MNIST. We also delved into advanced concepts such as feature mapping, ansatz design, and the use of different optimizers. Finally, we compared various QNN architectures and proposed a custom HCQNN that leverages the strengths of both classical and quantum computing for improved performance in image classification tasks.
+In this report, i explored the implementation of hybrid quantum convolutional neural networks (HCQNNs) using Qiskit and PyTorch. We began by understanding the basics of quantum neural networks (QNNs) and their applications in image classification tasks. Through hands-on tutorials, we learned how to construct QNNs, integrate them with classical layers, and train them on datasets like MNIST. We also delved into advanced concepts such as feature mapping, ansatz design, and the use of different optimizers. Finally, we compared various QNN architectures and proposed a custom HCQNN that leverages the strengths of both classical and quantum computing for improved performance in image classification tasks.
 The results obtained from the experiments demonstrated the potential of HCQNNs in achieving competitive accuracy on image classification tasks. The combination of classical and quantum layers allows for efficient feature extraction and representation learning, making HCQNNs a promising avenue for future research in quantum machine learning.
 
 

@@ -29,27 +29,46 @@ if not os.path.exists('tutorial1'):
 
 # Train Dataset
 # -------------
+def load_filtered_fashion_mnist(train=True, n_samples=100):
+    dataset = datasets.FashionMNIST(
+        root="./data", train=train, download=True,
+        transform=transforms.Compose([transforms.ToTensor()])
+    )
+    # Choose classes 0 and 2 for binary classification
+    selected_classes = [0, 2]
+    idx = np.where(np.isin(dataset.targets, selected_classes))[0]
+    
+    # Take first n_samples from each class
+    idx0 = idx[dataset.targets[idx] == 0][:n_samples]
+    idx2 = idx[dataset.targets[idx] == 2][:n_samples]
+    idx = np.append(idx0, idx2)
+    
+    dataset.data = dataset.data[idx]
+    dataset.targets = dataset.targets[idx]
+    
+    # Remap targets: 0 -> 0, 2 -> 1 for binary classification
+    dataset.targets = torch.where(dataset.targets == 2, torch.tensor(1), dataset.targets)
+    
+    loader = DataLoader(dataset, batch_size=batch_size, shuffle=True)
+    return loader
+
+
 
 # Set train shuffle seed (for reproducibility)
-manual_seed(12)
+manual_seed(1111)
 
+n_train_samples = 100
+n_test_samples = 50
 batch_size = 1
-n_samples = 100  # We will concentrate on the first 100 samples
 
-# Use pre-defined torchvision function to load MNIST train data
-X_train = datasets.MNIST(
-    root="./data", train=True, download=True, transform=transforms.Compose([transforms.ToTensor()])
-)
+train_loader = load_filtered_fashion_mnist(train=True, n_samples=n_train_samples)
+test_loader = load_filtered_fashion_mnist(train=False, n_samples=n_test_samples)
 
-# Filter out labels (originally 0-9), leaving only labels 0 and 1
-idx = np.append(
-    np.where(X_train.targets == 0)[0][:n_samples], np.where(X_train.targets == 1)[0][:n_samples]
-)
-X_train.data = X_train.data[idx]
-X_train.targets = X_train.targets[idx]
+
+
+
 
 # Define torch dataloader with filtered data
-train_loader = DataLoader(X_train, batch_size=batch_size, shuffle=True)
 
 # Visualize some training samples
 n_samples_show = 6
@@ -77,19 +96,8 @@ fig.savefig('tutorial1/train_samples.png')
 n_samples = 50
 
 # Use pre-defined torchvision function to load MNIST test data
-X_test = datasets.MNIST(
-    root="./data", train=False, download=True, transform=transforms.Compose([transforms.ToTensor()])
-)
 
-# Filter out labels (originally 0-9), leaving only labels 0 and 1
-idx = np.append(
-    np.where(X_test.targets == 0)[0][:n_samples], np.where(X_test.targets == 1)[0][:n_samples]
-)
-X_test.data = X_test.data[idx]
-X_test.targets = X_test.targets[idx]
 
-# Define torch dataloader with filtered data
-test_loader = DataLoader(X_test, batch_size=batch_size, shuffle=True)
 
 # Function to create a Quantum Neural Network (QNN)
 def create_qnn():
