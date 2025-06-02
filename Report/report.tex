@@ -643,8 +643,8 @@ the second tutorial adopts a more experimental approach, where data is processed
 The QCNN uses convolutional and pooling layers to extract features, and the NeuralNetworkClassifier trains the model. 
 Precision is evaluated, and results are displayed in a classical manner. 
 
-\section*{\fontsize{16}{20}\selectfont Statistics and running on real hardware}
-\addcontentsline{toc}{section}{Statistics and running on real hardware}
+\section*{\fontsize{16}{20}\selectfont Statistics}
+\addcontentsline{toc}{section}{Statistics}
 
 \subsection*{\fontsize{12}{16}\selectfont First tutorial}
 \addcontentsline{toc}{subsection}{First tutorial}
@@ -895,6 +895,32 @@ accuracy & 99\% & 100\% & 100\% & 100\% & 100\% \\
 }
 \caption{accuracy and final loss of the tests}
 \end{table}
+
+while the second tutorial, when trying to classify the dataset from the first one, achived around 50\% accuracy with very little loss convergence. This was due to the way the second tutorial treats the data in a more quantum-centric manner, the images need to be resized to fit the quantum model, losing its features and becoming too noisy.
+
+\begin{tikzpicture}
+\begin{axis}[
+    title={Training Progress vs. Loss},
+    xlabel={Training Progress (\%)},
+    ylabel={Loss},
+    xmin=0, xmax=100,
+    ymin=-1.5, ymax=0,
+    xtick={10,20,...,100},
+    ytick={-1.5,-1-0,...,0},
+    legend pos=south west,
+    grid=major,
+    width=0.48\textwidth,
+    height=6cm,
+]
+
+\addplot+[mark=*, thick] coordinates {
+    (10, -1.0167) (20, -0.9827) (30, -0.9599) (40, -0.9471)
+    (50, -0.9377) (60, -0.9303) (70, -0.9523) (80, -0.9212)
+    (90, -0.9162) (100, -0.9107)
+};
+\addlegendentry{Average run (63\% accuracy)}
+\end{axis}
+\end{tikzpicture}
 
 
 \section*{\fontsize{16}{20}\selectfont What works best and creating a custom HCQNN}
@@ -1631,7 +1657,8 @@ The results, even with a small testing set, demonstrate the effectiveness of the
 
 
 
-
+\section*{\fontsize{16}{20}\selectfont Running custom HCQNN on real hardware}
+\addcontentsline{toc}{section}{Running custom HCQNN on real hardware}
 
 \section*{\fontsize{16}{20}\selectfont Conclusion}
 \addcontentsline{toc}{section}{Conclusion}

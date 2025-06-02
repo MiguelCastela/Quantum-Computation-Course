@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.25 (TeX Live 2023/Debian) (preloaded format=pdflatex 2024.12.11)  2 JUN 2025 01:15
+This is pdfTeX, Version 3.141592653-2.6-1.40.25 (TeX Live 2023/Debian) (preloaded format=pdflatex 2024.12.11)  2 JUN 2025 01:42
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -980,175 +980,180 @@ Overfull \hbox (13.8527pt too wide) in paragraph at lines 881--882
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 912--916
+Overfull \hbox (13.8527pt too wide) in paragraph at lines 923--924
+[][] 
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 938--942
 []\OT1/ptm/m/n/10 Flexible Rep-re-sen-ta-tion of Quan-tum Im-ages
  []
 
 
-Underfull \hbox (badness 6775) in paragraph at lines 912--916
+Underfull \hbox (badness 6775) in paragraph at lines 938--942
 \OT1/ptm/m/n/10 (FRQI): This method en-codes both the color
  []
 
 [8]
-Underfull \hbox (badness 1902) in paragraph at lines 1004--1007
+Underfull \hbox (badness 1902) in paragraph at lines 1030--1033
 \OT1/ptm/m/n/10 neu-ral net-works, as it de-fines the struc-ture and
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 1004--1007
+Underfull \hbox (badness 10000) in paragraph at lines 1030--1033
 \OT1/ptm/m/n/10 The pa-ram-e-ters cho-sen were:$\OML/cmm/m/it/10 ansatz \OT1/cmr/m/n/10 =
  []
 
 
-Underfull \hbox (badness 3323) in paragraph at lines 1004--1007
+Underfull \hbox (badness 3323) in paragraph at lines 1030--1033
 \OML/cmm/m/it/10 TwoLocal\OT1/cmr/m/n/10 (\OML/cmm/m/it/10 num[]ubits \OT1/cmr/m/n/10 = 2\OML/cmm/m/it/10 ; rotation[]locks \OT1/cmr/m/n/10 =[]
  []
 
 
-Underfull \hbox (badness 3229) in paragraph at lines 1022--1023
+Underfull \hbox (badness 3229) in paragraph at lines 1048--1049
 []\OT1/ptm/m/n/10 The crossover method used is a single-point
  []
 
 [9]
-Overfull \hbox (11.34813pt too wide) in paragraph at lines 1065--1066
+Overfull \hbox (11.34813pt too wide) in paragraph at lines 1091--1092
 [][] 
  []
 
 
-Underfull \hbox (badness 1460) in paragraph at lines 1067--1070
+Underfull \hbox (badness 1460) in paragraph at lines 1093--1096
 \OT1/ptm/m/n/10 model's per-for-mance, demon-strat-ing the ef-fec-tive-
  []
 
 
-Overfull \hbox (6.3158pt too wide) in paragraph at lines 1263--1263
+Overfull \hbox (6.3158pt too wide) in paragraph at lines 1289--1289
 []    \OT1/pcr/m/n/9 dataset.targets = dataset.targets[idx][] 
  []
 
 
-Overfull \hbox (11.71579pt too wide) in paragraph at lines 1263--1263
+Overfull \hbox (11.71579pt too wide) in paragraph at lines 1289--1289
 []\OT1/pcr/m/n/9 train_loader = load_filtered_fashion_mnist([] 
  []
 
 
-Overfull \hbox (6.3158pt too wide) in paragraph at lines 1263--1263
+Overfull \hbox (6.3158pt too wide) in paragraph at lines 1289--1289
 []\OT1/pcr/m/n/9 test_loader = load_filtered_fashion_mnist([] 
  []
 
 
-Overfull \hbox (54.91574pt too wide) in paragraph at lines 1263--1263
+Overfull \hbox (54.91574pt too wide) in paragraph at lines 1289--1289
 []    \OT1/pcr/m/n/9 rotation_blocks='ry', entanglement_blocks='cz',[] 
  []
 
 
-Overfull \hbox (0.9158pt too wide) in paragraph at lines 1263--1263
+Overfull \hbox (0.9158pt too wide) in paragraph at lines 1289--1289
 []    \OT1/pcr/m/n/9 qc.compose(feature_map, inplace=True)[] 
  []
 
 
-Overfull \hbox (17.11578pt too wide) in paragraph at lines 1263--1263
+Overfull \hbox (17.11578pt too wide) in paragraph at lines 1289--1289
 []        \OT1/pcr/m/n/9 input_params=feature_map.parameters,[] 
  []
 
-
-Overfull \hbox (38.71576pt too wide) in paragraph at lines 1263--1263
+[10]
+Overfull \hbox (38.71576pt too wide) in paragraph at lines 1289--1289
 []        \OT1/pcr/m/n/9 self.conv1 = Conv2d(1, 4, kernel_size=5)[] 
  []
 
 
-Overfull \hbox (0.9158pt too wide) in paragraph at lines 1263--1263
+Overfull \hbox (0.9158pt too wide) in paragraph at lines 1289--1289
 []        \OT1/pcr/m/n/9 self.pool = torch.nn.MaxPool2d(2)[] 
  []
 
 
-Overfull \hbox (33.31577pt too wide) in paragraph at lines 1263--1263
+Overfull \hbox (33.31577pt too wide) in paragraph at lines 1289--1289
 []        \OT1/pcr/m/n/9 # Output 2 classes as prob distribution[] 
  []
 
 
-Underfull \vbox (badness 10000) has occurred while \output is active []
-
- [10]
-Overfull \hbox (6.3158pt too wide) in paragraph at lines 1263--1263
+Overfull \hbox (6.3158pt too wide) in paragraph at lines 1289--1289
 []\OT1/pcr/m/n/9 optimizer = optim.Adam(model.parameters(),[] 
  []
 
 
-Overfull \hbox (22.51578pt too wide) in paragraph at lines 1263--1263
+Overfull \hbox (22.51578pt too wide) in paragraph at lines 1289--1289
 []            \OT1/pcr/m/n/9 new1, new2 = crossover(params[i],[] 
  []
 
 
-Overfull \hbox (6.3158pt too wide) in paragraph at lines 1263--1263
+Overfull \hbox (6.3158pt too wide) in paragraph at lines 1289--1289
 []            \OT1/pcr/m/n/9 params[i + 1].data.copy_(new2)[] 
  []
 
 
-Overfull \hbox (27.91577pt too wide) in paragraph at lines 1263--1263
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+
+Overfull \hbox (27.91577pt too wide) in paragraph at lines 1289--1289
 []    \OT1/pcr/m/n/9 print(f"Epoch {epoch+1}/{epochs} - Loss: {[] 
  []
 
 
-Underfull \vbox (badness 10000) has occurred while \output is active []
-
-
-Overfull \hbox (44.11575pt too wide) in paragraph at lines 1263--1263
+Overfull \hbox (44.11575pt too wide) in paragraph at lines 1289--1289
 []        \OT1/pcr/m/n/9 pred = output.argmax(dim=1, keepdim=True)[] 
  []
 
 
-Overfull \hbox (44.11575pt too wide) in paragraph at lines 1263--1263
+Overfull \hbox (44.11575pt too wide) in paragraph at lines 1289--1289
 []        \OT1/pcr/m/n/9 correct += pred.eq(target.view_as(pred)).[] 
  []
 
 
-Overfull \hbox (3.57033pt too wide) in paragraph at lines 1326--1327
+Overfull \hbox (3.57033pt too wide) in paragraph at lines 1352--1353
 [][] 
  []
 
 
-Overfull \hbox (10.48705pt too wide) in paragraph at lines 1380--1381
+Overfull \hbox (10.48705pt too wide) in paragraph at lines 1406--1407
 [][] 
  []
 
-
-Underfull \hbox (badness 10000) in paragraph at lines 1386--1444
+[11]
+Underfull \hbox (badness 10000) in paragraph at lines 1412--1470
 []\OT1/ptm/m/n/10 The re-sults ob-tained with the MNIST
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 1386--1444
+Underfull \hbox (badness 10000) in paragraph at lines 1412--1470
 \OT1/ptm/m/n/10 dataset, us-ing the same test and train-ing
  []
 
 
-Underfull \hbox (badness 4872) in paragraph at lines 1386--1444
+Underfull \hbox (badness 4872) in paragraph at lines 1412--1470
 \OT1/ptm/m/n/10 size as in the first tu-to-rial were as fol-lows:
  []
 
 
-Overfull \hbox (1.34813pt too wide) in paragraph at lines 1386--1444
+Overfull \hbox (1.34813pt too wide) in paragraph at lines 1412--1470
 [] 
  []
 
-[11]
-Underfull \hbox (badness 1783) in paragraph at lines 1468--1469
+
+Underfull \hbox (badness 1783) in paragraph at lines 1494--1495
 []\OT1/ptm/m/n/10 These tests were per-formed us-ing the fash-ion
  []
 
 
-Overfull \hbox (40.3642pt too wide) in paragraph at lines 1529--1530
+Overfull \hbox (40.3642pt too wide) in paragraph at lines 1555--1556
 [][] 
  []
 
 
-Overfull \hbox (11.34813pt too wide) in paragraph at lines 1608--1609
+Underfull \vbox (badness 4366) has occurred while \output is active []
+
+
+Overfull \hbox (11.34813pt too wide) in paragraph at lines 1634--1635
 [][] 
  []
 
 
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
- (./report.bbl [12]
+ [12] (./report.bbl
 Underfull \hbox (badness 10000) in paragraph at lines 38--39
 []\OT1/ptm/m/n/8 ------, ``Zzfea-turemap class | qiskit doc-u-men-ta-tion,''
  []
@@ -1255,29 +1260,27 @@ Before submitting the final camera ready copy, remember to:
  uses only Type 1 fonts and that every step in the generation
  process uses the appropriate paper size.
 
-[13
-
-] (./report.aux)
+[13] (./report.aux)
  ***********
 LaTeX2e <2023-11-01> patch level 1
 L3 programming layer <2024-01-22>
  ***********
 Package rerunfilecheck Info: File `report.out' has not changed.
-(rerunfilecheck)             Checksum: 31F9B7AABEC5AAE1019D62ED2B62C211;4491.
+(rerunfilecheck)             Checksum: A7D84DE9A53E25E19BBBEE7FB89B05C9;4577.
  ) 
 Here is how much of TeX's memory you used:
- 33984 strings out of 476182
- 788118 string characters out of 5795594
- 1991975 words of memory out of 5000000
- 55421 multiletter control sequences out of 15000+600000
+ 34013 strings out of 476182
+ 788662 string characters out of 5795594
+ 2005975 words of memory out of 5000000
+ 55449 multiletter control sequences out of 15000+600000
  605447 words of font info for 132 fonts, out of 8000000 for 9000
  14 hyphenation exceptions out of 8191
  99i,18n,107p,1083b,2159s stack positions out of 10000i,1000n,20000p,200000b,200000s
 </usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi7.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy7.pfb></usr/share/texlive/texmf-dist/fonts/type1/urw/courier/ucrb8a.pfb></usr/share/texlive/texmf-dist/fonts/type1/urw/courier/ucrr8a.pfb></usr/share/texlive/texmf-dist/fonts/type1/urw/times/utmb8a.pfb></usr/share/texlive/texmf-dist/fonts/type1/urw/times/utmr8a.pfb></usr/share/texlive/texmf-dist/fonts/type1/urw/times/utmri8a.pfb>
-Output written on report.pdf (13 pages, 220684 bytes).
+Output written on report.pdf (13 pages, 222808 bytes).
 PDF statistics:
- 334 PDF objects out of 1000 (max. 8388607)
- 296 compressed objects within 3 object streams
- 62 named destinations out of 1000 (max. 500000)
- 213 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 340 PDF objects out of 1000 (max. 8388607)
+ 301 compressed objects within 4 object streams
+ 63 named destinations out of 1000 (max. 500000)
+ 221 words of extra memory for PDF output out of 10000 (max. 10000000)
 

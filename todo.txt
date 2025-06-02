@@ -1,9 +1,6 @@
+- fazer um notebook com a custom HQNN correr testes em hardware real
 - meter referencias na drive
-- correr testes em hardware real
-- meter o hybridon.py no relatorio
-- meter testes do hybridon e dizer que usei corssover mutação e falar de elitismo
-- falar dos resultados hynridon2 no dataset do segundo tutorial
-- testar melhor os frqi e neqr, se n correrem mm manter
+- explicar o hybrid no relatorio
 - no ficheiro de frqi_neqr testar com DCT-EFRQI e QPIE (documento)
 
 
