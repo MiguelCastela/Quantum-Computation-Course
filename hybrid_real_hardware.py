@@ -6,7 +6,7 @@ from torchvision import datasets, transforms
 import torch.optim as optim
 import numpy as np
 import matplotlib.pyplot as plt
-from qiskit.circuit.library import ZZFeatureMap, TwoLocal
+from qiskit.circuit.library import ZFeatureMap, TwoLocal
 from qiskit import QuantumCircuit
 from qiskit.primitives import StatevectorEstimator as Estimator
 from qiskit_machine_learning.neural_networks import EstimatorQNN
@@ -14,23 +14,27 @@ from qiskit_machine_learning.connectors import TorchConnector
 from torch.nn import Module, Conv2d, Linear
 from torch.nn import functional as F
 from torch.nn import NLLLoss
+from dotenv import load_dotenv
+from qiskit_ibm_runtime import QiskitRuntimeService
+
+
 
 
 
 #load_dotenv()  # Load variables from .env file
 qiskit_token = os.getenv("QISKIT_TOKEN")
 
-#estimator = Estimator() 
-#service = QiskitRuntimeService(channel="ibm_quantum", token=qiskit_token)
-#print(qiskit_token)
-#backend = service.least_busy(operational=True, simulator=False, min_num_qubits=2)
-#print(f"Using backend: {backend.name}")
-#estimator = Estimator(backend)
+estimator = Estimator() 
+service = QiskitRuntimeService(channel="ibm_quantum", token=qiskit_token)
+print(qiskit_token)
+backend = service.least_busy(operational=True, simulator=False, min_num_qubits=2)
+print(f"Using backend: {backend.name}")
+estimator = Estimator(backend)
 
 
 # Initialize Qiskit Runtime Service and Estimator
 #backend = service.least_busy(operational=True, simulator=True)
-estimator = Estimator()  # Use a simulator for testing
+#estimator = Estimator()  # Use a simulator for testing
 
 # Create data directory
 if not os.path.exists('tutorial1'):
@@ -41,8 +45,8 @@ manual_seed(12)
 np.random.seed(12)
 
 batch_size = 1
-n_train_samples = 100
-n_test_samples = 50
+n_train_samples = 20
+n_test_samples = 10
 
 # Load MNIST and filter only digits 0 and 1
 def load_filtered_mnist(train=True, n_samples=100):
@@ -63,7 +67,7 @@ test_loader = load_filtered_mnist(train=False, n_samples=n_test_samples)
 
 # Create QNN with TwoLocal ansatz
 def create_qnn():
-    feature_map = ZZFeatureMap(2)
+    feature_map = ZFeatureMap(2)
     ansatz = TwoLocal(num_qubits=2, rotation_blocks='ry', entanglement_blocks='cz', reps=1)
     qc = QuantumCircuit(2)
     qc.compose(feature_map, inplace=True)
@@ -87,11 +91,11 @@ qnn = create_qnn()
 class HybridNet(Module):
     def __init__(self, qnn):
         super().__init__()
-        self.conv1 = Conv2d(1, 4, kernel_size=5)  # output size: (4, 24, 24)
+        self.conv1 = Conv2d(1, 2, kernel_size=3)  # output size: (4, 24, 24)
         self.pool = torch.nn.MaxPool2d(2)         # output size: (4, 12, 12)
-        self.fc1 = Linear(4*12*12, 2)              # Flatten to 4*12*12=576, then Linear to 2 features for QNN
+        self.fc1 = Linear(2 * 13 * 13, 2)              # Flatten to 4*12*12=576, then Linear to 2 features for QNN
         self.qnn = TorchConnector(qnn)              # QNN layer
-        self.fc2 = Linear(1, 1)                    # QNN output to single output
+                  # QNN output to single output
 
     def forward(self, x):
         x = F.relu(self.conv1(x))
@@ -99,17 +103,13 @@ class HybridNet(Module):
         x = x.view(x.shape[0], -1)
         x = F.relu(self.fc1(x))
         x = self.qnn(x)
-        x = self.fc2(x)
         # Output 2 classes as prob distribution
         return cat((x, 1 - x), dim=-1)
-def count_parameters(model):
-    return sum(p.numel() for p in model.parameters() if p.requires_grad)
+
 
 
 # Instantiate model, loss, optimizer
 model = HybridNet(qnn)
-total_params = count_parameters(model)
-print(f"Total trainable parameters: {total_params}")
 optimizer = optim.Adam(model.parameters(), lr=0.001)
 loss_func = NLLLoss()
 
@@ -146,7 +146,7 @@ def apply_evolution(model):
         mutation(params[i])
 
 # Train loop
-epochs = 10
+epochs = 3
 loss_list = []
 
 model.train()
