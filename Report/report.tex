@@ -1019,6 +1019,7 @@ In this hybrid quantum-classical neural network setup, using the Adam optimizer 
 
 The results of using NEQR and FRQI instead of quantum feature maps were not as good as expected.
 The NEQR and FRQI methods are more complex and require careful tuning of parameters, which can lead to longer training times and less intuitive results.
+More experimental strategies were studied, such as QPIE \cite{https://doi.org/10.1038/s41598-023-30575-2www.nature.com/scientificreports} wich is a more structure-aware encoding inspired by polar coordinates and DCT-EFRQI \cite{arXiv:2203.01831v1}, wich efficiently takes advantage of classical Discrete Cosine Transform. This would maybe yeild slightly better results but similar results to the other classical encoding methods mentioned.
 
 Because of this, the decision came down to using the ZFeatureMap or ZZFeatureMap.\\
 The ZFeatureMap is a simpler feature map that encodes classical data into quantum states using single-qubit rotations. It is computationally less expensive and easier to implement, making it suitable for smaller datasets or simpler models. However, it may not capture complex relationships between features as effectively as the ZZFeatureMap.

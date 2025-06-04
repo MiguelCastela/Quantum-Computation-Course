@@ -7,7 +7,8 @@
 \providecommand{\BIBentrySTDinterwordspacing}{\spaceskip=0pt\relax}
 \providecommand{\BIBentryALTinterwordstretchfactor}{4}
 \providecommand{\BIBentryALTinterwordspacing}{\spaceskip=\fontdimen2\font plus
-\BIBentryALTinterwordstretchfactor\fontdimen3\font minus \fontdimen4\font\relax}
+\BIBentryALTinterwordstretchfactor\fontdimen3\font minus
+  \fontdimen4\font\relax}
 \providecommand{\BIBforeignlanguage}[2]{{%
 \expandafter\ifx\csname l@#1\endcsname\relax
 \typeout{** WARNING: IEEEtran.bst: No hyphenation pattern has been}%
@@ -22,52 +23,94 @@
 
 \bibitem{paszke2019pytorch}
 \BIBentryALTinterwordspacing
-A.~Paszke, S.~Gross, F.~Massa, A.~Lerer, J.~Bradbury, G.~Chanan, T.~Killeen, Z.~Lin, N.~Gimelshein, L.~Antiga, A.~Desmaison, A.~Kopf, E.~Yang, Z.~DeVito, M.~Raison, A.~Tejani, S.~Chilamkurthy, B.~Steiner, L.~Fang, J.~Bai, and S.~Chintala, ``Pytorch: An imperative style, high-performance deep learning library,'' in \emph{Advances in Neural Information Processing Systems 32 (NeurIPS 2019)}, 2019, pp. 8024--8035. [Online]. Available: \url{https://arxiv.org/abs/1912.01703}
+A.~Paszke, S.~Gross, F.~Massa, A.~Lerer, J.~Bradbury, G.~Chanan, T.~Killeen,
+  Z.~Lin, N.~Gimelshein, L.~Antiga, A.~Desmaison, A.~Kopf, E.~Yang, Z.~DeVito,
+  M.~Raison, A.~Tejani, S.~Chilamkurthy, B.~Steiner, L.~Fang, J.~Bai, and
+  S.~Chintala, ``Pytorch: An imperative style, high-performance deep learning
+  library,'' in \emph{Advances in Neural Information Processing Systems 32
+  (NeurIPS 2019)}, 2019, pp. 8024--8035. [Online]. Available:
+  \url{https://arxiv.org/abs/1912.01703}
 \BIBentrySTDinterwordspacing
 
 \bibitem{lecun2010mnist}
-Y.~LeCun and C.~Cortes, ``{MNIST} handwritten digit database,'' \url{http://yann.lecun.com/exdb/mnist/}, 2010, accessed: 2025-05-20.
+Y.~LeCun and C.~Cortes, ``{MNIST} handwritten digit database,''
+  \url{http://yann.lecun.com/exdb/mnist/}, 2010.
 
 \bibitem{DataLoader}
-{PyTorch Contributors}, ``torch.utils.data — pytorch 2.7 documentation,'' \url{https://pytorch.org/docs/stable/data.html}, 2025, accessed: 2025-05-20.
+{PyTorch Contributors}, ``torch.utils.data — pytorch 2.7 documentation,''
+  \url{https://pytorch.org/docs/stable/data.html}, 2025.
 
 \bibitem{qiskit_zfeaturemap}
-{Qiskit Contributors}, ``Zfeaturemap class — qiskit documentation,'' \url{https://docs.quantum.ibm.com/api/qiskit/qiskit.circuit.library.ZFeatureMap}, 2025, accessed: 2025-05-20.
+{Qiskit Contributors}, ``Zfeaturemap class — qiskit documentation,''
+  \url{https://docs.quantum.ibm.com/api/qiskit/qiskit.circuit.library.ZFeatureMap},
+  2025.
 
 \bibitem{qiskit_zzfeaturemap}
-------, ``Zzfeaturemap class — qiskit documentation,'' \url{https://docs.quantum.ibm.com/api/qiskit/qiskit.circuit.library.ZZFeatureMap}, 2025, accessed: 2025-05-20.
+------, ``Zzfeaturemap class — qiskit documentation,''
+  \url{https://docs.quantum.ibm.com/api/qiskit/qiskit.circuit.library.ZZFeatureMap},
+  2025.
 
 \bibitem{qiskit_paulifeaturemap}
-------, ``Paulifeaturemap class — qiskit documentation,'' \url{https://docs.quantum.ibm.com/api/qiskit/qiskit.circuit.library.PauliFeatureMap}, 2025, accessed: 2025-05-20.
+------, ``Paulifeaturemap class — qiskit documentation,''
+  \url{https://docs.quantum.ibm.com/api/qiskit/qiskit.circuit.library.PauliFeatureMap},
+  2025.
 
 \bibitem{qiskit_efficientsu2}
-------, ``Efficientsu2 ansatz — qiskit documentation,'' \url{https://docs.quantum.ibm.com/api/qiskit/qiskit.circuit.library.EfficientSU2}, 2025, accessed: 2025-05-20.
+------, ``Efficientsu2 ansatz — qiskit documentation,''
+  \url{https://docs.quantum.ibm.com/api/qiskit/qiskit.circuit.library.EfficientSU2},
+  2025.
 
 \bibitem{qiskit_realamplitudes}
-------, ``realamplitudes ansatz — qiskit documentation,'' \url{https://docs.quantum.ibm.com/api/qiskit/qiskit.circuit.library.RealAmplitudes}, 2025, accessed: 2025-05-20.
+------, ``realamplitudes ansatz — qiskit documentation,''
+  \url{https://docs.quantum.ibm.com/api/qiskit/qiskit.circuit.library.RealAmplitudes},
+  2025.
 
 \bibitem{qiskit_twolocal}
-------, ``Twolocal ansatz — qiskit documentation,'' \url{https://docs.quantum.ibm.com/api/qiskit/qiskit.circuit.library.TwoLocal}, 2025, accessed: 2025-05-20.
+------, ``Twolocal ansatz — qiskit documentation,''
+  \url{https://docs.quantum.ibm.com/api/qiskit/qiskit.circuit.library.TwoLocal},
+  2025.
 
 \bibitem{pytorch_net}
-{PyTorch Contributors}, ``Neural networks — pytorch documentation,'' \url{https://docs.pytorch.org/tutorials/beginner/blitz/neural_networks_tutorial.html}, 2025, accessed: 2025-05-20.
+{PyTorch Contributors}, ``Neural networks — pytorch documentation,''
+  \url{https://docs.pytorch.org/tutorials/beginner/blitz/neural_networks_tutorial.html},
+  2025.
 
 \bibitem{pytorch_dropout2d}
-------, ``Dropout2d — pytorch documentation,'' \url{https://docs.pytorch.org/docs/stable/generated/torch.nn.Dropout2d.html}, 2025, accessed: 2025-05-20.
+------, ``Dropout2d — pytorch documentation,''
+  \url{https://docs.pytorch.org/docs/stable/generated/torch.nn.Dropout2d.html},
+  2025.
 
 \bibitem{pytorch_relu}
-------, ``Relu — pytorch documentation,'' \url{https://docs.pytorch.org/docs/stable/generated/torch.nn.ReLU.html}, 2025, accessed: 2025-05-20.
+------, ``Relu — pytorch documentation,''
+  \url{https://docs.pytorch.org/docs/stable/generated/torch.nn.ReLU.html},
+  2025.
 
 \bibitem{pytorch_adam}
-------, ``Adam — pytorch documentation,'' \url{https://docs.pytorch.org/docs/stable/generated/torch.optim.Adam.html}, 2025, accessed: 2025-05-20.
+------, ``Adam — pytorch documentation,''
+  \url{https://docs.pytorch.org/docs/stable/generated/torch.optim.Adam.html},
+  2025.
 
 \bibitem{qiskit_sparsepauliop}
-{Qiskit Contributors}, ``Sparsepauliop — qiskit documentation,'' \url{https://docs.quantum.ibm.com/api/qiskit/qiskit.quantum_info.SparsePauliOp}, 2025, accessed: 2025-05-20.
+{Qiskit Contributors}, ``Sparsepauliop — qiskit documentation,''
+  \url{https://docs.quantum.ibm.com/api/qiskit/qiskit.quantum_info.SparsePauliOp},
+  2025.
 
 \bibitem{qiskit_estimatorqnn}
-------, ``Estimatorqnn — qiskit documentation,'' \url{https://qiskit-community.github.io/qiskit-machine-learning/stubs/qiskit_machine_learning.neural_networks.EstimatorQNN.html}, 2025, accessed: 2025-05-20.
+------, ``Estimatorqnn — qiskit documentation,''
+  \url{https://qiskit-community.github.io/qiskit-machine-learning/stubs/qiskit_machine_learning.neural_networks.EstimatorQNN.html},
+  2025.
 
 \bibitem{qiskit_cobyla}
-------, ``Cobyla — qiskit documentation,'' \url{https://docs.quantum.ibm.com/api/qiskit/0.37/qiskit.algorithms.optimizers.COBYLA}, 2025, accessed: 2025-05-20.
+------, ``Cobyla — qiskit documentation,''
+  \url{https://docs.quantum.ibm.com/api/qiskit/0.37/qiskit.algorithms.optimizers.COBYLA},
+  2025.
+
+\bibitem{https://doi.org/10.1038/s41598-023-30575-2www.nature.com/scientificreports}
+A.~U. . T.~D. Md~Ershadul Haque~*, Manoranjan~Paul, ``Advanced quantum image
+  representation and compression using a dct-efrqi approach,'' \emph{nature
+  scientific reports}, 2023.
+
+\bibitem{arXiv:2203.01831v1}
+P.~S. B. V.~P. Alok~Anad, Meizhong~Lyu, ``Quantum image processing,'' 2022.
 
 \end{thebibliography}

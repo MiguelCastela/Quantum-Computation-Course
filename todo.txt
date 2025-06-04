@@ -1,7 +1,7 @@
-- fazer um notebook com a custom HQNN correr testes em hardware real
+- correr testes em hardware real!!!!!!!!!!!!!
+- fazer um notebook com a custom HQNN
 - meter referencias na drive
 - explicar o hybrid no relatorio
-- no ficheiro de frqi_neqr testar com DCT-EFRQI e QPIE (documento)
 
 
 
