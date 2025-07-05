@@ -1,15 +1,15 @@
 # Fdb version 4
-["bibtex report"] 1748995686.84526 "report.aux" "report.bbl" "report" 1748995686.87707 2
+["bibtex report"] 1749927990.8639 "report.aux" "report.bbl" "report" 1749927990.8947 2
   "./references.bib" 1748995604.56913 5034 83b3dbd18e1be0002f22761ca954f39a ""
   "/usr/share/texlive/texmf-dist/bibtex/bst/ieeetran/IEEEtran.bst" 1440712899 57748 7c8250ecf02814ce6ddc0cdbb63df1dd ""
-  "report.aux" 1748995686.5618 5290 d2108d4ed3d2a8f10e7fd7de38cdba33 "pdflatex"
+  "report.aux" 1749927990.61168 5456 d3827575c124fc5dddf6394f6bc7bb21 "pdflatex"
   (generated)
   "report.bbl"
   "report.blg"
   (rewritten before read)
-["pdflatex"] 1748995682.57454 "/home/castela/Documents/GitHub/Quantica/Report/report.tex" "report.pdf" "report" 1748995686.87737 0
+["pdflatex"] 1749927987.05955 "/home/castela/Documents/GitHub/Quantica/Report/report.tex" "report.pdf" "report" 1749927990.89497 0
   "/etc/texmf/web2c/texmf.cnf" 1733106275.85044 475 c0e671620eb5563b2130f56340a5fde8 ""
-  "/home/castela/Documents/GitHub/Quantica/Report/report.tex" 1748995677.56865 66533 94968506144bdf67fadf5de53663eade ""
+  "/home/castela/Documents/GitHub/Quantica/Report/report.tex" 1749927982.32076 65769 fabb6045237571841ef8e198feabf502 ""
   "/usr/share/texlive/texmf-dist/fonts/enc/dvips/base/8r.enc" 1165713224 4850 80dc9bab7f31fb78a000ccfed0e27cab ""
   "/usr/share/texlive/texmf-dist/fonts/map/fontname/texfonts.map" 1577235249 3524 cb3e574dea2d1052e39280babc910dc8 ""
   "/usr/share/texlive/texmf-dist/fonts/tfm/adobe/courier/pcrb7t.tfm" 1136768653 960 4ab65358b8406f30ef5496c8c096d22b ""
@@ -226,11 +226,11 @@
   "/usr/share/texmf/web2c/texmf.cnf" 1707919699 40399 f2c302f7d2af602abb742093540a5834 ""
   "/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map" 1733107137.99265 128028 f533b797fba58d231669ea19e894e23e ""
   "/var/lib/texmf/web2c/pdftex/pdflatex.fmt" 1733922934 6800790 4f44c5be00cf6bb5c5639010e479b2cb ""
-  "report.aux" 1748995686.5618 5290 d2108d4ed3d2a8f10e7fd7de38cdba33 "pdflatex"
-  "report.bbl" 1748995686.87477 4392 14cc1f712cc2c26a1be3d9a8b4623822 "bibtex report"
-  "report.out" 1748995686.5638 4577 a7d84de9a53e25e19bbbee7fb89b05c9 "pdflatex"
-  "report.tex" 1748995677.56865 66533 94968506144bdf67fadf5de53663eade ""
-  "report.toc" 1748995686.5638 1773 0512f2f3de11bb9d242d31028372a12b "pdflatex"
+  "report.aux" 1749927990.61168 5456 d3827575c124fc5dddf6394f6bc7bb21 "pdflatex"
+  "report.bbl" 1749927990.89168 4392 14cc1f712cc2c26a1be3d9a8b4623822 "bibtex report"
+  "report.out" 1749927990.61368 4577 9749aa25ce0d6dd7bd5e9f134ce613ed "pdflatex"
+  "report.tex" 1749927982.32076 65769 fabb6045237571841ef8e198feabf502 ""
+  "report.toc" 1749927990.61368 1773 5e7124820a1b9614af4e4617aefa881c "pdflatex"
   (generated)
   "report.aux"
   "report.log"
