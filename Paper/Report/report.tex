@@ -34,14 +34,20 @@
     \maketitle
 
 % Table of contents
-\renewcommand{\contentsname}{Table of Contents}
-\tableofcontents
 \newpage
 
 \section*{\fontsize{16}{20}\selectfont Abstract}
 \addcontentsline{toc}{section}{Abstract}
-
-Abstract
+Neural networks are currently among the most widely used models in machine
+learning. A sub-category of these, known as convolutional neural networks, is
+primarily applied to image recognition tasks. By using pooling and convolution
+layers, CNNs can extract features from images, making them effective for image
+classification. They have been showing promising results when compared to
+classical methods. This project explores the integration of quantum computing
+with neural network architectures, focusing on two types of quantum neural
+networks (QNNs) from the Qiskit tutorials. A final neural network was then
+created with the best features of each of the tutorials and some evolutionary-
+inspired approaches to the hybrid quantum neural network (HQCNN)
 
 % Sections
 \section*{\fontsize{16}{20}\selectfont Introduction and methodology}
@@ -1691,6 +1697,9 @@ The results, even with a small testing set, demonstrate the effectiveness of the
 \section*{\fontsize{16}{20}\selectfont Running custom HCQNN on real hardware}
 \addcontentsline{toc}{section}{Running custom HCQNN on real hardware}
 
+When running the custom HCQNN on real hardware, it is necessary to define the backend, which was defined by the least busy available with a minimum of 2 qubits. A pass manager and transpiler were also used in the quantum circuit to transform it using hardware-aware passes, Gradients, shot schedules, and error mitigation are properly handled and no unsupported gate remains before runtime execution.
+Even with these optimizations, running the full HCQNN showed aboved depleted the full 10 minutes that come with the free IBM Quantum account. 
+Very few forward passes were executed (one job). When the new IBM Cloud plataform became available, i tried a mini version of my HCQNN, with only 20 training samples and 10 testing samples and without any of the evolutionary operators (in the service of simplicity). Even with the new EstimatorV2 and these changes, the jobs didn't run to completion. But, by analising the jobs that were completed its possible to infer that the model was, on the last jobs, likely correctly infering the classes of the images (handwritten digits), this was inferred by the ev ≈ 0.99 ± 0.014 result obtained in the primitive results from the last job. This indicates the QNN model confidently assigned a class close to 1, with a tight standard error (~1.4\%). This isn't enough to infer global model performance, this could be achieved in future work by addim a rule in the code that includes the true label of the image in the metadata. This could then be retrieved easily form the completed jobs. More minutes would also resolve the root problem.
 \section*{\fontsize{16}{20}\selectfont Conclusion}
 \addcontentsline{toc}{section}{Conclusion}
 

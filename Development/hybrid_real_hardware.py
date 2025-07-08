@@ -1,4 +1,4 @@
-import os
+whimport os
 import torch
 from torch import cat, no_grad, manual_seed
 from torch.utils.data import DataLoader
@@ -8,7 +8,7 @@ import numpy as np
 import matplotlib.pyplot as plt
 from qiskit.circuit.library import ZFeatureMap, TwoLocal
 from qiskit import QuantumCircuit
-from qiskit.primitives import StatevectorEstimator as Estimator
+from qiskit.primitives import BackendEstimatorV2
 from qiskit_machine_learning.neural_networks import EstimatorQNN
 from qiskit_machine_learning.connectors import TorchConnector
 from torch.nn import Module, Conv2d, Linear
@@ -16,20 +16,23 @@ from torch.nn import functional as F
 from torch.nn import NLLLoss
 from dotenv import load_dotenv
 from qiskit_ibm_runtime import QiskitRuntimeService
+from qiskit_ibm_runtime import EstimatorV2
+from qiskit.compiler import transpile
 
 
+from qiskit.transpiler import generate_preset_pass_manager
 
 
 
 #load_dotenv()  # Load variables from .env file
 qiskit_token = os.getenv("QISKIT_TOKEN")
 
-estimator = Estimator() 
-service = QiskitRuntimeService(channel="ibm_quantum", token=qiskit_token)
+service = QiskitRuntimeService()
 print(qiskit_token)
 backend = service.least_busy(operational=True, simulator=False, min_num_qubits=2)
 print(f"Using backend: {backend.name}")
-estimator = Estimator(backend)
+estimator = EstimatorV2(backend)
+
 
 
 # Initialize Qiskit Runtime Service and Estimator
@@ -64,7 +67,7 @@ def load_filtered_mnist(train=True, n_samples=100):
 
 train_loader = load_filtered_mnist(train=True, n_samples=n_train_samples)
 test_loader = load_filtered_mnist(train=False, n_samples=n_test_samples)
-
+pass_manager = generate_preset_pass_manager(optimization_level=2, backend=backend)
 # Create QNN with TwoLocal ansatz
 def create_qnn():
     feature_map = ZFeatureMap(2)
@@ -72,6 +75,7 @@ def create_qnn():
     qc = QuantumCircuit(2)
     qc.compose(feature_map, inplace=True)
     qc.compose(ansatz, inplace=True)
+    qc = transpile(qc, backend)
 
 
 
@@ -82,6 +86,7 @@ def create_qnn():
         weight_params=ansatz.parameters,
         input_gradients=True,
         estimator=estimator,
+        pass_manager=pass_manager
     )
     return qnn
 
