@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.25 (TeX Live 2023/Debian) (preloaded format=pdflatex 2024.12.11)  8 JUL 2025 01:45
+This is pdfTeX, Version 3.141592653-2.6-1.40.25 (TeX Live 2023/Debian) (preloaded format=pdflatex 2024.12.11)  9 JUL 2025 01:26
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -691,550 +691,498 @@ LaTeX Font Info:    Trying to load font information for U+msb on input line 35.
 File: umsb.fd 2013/01/14 v3.01 AMS symbols B
 )
 LaTeX Font Info:    Calculating math sizes for size <11> on input line 35.
-
-Underfull \vbox (badness 3343) has occurred while \output is active []
-
-LaTeX Font Info:    Trying to load font information for OT1+pcr on input line 85.
+LaTeX Font Info:    Trying to load font information for OT1+pcr on input line 81.
  (/usr/share/texlive/texmf-dist/tex/latex/psnfss/ot1pcr.fd
 File: ot1pcr.fd 2001/06/04 font definitions for OT1/pcr.
 )
 
-LaTeX Warning: Citation `paszke2019pytorch' on page 1 undefined on input line 89.
+LaTeX Warning: Citation `paszke2019pytorch' on page 1 undefined on input line 85.
 
 
-LaTeX Warning: Citation `lecun2010mnist' on page 1 undefined on input line 89.
+LaTeX Warning: Citation `lecun2010mnist' on page 1 undefined on input line 85.
+
+
+Overfull \hbox (4.81311pt too wide) in paragraph at lines 116--116
+ []\OT1/pcr/m/n/9 X_train.targets = X_train.targets[idx][] 
+ []
+
+
+LaTeX Warning: Citation `DataLoader' on page 1 undefined on input line 119.
 
 [1{/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map}{/usr/share/texlive/texmf-dist/fonts/enc/dvips/base/8r.enc}
 
 
 ]
-Overfull \hbox (4.81311pt too wide) in paragraph at lines 124--124
- []\OT1/pcr/m/n/9 X_train.targets = X_train.targets[idx][] 
+
+LaTeX Warning: Citation `qiskit_zfeaturemap' on page 2 undefined on input line 152.
+
+
+LaTeX Warning: Citation `qiskit_zzfeaturemap' on page 2 undefined on input line 155.
+
+
+LaTeX Warning: Citation `qiskit_paulifeaturemap' on page 2 undefined on input line 158.
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 162--163
+
  []
 
 
-LaTeX Warning: Citation `DataLoader' on page 2 undefined on input line 127.
+LaTeX Warning: Citation `qiskit_efficientsu2' on page 2 undefined on input line 170.
 
 
-LaTeX Warning: Citation `qiskit_zfeaturemap' on page 2 undefined on input line 160.
+LaTeX Warning: Citation `qiskit_realamplitudes' on page 2 undefined on input line 173.
 
 
-LaTeX Warning: Citation `qiskit_zzfeaturemap' on page 2 undefined on input line 163.
+LaTeX Warning: Citation `qiskit_twolocal' on page 2 undefined on input line 176.
 
 
-LaTeX Warning: Citation `qiskit_paulifeaturemap' on page 2 undefined on input line 171.
+Underfull \hbox (badness 10000) in paragraph at lines 211--212
+
+ []
 
 
-LaTeX Warning: Hyper reference `sec:NEQR_FRQI' on page 2 undefined on input line 172.
+LaTeX Warning: Citation `pytorch_net' on page 2 undefined on input line 213.
 
 
-LaTeX Warning: Citation `qiskit_efficientsu2' on page 2 undefined on input line 180.
+Underfull \hbox (badness 2698) in paragraph at lines 213--216
+\OT1/ptm/m/n/10 neu-ral net-work (QNN) layer cre-ated ear-lier
+ []
 
 
-LaTeX Warning: Citation `qiskit_realamplitudes' on page 2 undefined on input line 183.
-
-
-LaTeX Warning: Citation `qiskit_twolocal' on page 2 undefined on input line 186.
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 221--222
+Underfull \hbox (badness 10000) in paragraph at lines 213--216
 
  []
 
 [2]
-
-LaTeX Warning: Citation `pytorch_net' on page 3 undefined on input line 223.
-
-
-Underfull \hbox (badness 2245) in paragraph at lines 223--224
-\OT1/ptm/m/n/10 ear-lier with Qiskit. The QNN is in-te-grated
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 223--224
+Underfull \hbox (badness 10000) in paragraph at lines 220--221
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 229--230
-
- []
+LaTeX Warning: Citation `pytorch_dropout2d' on page 3 undefined on input line 222.
 
 
-LaTeX Warning: Citation `pytorch_dropout2d' on page 3 undefined on input line 231.
-
-
-Underfull \hbox (badness 1642) in paragraph at lines 231--232
+Underfull \hbox (badness 1642) in paragraph at lines 222--227
 []\OT1/ptm/m/n/10 Dropout2d [[]] is a reg-u-lar-iza-tion layer that
  []
 
 
-Underfull \hbox (badness 4556) in paragraph at lines 231--232
+Underfull \hbox (badness 4556) in paragraph at lines 222--227
 \OT1/ptm/m/n/10 ran-domly ze-ros out en-tire chan-nels dur-ing
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 231--232
+Underfull \hbox (badness 1629) in paragraph at lines 222--227
+\OT1/ptm/m/n/10 The Qiskit quan-tum neu-ral net-work is then
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 222--227
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 233--234
+LaTeX Warning: Citation `pytorch_relu' on page 3 undefined on input line 250.
+
+
+LaTeX Warning: Citation `pytorch_adam' on page 3 undefined on input line 270.
+
+
+Underfull \hbox (badness 3158) in paragraph at lines 269--273
+\OT1/ptm/m/n/10 that com-bines mo-men-tum, which uses past
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 269--273
+\OT1/ptm/m/n/10 gen-er-al-ize worse than Stochas-tic Gra-di-ent
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 269--273
 
  []
 
 
-Underfull \hbox (badness 1629) in paragraph at lines 235--236
-[]\OT1/ptm/m/n/10 The Qiskit quan-tum neu-ral net-work is then
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 235--236
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 239--240
-
- []
-
-
-Underfull \vbox (badness 10000) has occurred while \output is active []
-
-
-
-LaTeX Warning: Citation `pytorch_relu' on page 3 undefined on input line 267.
-
-
-LaTeX Warning: Citation `pytorch_adam' on page 3 undefined on input line 290.
-
-
-Underfull \hbox (badness 3138) in paragraph at lines 289--292
-\OT1/ptm/m/n/10 The loss func-tion is used to mea-sure the
- []
-
-
-Underfull \hbox (badness 1852) in paragraph at lines 289--292
-\OT1/ptm/m/n/10 dif-fer-ence be-tween the pre-dicted out-put and
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 289--292
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 300--301
+Underfull \hbox (badness 10000) in paragraph at lines 277--278
 []\OT1/ptm/m/n/10 Gradients are re-set with
  []
 
-[3]
-Underfull \hbox (badness 10000) in paragraph at lines 309--310
 
- []
-
-
-Underfull \hbox (badness 4556) in paragraph at lines 311--312
+Underfull \hbox (badness 4556) in paragraph at lines 288--289
 []\OT1/ptm/m/n/10 The model is then eval-u-ated on the test
  []
 
 
-Underfull \hbox (badness 2393) in paragraph at lines 311--312
+Underfull \hbox (badness 2393) in paragraph at lines 288--289
 \OT1/ptm/m/n/10 dataset. First, it is set to eval-u-a-tion mode
  []
 
 
-Underfull \hbox (badness 1701) in paragraph at lines 311--312
+Underfull \hbox (badness 1701) in paragraph at lines 288--289
 \OT1/ptm/m/n/10 is dis-abled us-ing \OT1/pcr/m/n/10 no_grad() \OT1/ptm/m/n/10 to speed up
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 311--312
+Underfull \hbox (badness 10000) in paragraph at lines 288--289
 
  []
 
-
-Underfull \hbox (badness 6016) in paragraph at lines 317--318
+[3]
+Underfull \hbox (badness 6016) in paragraph at lines 294--295
 []\OT1/ptm/m/n/10 The pre-dicted la-bel is ob-tained us-ing
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 328--329
+Underfull \hbox (badness 1377) in paragraph at lines 304--306
+[]\OT1/ptm/m/n/10 In con-trast, the sec-ond tu-to-rial adopts a fully
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 304--306
+\OT1/ptm/m/n/10 quan-tum model with cus-tom built quan-tum
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 304--306
+\OT1/ptm/m/n/10 con-vo-lu-tional and pool-ing lay-ers. The tu-to-rial
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 304--306
 
  []
 
 
-Overfull \hbox (37.21307pt too wide) in paragraph at lines 349--349
+Overfull \hbox (37.21307pt too wide) in paragraph at lines 326--326
  []\OT1/pcr/m/n/9 params = ParameterVector("\theta", length=3)[] 
  []
 
 
-Overfull \hbox (21.01309pt too wide) in paragraph at lines 392--392
+Overfull \hbox (21.01309pt too wide) in paragraph at lines 369--369
  []\OT1/pcr/m/n/9 def conv_layer(num_qubits, param_prefix):[] 
  []
 
 
-Overfull \hbox (53.41306pt too wide) in paragraph at lines 392--392
+Overfull \hbox (53.41306pt too wide) in paragraph at lines 369--369
  []        \OT1/pcr/m/n/9 num_qubits, name="Convolutional Layer")[] 
  []
 
 
-Overfull \hbox (26.41309pt too wide) in paragraph at lines 392--392
+Overfull \hbox (26.41309pt too wide) in paragraph at lines 369--369
  []                        \OT1/pcr/m/n/9 param_index + 3)])[] 
  []
 
 
-Overfull \hbox (26.41309pt too wide) in paragraph at lines 392--392
+Overfull \hbox (26.41309pt too wide) in paragraph at lines 369--369
  []        \OT1/pcr/m/n/9 qubits[1::2], qubits[2::2] + [0]):[] 
  []
 
 
-Overfull \hbox (26.41309pt too wide) in paragraph at lines 392--392
+Overfull \hbox (26.41309pt too wide) in paragraph at lines 369--369
  []                        \OT1/pcr/m/n/9 param_index + 3)])[] 
  []
 
 
-Overfull \hbox (4.81311pt too wide) in paragraph at lines 442--442
+Overfull \hbox (4.81311pt too wide) in paragraph at lines 419--419
  []                \OT1/pcr/m/n/9 params[param_index : ([] 
  []
 
 
-Overfull \hbox (4.81311pt too wide) in paragraph at lines 442--442
+Overfull \hbox (4.81311pt too wide) in paragraph at lines 419--419
  []                    \OT1/pcr/m/n/9 param_index + 3)])[] 
  []
 
 [4]
-Overfull \hbox (21.01309pt too wide) in paragraph at lines 489--489
+Overfull \hbox (21.01309pt too wide) in paragraph at lines 464--464
  []\OT1/pcr/m/n/9 ansatz = QuantumCircuit(8, name="Ansatz")[] 
  []
 
 
-Overfull \hbox (21.01309pt too wide) in paragraph at lines 527--527
+Overfull \hbox (21.01309pt too wide) in paragraph at lines 502--502
  []\OT1/pcr/m/n/9 ansatz.compose(pool_layer([0], [1], "p3")[] 
  []
 
 
-LaTeX Warning: Citation `qiskit_sparsepauliop' on page 5 undefined on input line 541.
+LaTeX Warning: Citation `qiskit_sparsepauliop' on page 5 undefined on input line 509.
 
 
-LaTeX Warning: Citation `qiskit_estimatorqnn' on page 5 undefined on input line 542.
+LaTeX Warning: Citation `qiskit_estimatorqnn' on page 5 undefined on input line 510.
 
 
-Overfull \hbox (42.61307pt too wide) in paragraph at lines 563--563
+Overfull \hbox (42.61307pt too wide) in paragraph at lines 531--531
  []\OT1/pcr/m/n/9 SparsePauliOp.from_list([("Z" + "I" * 7, 1)])[] 
  []
 
 
-Overfull \hbox (15.6131pt too wide) in paragraph at lines 563--563
+Overfull \hbox (15.6131pt too wide) in paragraph at lines 531--531
  []    \OT1/pcr/m/n/9 input_params=feature_map.parameters,[] 
  []
 
-
-Underfull \hbox (badness 1701) in paragraph at lines 571--573
-\OT1/ptm/m/n/10 pass by com-put-ing the out-put for each in-
- []
-
 [5]
-
-LaTeX Warning: Citation `qiskit_cobyla' on page 6 undefined on input line 577.
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 598--599
+Underfull \hbox (badness 10000) in paragraph at lines 557--558
 []\OT1/ptm/b/n/10 Derivative-Free\OT1/ptm/m/n/10 : COBYLA is a
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 598--599
+Underfull \hbox (badness 10000) in paragraph at lines 557--558
 \OT1/ptm/m/n/10 derivative-free op-ti-miza-tion method
  []
 
 
-Underfull \hbox (badness 1888) in paragraph at lines 599--600
+Underfull \hbox (badness 1888) in paragraph at lines 558--559
 []\OT1/ptm/b/n/10 Key Dif-fer-ence from Adam\OT1/ptm/m/n/10 : Un-like
  []
 
 
-Underfull \hbox (badness 5578) in paragraph at lines 599--600
+Underfull \hbox (badness 5578) in paragraph at lines 558--559
 \OT1/ptm/m/n/10 Adam, COBYLA does not rely on
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 602--604
+Underfull \hbox (badness 10000) in paragraph at lines 561--563
 []\OT1/ptm/b/n/10 Alternative to
  []
 
 
-Overfull \hbox (42.8933pt too wide) in paragraph at lines 602--604
+Overfull \hbox (42.8933pt too wide) in paragraph at lines 561--563
 \OT1/pcr/b/n/10 optimizer.zero_grad(set_to_none=True)\OT1/ptm/m/n/10 : 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 605--606
+Underfull \hbox (badness 10000) in paragraph at lines 564--565
 []\OT1/ptm/m/n/10 For gradient-based op-ti-miz-ers
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 605--606
+Underfull \hbox (badness 10000) in paragraph at lines 564--565
 \OT1/ptm/m/n/10 (like Adam), you typ-i-cally use
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 605--606
+Underfull \hbox (badness 10000) in paragraph at lines 564--565
 \OT1/pcr/m/n/10 optimizer.zero_grad()\OT1/ptm/m/n/10 , but
  []
 
 
-Overfull \hbox (15.6131pt too wide) in paragraph at lines 636--636
+Underfull \hbox (badness 3428) in paragraph at lines 578--579
+[]\OT1/ptm/m/n/10 The data is passed through the quan-
+ []
+
+
+Overfull \hbox (15.6131pt too wide) in paragraph at lines 610--610
  []\OT1/pcr/m/n/9 plt.rcParams["figure.figsize"] = (12, 6)[] 
  []
 
 
-Overfull \hbox (31.81308pt too wide) in paragraph at lines 636--636
+Overfull \hbox (31.81308pt too wide) in paragraph at lines 610--610
  []\OT1/pcr/m/n/9 y_predict = classifier.predict(test_images)[] 
  []
 
 
-Underfull \hbox (badness 1360) in paragraph at lines 643--646
+Underfull \hbox (badness 1360) in paragraph at lines 617--620
 \OT1/ptm/m/n/10 pro-cess-ing (con-vo-lu-tions, pool-ing, fully con-nected
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 643--646
+Underfull \hbox (badness 10000) in paragraph at lines 617--620
 
  []
 
 
-Overfull \hbox (13.8527pt too wide) in paragraph at lines 710--711
+Overfull \hbox (13.8527pt too wide) in paragraph at lines 684--685
 [][] 
  []
 
 [6]
-Overfull \hbox (13.8527pt too wide) in paragraph at lines 790--791
+Overfull \hbox (13.8527pt too wide) in paragraph at lines 764--765
 [][] 
  []
 
 
-Underfull \hbox (badness 1735) in paragraph at lines 810--814
-[]\OT1/ptm/m/n/10 The model was trained us ing the COBYLA
- []
-
-
-Underfull \hbox (badness 1715) in paragraph at lines 810--814
-\OT1/ptm/m/n/10 The train-ing progress of Test 1 was vi-su-al-ized,
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 810--814
-
- []
-
-
-Overfull \hbox (13.8527pt too wide) in paragraph at lines 872--873
+Overfull \hbox (13.8527pt too wide) in paragraph at lines 844--845
 [][] 
  []
 
 
-Overfull \hbox (13.8527pt too wide) in paragraph at lines 944--945
+Overfull \hbox (13.8527pt too wide) in paragraph at lines 916--917
 [][] 
  []
 
-
-Underfull \vbox (badness 10000) has occurred while \output is active []
-
- [7]
-Underfull \hbox (badness 10000) in paragraph at lines 974--978
+[7]
+Underfull \hbox (badness 10000) in paragraph at lines 946--950
 []\OT1/ptm/m/n/10 Flexible Rep-re-sen-ta-tion of Quan-tum Im-ages
  []
 
 
-Underfull \hbox (badness 6775) in paragraph at lines 974--978
+Underfull \hbox (badness 6775) in paragraph at lines 946--950
 \OT1/ptm/m/n/10 (FRQI): This method en-codes both the color
  []
 
+
+LaTeX Warning: Citation `https://doi.org/10.1038/s41598-023-30575-2www.nature.com/scientificreports' on page 8 undefined on input line 1021.
+
+
+LaTeX Warning: Citation `arXiv:2203.01831v1' on page 8 undefined on input line 1021.
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 1019--1023
+
+ []
+
+
+Underfull \hbox (badness 1715) in paragraph at lines 1029--1031
+[]\OT1/ptm/m/n/10 Like men-tioned be-fore, the ZFea-tureMap is a
+ []
+
+
+Underfull \hbox (badness 2617) in paragraph at lines 1029--1031
+\OT1/ptm/m/n/10 sim-pler fea-ture map that en-codes clas-si-cal data
+ []
+
+
+Underfull \hbox (badness 2970) in paragraph at lines 1029--1031
+\OT1/ptm/m/n/10 into quan-tum states us-ing single-qubit ro-ta-tions.
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 1029--1031
+
+ []
+
 [8]
-
-LaTeX Warning: Citation `https://doi.org/10.1038/s41598-023-30575-2www.nature.com/scientificreports' on page 9 undefined on input line 1058.
-
-
-LaTeX Warning: Citation `arXiv:2203.01831v1' on page 9 undefined on input line 1058.
-
-
-Underfull \hbox (badness 1902) in paragraph at lines 1067--1070
+Underfull \hbox (badness 1902) in paragraph at lines 1043--1046
 \OT1/ptm/m/n/10 neu-ral net-works, as it de-fines the struc-ture and
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 1067--1070
+Underfull \hbox (badness 10000) in paragraph at lines 1043--1046
 \OT1/ptm/m/n/10 The pa-ram-e-ters cho-sen were:$\OML/cmm/m/it/10 ansatz \OT1/cmr/m/n/10 =
  []
 
 
-Underfull \hbox (badness 3323) in paragraph at lines 1067--1070
+Underfull \hbox (badness 3323) in paragraph at lines 1043--1046
 \OML/cmm/m/it/10 TwoLocal\OT1/cmr/m/n/10 (\OML/cmm/m/it/10 num[]ubits \OT1/cmr/m/n/10 = 2\OML/cmm/m/it/10 ; rotation[]locks \OT1/cmr/m/n/10 =[]
  []
 
 
-Underfull \hbox (badness 3229) in paragraph at lines 1085--1086
+Underfull \hbox (badness 3229) in paragraph at lines 1061--1062
 []\OT1/ptm/m/n/10 The crossover method used is a single-point
  []
 
-[9]
-Overfull \hbox (11.34813pt too wide) in paragraph at lines 1128--1129
+
+Overfull \hbox (11.34813pt too wide) in paragraph at lines 1104--1105
 [][] 
  []
 
 
-Underfull \hbox (badness 1460) in paragraph at lines 1130--1133
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+ [9]
+Underfull \hbox (badness 1460) in paragraph at lines 1106--1109
 \OT1/ptm/m/n/10 model's per-for-mance, demon-strat-ing the ef-fec-tive-
  []
 
 
-Overfull \hbox (6.3158pt too wide) in paragraph at lines 1326--1326
-[]    \OT1/pcr/m/n/9 dataset.targets = dataset.targets[idx][] 
- []
-
-
-Overfull \hbox (11.71579pt too wide) in paragraph at lines 1326--1326
-[]\OT1/pcr/m/n/9 train_loader = load_filtered_fashion_mnist([] 
- []
-
-
-Overfull \hbox (6.3158pt too wide) in paragraph at lines 1326--1326
-[]\OT1/pcr/m/n/9 test_loader = load_filtered_fashion_mnist([] 
- []
-
-
-Overfull \hbox (54.91574pt too wide) in paragraph at lines 1326--1326
-[]    \OT1/pcr/m/n/9 rotation_blocks='ry', entanglement_blocks='cz',[] 
- []
-
-
-Overfull \hbox (0.9158pt too wide) in paragraph at lines 1326--1326
-[]    \OT1/pcr/m/n/9 qc.compose(feature_map, inplace=True)[] 
- []
-
-
-Overfull \hbox (17.11578pt too wide) in paragraph at lines 1326--1326
-[]        \OT1/pcr/m/n/9 input_params=feature_map.parameters,[] 
- []
-
-
-Overfull \hbox (38.71576pt too wide) in paragraph at lines 1326--1326
-[]        \OT1/pcr/m/n/9 self.conv1 = Conv2d(1, 4, kernel_size=5)[] 
- []
-
-
-Overfull \hbox (0.9158pt too wide) in paragraph at lines 1326--1326
-[]        \OT1/pcr/m/n/9 self.pool = torch.nn.MaxPool2d(2)[] 
- []
-
-
-Underfull \vbox (badness 10000) has occurred while \output is active []
-
- [10]
-Overfull \hbox (33.31577pt too wide) in paragraph at lines 1326--1326
-[]        \OT1/pcr/m/n/9 # Output 2 classes as prob distribution[] 
- []
-
-
-Overfull \hbox (6.3158pt too wide) in paragraph at lines 1326--1326
-[]\OT1/pcr/m/n/9 optimizer = optim.Adam(model.parameters(),[] 
- []
-
-
-Overfull \hbox (22.51578pt too wide) in paragraph at lines 1326--1326
-[]            \OT1/pcr/m/n/9 new1, new2 = crossover(params[i],[] 
- []
-
-
-Overfull \hbox (6.3158pt too wide) in paragraph at lines 1326--1326
-[]            \OT1/pcr/m/n/9 params[i + 1].data.copy_(new2)[] 
- []
-
-
-Overfull \hbox (27.91577pt too wide) in paragraph at lines 1326--1326
-[]    \OT1/pcr/m/n/9 print(f"Epoch {epoch+1}/{epochs} - Loss: {[] 
- []
-
-
-Underfull \vbox (badness 10000) has occurred while \output is active []
-
-
-Overfull \hbox (44.11575pt too wide) in paragraph at lines 1326--1326
-[]        \OT1/pcr/m/n/9 pred = output.argmax(dim=1, keepdim=True)[] 
- []
-
-
-Overfull \hbox (44.11575pt too wide) in paragraph at lines 1326--1326
-[]        \OT1/pcr/m/n/9 correct += pred.eq(target.view_as(pred)).[] 
- []
-
-
-Overfull \hbox (3.57033pt too wide) in paragraph at lines 1389--1390
+Overfull \hbox (11.34813pt too wide) in paragraph at lines 1182--1183
 [][] 
  []
 
 
-Overfull \hbox (10.48705pt too wide) in paragraph at lines 1443--1444
-[][] 
+Underfull \hbox (badness 2080) in paragraph at lines 1200--1201
+\OT1/ptm/m/n/10 ac-cu-racy across all tests, with fi-nal loss val-ues
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 1449--1507
-[]\OT1/ptm/m/n/10 The re-sults ob-tained with the MNIST
+Underfull \hbox (badness 10000) in paragraph at lines 1200--1201
+
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 1449--1507
-\OT1/ptm/m/n/10 dataset, us-ing the same test and train-ing
- []
-
-
-Underfull \hbox (badness 4872) in paragraph at lines 1449--1507
-\OT1/ptm/m/n/10 size as in the first tu-to-rial were as fol-lows:
- []
-
-
-Overfull \hbox (1.34813pt too wide) in paragraph at lines 1449--1507
-[] 
- []
-
-[11]
-Underfull \hbox (badness 1783) in paragraph at lines 1531--1532
+Underfull \hbox (badness 1783) in paragraph at lines 1205--1206
 []\OT1/ptm/m/n/10 These tests were per-formed us-ing the fash-ion
  []
 
 
-Overfull \hbox (40.3642pt too wide) in paragraph at lines 1592--1593
+Overfull \hbox (40.3642pt too wide) in paragraph at lines 1265--1266
 [][] 
  []
 
 
-Overfull \hbox (11.34813pt too wide) in paragraph at lines 1671--1672
+Overfull \hbox (11.34813pt too wide) in paragraph at lines 1344--1345
 [][] 
  []
 
+[10]
+/home/castela/Documents/GitHub/Quantica/Paper/Report/report.tex:1376: Undefined control sequence.
+l.1376 ... digits), this was inferred by the ev \â
+                                                  ‰ˆ 0.99 \Â± 0.014 result o...
+The control sequence at the end of the top line
+of your error message was never \def'ed. If you have
+misspelled it (e.g., `\hobx'), type `I' and the correct
+spelling (e.g., `I\hbox'). Otherwise just continue,
+and I'll forget about whatever was undefined.
 
-Underfull \vbox (badness 1052) has occurred while \output is active []
 
-
-
-/home/castela/Documents/GitHub/Quantica/Paper/Report/report.tex:1702: LaTeX Error: Unicode character â‰ˆ (U+2248)
-               not set up for use with LaTeX.
+/home/castela/Documents/GitHub/Quantica/Paper/Report/report.tex:1376: LaTeX Error: Invalid UTF-8 byte "89.
 
 See the LaTeX manual or LaTeX Companion for explanation.
 Type  H <return>  for immediate help.
  ...                                              
                                                   
-l.1702 ...digits), this was inferred by the ev â‰ˆ
-                                                   0.99 Â± 0.014 result obta...
-You may provide a definition with
-\DeclareUnicodeCharacter 
+l.1376 ...digits), this was inferred by the ev \â‰
+                                                  ˆ 0.99 \Â± 0.014 result ob...
+The document does not appear to be in UTF-8 encoding.
+Try adding \UseRawInputEncoding as the first line of the file
+or specify an encoding such as \usepackage [latin1]{inputenc}
+in the document preamble.
+Alternatively, save the file in UTF-8 using your editor or another tool
 
-LaTeX Font Info:    Trying to load font information for TS1+ptm on input line 1702.
-(/usr/share/texlive/texmf-dist/tex/latex/psnfss/ts1ptm.fd
-File: ts1ptm.fd 2001/06/04 font definitions for TS1/ptm.
-) [12] (./report.bbl
+
+/home/castela/Documents/GitHub/Quantica/Paper/Report/report.tex:1376: LaTeX Error: Invalid UTF-8 byte "88.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.1376 ...igits), this was inferred by the ev \â‰ˆ
+                                                   0.99 \Â± 0.014 result obt...
+The document does not appear to be in UTF-8 encoding.
+Try adding \UseRawInputEncoding as the first line of the file
+or specify an encoding such as \usepackage [latin1]{inputenc}
+in the document preamble.
+Alternatively, save the file in UTF-8 using your editor or another tool
+
+/home/castela/Documents/GitHub/Quantica/Paper/Report/report.tex:1376: Undefined control sequence.
+l.1376 ...this was inferred by the ev \â‰ˆ 0.99 \Â
+                                                  ± 0.014 result obtained in...
+The control sequence at the end of the top line
+of your error message was never \def'ed. If you have
+misspelled it (e.g., `\hobx'), type `I' and the correct
+spelling (e.g., `I\hbox'). Otherwise just continue,
+and I'll forget about whatever was undefined.
+
+
+/home/castela/Documents/GitHub/Quantica/Paper/Report/report.tex:1376: LaTeX Error: Invalid UTF-8 byte "B1.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.1376 ...his was inferred by the ev \â‰ˆ 0.99 \Â±
+                                                   0.014 result obtained in ...
+The document does not appear to be in UTF-8 encoding.
+Try adding \UseRawInputEncoding as the first line of the file
+or specify an encoding such as \usepackage [latin1]{inputenc}
+in the document preamble.
+Alternatively, save the file in UTF-8 using your editor or another tool
+
+
+Underfull \hbox (badness 1874) in paragraph at lines 1387--1391
+\OT1/ptm/m/n/10 niques with HC-QNNs, as this ap-proach showed
+ []
+
+(./report.bbl [11]
 Underfull \hbox (badness 10000) in paragraph at lines 38--39
 []\OT1/ptm/m/n/8 ------, ``Zzfea-turemap class | qiskit doc-u-men-ta-tion,''
  []
@@ -1326,7 +1274,9 @@ Before submitting the final camera ready copy, remember to:
  uses only Type 1 fonts and that every step in the generation
  process uses the appropriate paper size.
 
-[13] (./report.aux)
+[12
+
+] (./report.aux)
  ***********
 LaTeX2e <2023-11-01> patch level 1
 L3 programming layer <2024-01-22>
@@ -1345,21 +1295,21 @@ Package rerunfilecheck Warning: File `report.out' has changed.
 
 Package rerunfilecheck Info: Checksums for `report.out':
 (rerunfilecheck)             Before: <no file>
-(rerunfilecheck)             After:  51D163510E03B4395F78FF7ECF3192C0;4577.
+(rerunfilecheck)             After:  7489BCC4F8C7B2B3B5E55DF26DC05ABA;4365.
  ) 
 Here is how much of TeX's memory you used:
- 33867 strings out of 476182
- 785915 string characters out of 5795594
- 1990975 words of memory out of 5000000
- 55304 multiletter control sequences out of 15000+600000
- 605761 words of font info for 133 fonts, out of 8000000 for 9000
+ 33754 strings out of 476182
+ 783858 string characters out of 5795594
+ 2000975 words of memory out of 5000000
+ 55197 multiletter control sequences out of 15000+600000
+ 605447 words of font info for 132 fonts, out of 8000000 for 9000
  14 hyphenation exceptions out of 8191
- 99i,18n,107p,1175b,2159s stack positions out of 10000i,1000n,20000p,200000b,200000s
+ 99i,17n,107p,1089b,2159s stack positions out of 10000i,1000n,20000p,200000b,200000s
 </usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi7.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy7.pfb></usr/share/texlive/texmf-dist/fonts/type1/urw/courier/ucrb8a.pfb></usr/share/texlive/texmf-dist/fonts/type1/urw/courier/ucrr8a.pfb></usr/share/texlive/texmf-dist/fonts/type1/urw/times/utmb8a.pfb></usr/share/texlive/texmf-dist/fonts/type1/urw/times/utmr8a.pfb></usr/share/texlive/texmf-dist/fonts/type1/urw/times/utmri8a.pfb>
-Output written on report.pdf (13 pages, 213393 bytes).
+Output written on report.pdf (12 pages, 201833 bytes).
 PDF statistics:
- 215 PDF objects out of 1000 (max. 8388607)
- 178 compressed objects within 2 object streams
- 65 named destinations out of 1000 (max. 500000)
+ 209 PDF objects out of 1000 (max. 8388607)
+ 173 compressed objects within 2 object streams
+ 63 named destinations out of 1000 (max. 500000)
  13 words of extra memory for PDF output out of 10000 (max. 10000000)
 
