@@ -67,9 +67,6 @@ Y.~LeCun and C.~Cortes, ``{MNIST} handwritten digit database,'' \url{http://yann
 \bibitem{qiskit_estimatorqnn}
 ------, ``Estimatorqnn — qiskit documentation,'' \url{https://qiskit-community.github.io/qiskit-machine-learning/stubs/qiskit_machine_learning.neural_networks.EstimatorQNN.html}, 2025.
 
-\bibitem{qiskit_cobyla}
-------, ``Cobyla — qiskit documentation,'' \url{https://docs.quantum.ibm.com/api/qiskit/0.37/qiskit.algorithms.optimizers.COBYLA}, 2025.
-
 \bibitem{https://doi.org/10.1038/s41598-023-30575-2www.nature.com/scientificreports}
 A.~U. . T.~D. Md~Ershadul Haque~*, Manoranjan~Paul, ``Advanced quantum image representation and compression using a dct-efrqi approach,'' \emph{nature scientific reports}, 2023.
 

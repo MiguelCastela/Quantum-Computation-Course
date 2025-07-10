@@ -17,7 +17,7 @@
 \begin{document}
 
     \title{Image classification with Hybrid Quantum Convolutional Neural Networks\\
-        {\footnotesize \textsuperscript QCML2}
+        {\footnotesize \textsuperscript{\textit{QCML2}}}
         }
     
         \author{
@@ -39,14 +39,14 @@
 \section*{\fontsize{16}{20}\selectfont Abstract}
 \addcontentsline{toc}{section}{Abstract}
 
+\noindent
 Artificial neural networks are currently one of the most popular models used in machine
-learning. A subcategory of these called convolutional neural networks (CNN) is par-
-ticularly popular. These are networks mainly used for the task of image recognition. Using
-pooling and convolution layers they extract structured information about images. THis
-project will be related to CNN topic but also to Quantum computing. Quantum machine
+learning. A subcategory of these called convolutional neural networks (CNN) is particularly popular. These are networks mainly used for the task of image recognition. Using
+pooling and convolution layers they extract structured information about images. This
+project will be related to CNN's but also to Quantum computing. Quantum machine
 learning leverages the principles of quantum mechanics to process information, allowing
 for the creation of algorithms that can potentially outperform classical counterparts. By
-harnessing quantum bits or qubits, these algorithms can explore multiple possibilities
+harnessing qubits ans applying rotations, these algorithms can explore multiple possibilities
 simultaneously, offering a unique approach to solving complex problems. While still in the
 early stages of development, quantum machine learning holds promise for revolutionizing
 certain computational tasks, particularly those involving large-scale optimization and data
@@ -56,11 +56,11 @@ analysis.
 \section*{\fontsize{16}{20}\selectfont Introduction and methodology}
 \addcontentsline{toc}{section}{Introduction and methodology}
 
+\noindent
 This project explores the integration of quantum computing
 with neural network architectures, focusing on two types of quantum neural
 networks (QNNs) from the Qiskit tutorials. A final neural network was then
-created with the best features of each of the tutorials and some evolutionary-
-inspired approaches to the hybrid quantum neural network (HQCNN)
+created with the best features of each of the tutorials and some evolutionary-inspired approaches to the hybrid quantum neural network (HQCNN)
 
 
 
@@ -70,19 +70,21 @@ inspired approaches to the hybrid quantum neural network (HQCNN)
 \subsection*{\fontsize{16}{20}\selectfont First tutorial}
 \addcontentsline{toc}{subsection}{First tutorial}
 
-
+\noindent
 The first step of this project was using the Qiskit framework, combined with pythorch to construct a HQNN.
 After studying the first three qiskit tutorials ("Quantum Neural Networks", "Neural Network Classifier" \& "Training a Quantum Model on a Real Dataset") to learn the basics , the tutorial ”Torch
 Connector and Hybrind QNNs” was implemented in totality.
-This tutorial focuses on a more direct application of a HQCNN.
+This tutorial focuses on the development of a standard HQCNN:
 \begin{itemize}
     \item The first step is to initialize the Estimator. The Estimator is a class in Qiskit that allows you to estimate the expectation values of quantum circuits. It is used to evaluate the performance of quantum models by measuring their outputs.
         {\small
         \begin{verbatim}
+
         estimator = Estimator()
+
         \end{verbatim}
         }
-    \item Then, using the torchvision API \cite{paszke2019pytorch}, the MNIST training dataset is loaded (The MNIST database is a large database of handwritten digits \cite{lecun2010mnist}) and apply a transformation to convert images to tensors.\\
+    \item Then, using the torchvision API \cite{paszke2019pytorch}, the MNIST training dataset is loaded (The MNIST database is a large database of handwritten digits \cite{lecun2010mnist}) and a transformation is applied to convert images to tensors.\\
         A tensor is a generalization of vectors and matrices to any number of dimensions. They are the fundamental data structure in PyTorch, similar to NumPy arrays but with additional capabilities for GPU acceleration, beneficial for this type of work.
         
 {\raggedright
@@ -96,55 +98,31 @@ X_train = datasets.MNIST(
 )
 \end{verbatim}
 }
-    \item The dataset is filtered to only have digits labeled 0 and 1 (first \texttt{n\_samples} of each)\\
-        The \texttt{np.append} function is used to concatenate the indices of the two classes (0 and 1) and then filter the dataset using these indices. The \texttt{np.where} function returns the indices of elements in an array that satisfy a given condition.\\
-        The \texttt{X\_train.data} and \texttt{X\_train.targets} attributes are then updated to include only the selected samples.\\
-        The \texttt{X\_train.data} attribute contains the image data, while \texttt{X\_train.targets} contains the corresponding labels.     
-{\raggedright
-\small
-\begin{verbatim}
-idx = np.append(
-    np.where(
-        X_train.targets == 0)
-        [0][:n_samples]
-    , np.where(
-        X_train.targets == 1)
-        [0][:n_samples]
-)
-X_train.data = X_train.data[idx]
-X_train.targets = X_train.targets[idx]  
-\end{verbatim}
-}
-        
+    \item The dataset is filtered to only have digits labeled 0 and 1 (first \texttt{n\_samples} of each)
+        Then \texttt{np.append} function is used to concatenate the indices of the two classes (0 and 1) and then filter the dataset using these indices. The \texttt{np.where} function returns the indices of elements in an array that satisfy a given condition.
+        The \texttt{X\_train.data} and \texttt{X\_train.targets} attributes are then updated to include only the selected samples.
+        The \texttt{X\_train.data} attribute contains the image data, while \texttt{X\_train.targets} contains the corresponding labels.\\
+
+
     \item The PyTorch DataLoader \cite{DataLoader} is defined for the filtered training data, this is used to load the data in batches during training. The \texttt{shuffle=True} argument ensures that the data is shuffled before each epoch, which helps improve the model's capability to generalize.
 {\raggedright
 \small
 \begin{verbatim}
+
 train_loader = DataLoader(X_train, 
 batch_size=batch_size, shuffle=True)
-\end{verbatim}
-}
-        
-    \item The MNIST dataset is loaded again, this time with \texttt{train=False} to indicate that we want to create the test set.\\
-        The test dataset is filtered to only keep digits labeled 0 and 1 (as in the traning set).
-        
-{\small
-\begin{verbatim}
-n_samples = 50
-X_test = datasets.MNIST(
-    root="./data", 
-    train=False, download=True,
-    transform=transforms.Compose(
-        [transforms.ToTensor()])
-)
 
-...
 \end{verbatim}
 }
+
+
+    \item The MNIST dataset is loaded again, this time with \texttt{train=False} to indicate that we want to create the test set.\\
+        The test dataset is filtered to only keep digits labeled 0 and 1 (as in the traning set).\\
+
+
 
     \item When creating the quantum neural network, a key decision must be made:  
-        \textbf{how to encode the classical input features into a quantum state} — a process known as \textit{feature mapping} or \textit{data encoding}.
-        
+        \textbf{how to encode the classical input features into a quantum state} (a process known as \textit{feature mapping} or \textit{data encoding}).
         Qiskit provides several options for this, the most common being:
         
 
@@ -162,10 +140,10 @@ X_test = datasets.MNIST(
         These feature maps are not just about storing the features — they are essential for \textbf{embedding classical data (such as pixel values from images)} into the quantum circuit so that the quantum neural network can process it.\\
 
 
-        The choice of feature map directly influences the expressiveness and performance of the quantum model. In this tutorial, the chosen feature map is the ZZFeatureMap.
+        The choice of feature map directly influences the expressiveness and performance of the quantum model. In this tutorial, the chosen feature map is the ZZFeatureMap.\\
 
 
-        The next choice is the \textbf{ansatz} (the quantum circuit structure). The ansatz defines the architecture of the quantum neural network, including the number of qubits, layers, and gates used. Qiskit provides several predefined ansatz classes, such as:
+        \item The next choice is the \textbf{ansatz} (the quantum circuit structure). The ansatz defines the architecture of the quantum neural network, including the number of qubits, layers, and gates used. Qiskit provides several predefined ansatz classes, such as:
         \begin{itemize}
             \item \textbf{EfficientSU2 \cite{qiskit_efficientsu2}} \\
             A general purpose ansatz that uses a combination of single-qubit rotations and entangling gates. It is designed to be efficient in terms of circuit depth and is suitable for a wide range of problems.
@@ -183,6 +161,7 @@ X_test = datasets.MNIST(
 
 {\small
 \begin{verbatim}
+
 def create_qnn():
     feature_map = ZZFeatureMap(2)
     ansatz = RealAmplitudes(
@@ -205,6 +184,7 @@ def create_qnn():
     return qnn
 
 qnn4 = create_qnn()
+
 \end{verbatim}
 }
 
@@ -215,18 +195,21 @@ qnn4 = create_qnn()
         The QNN is integrated using the TorchConnector, which allows it to be used just like any other PyTorch layer and supports hybrid quantum-classical training via backpropagation.\\
 
         There are two convolutional layers, typically used for image data.
-        $Conv2d(1, 2, kernel_size=5)$ means the first layer takes 1 input channel $(grayscale image)$ and outputs 2 feature maps using 5x5 filters.
-
-        The second layer takes 2 channels and produces 16 feature maps.\\
+        $Conv2d(1, 2, kernel_size=5)$ means the first layer takes 1 input channel $(grayscale image)$ and outputs 2 feature maps using 5x5 filters.The second layer takes 2 channels and produces 16 feature maps.\\
 
         Dropout2d \cite{pytorch_dropout2d} is a regularization layer that randomly zeros out entire channels during training to prevent overfitting.\\
+
+
         fc1 and fc2 are fully connected (linear) layers. The first one takes the flattened output of the convolutional layers (256 features) and reduces it to 64 features. The second one takes the 64 features and outputs 2 features, which are then passed to the QNN.\\
-        The Qiskit quantum neural network is then wrapped using the TorchConnector, allowing it to be used as a layer in the PyTorch model. The QNN takes the 2-dimensional input from fc2 and produces a 1-dimensional output.\\
+
+
+        The Qiskit quantum neural network is then wrapped using the TorchConnector, allowing it to be used as a layer in the PyTorch model. The QNN takes the 2-dimensional input from fc2 and produces a 1-dimensional output.
         The parameters (weights) of the quantum circuit are initialized randomly in the interval $[-1,1]$.
-        Finally, fc3 is another fully connected layer that takes the 1-dimensional output from the QNN and produces a final output of 2 features (which can be interpreted as probabilities for binary classification).\\
+        Finally, fc3 is another fully connected layer that takes the 1-dimensional output from the QNN and produces a final output of 2 features (which can be interpreted as probabilities for binary classification).
 
 {\small
 \begin{verbatim}
+
 class Net(Module):
 def __init__(self, qnn):
     super().__init__()
@@ -243,14 +226,16 @@ def __init__(self, qnn):
     self.qnn 
     = TorchConnector(qnn) 
     self.fc3 = Linear(1, 1)  
+
 \end{verbatim}
 }
 
         \item The next step is to define the Forward pass.
         It applies the first convolutional layer with a ReLU \cite{pytorch_relu} activation, followed by 2x2 max pooling (downsampling). The same steps are repeated for the second convolutional layer.
-        After feature extraction with convolutional layers and dropout for regularization, the data is flattened and passed through two fully connected layers (fc1 and fc2), these layers reduce the dimensionality of the data and prepare it for the quantum neural network (QNN) layer.The output, a 2D vector, is then processed by the quantum neural network (QNN) layer. Its result goes through another linear layer (fc3), and the final output is a concatenation of the prediction and its complement, representing probabilities for binary classification (digit 0 vs 1).
+        After feature extraction with convolutional layers and dropout for regularization, the data is flattened and passed through fc1 and fc2. As mentioned before, the output, a 2D vector, is then processed by the quantum neural network (QNN) layer. Its result goes through another linear layer (fc3), and the final output is a concatenation of the prediction and its complement, representing probabilities for binary classification (digit 0 vs 1).
 {\small
 \begin{verbatim}
+
 def forward(self, x):
     x = F.relu(self.conv1(x))
     x = F.max_pool2d(x, 2)
@@ -263,14 +248,18 @@ def forward(self, x):
     x = self.qnn(x)  # apply QNN
     x = self.fc3(x)
     return cat((x, 1 - x), -1)
+
 \end{verbatim}}
 
 
-        \item Finally it's essencial to inicialize the mode, optimizer and loss function.\\
-        The optimizer is responsible for updating the model's parameters during training. In this case, the Adam optimizer \cite{pytorch_adam} is used with a learning rate of 0.01.\\
-        Adam is a first-order gradient-based optimizer that combines momentum, which uses past gradients, and adaptive learning rates, which scale the step size based on how frequently a parameter is updated. It is commonly used for most deep learning tasks due to its speed and robustness. One of its key advantages is the adaptive learning rate per parameter, which often leads to good convergence. However, one downside of Adam is that it can sometimes generalize worse than Stochastic Gradient Descent (SGD). Other optimizers are explored in the second tutorial.
-        The loss function is used to measure the difference between the predicted output and the true labels. In this case, the  $Negative Log Likelihood Loss$ is used.\\
+        \item Finally it's essencial to inicialize the model, optimizer and loss function.\\
+        
 
+        The optimizer is responsible for updating the model's parameters during training. In this case, the Adam optimizer \cite{pytorch_adam} is used with a learning rate of 0.01.
+        Adam is a first-order gradient-based optimizer that combines momentum, which uses past gradients, and adaptive learning rates that scale the step size based on how frequently a parameter is updated. It is commonly used for deep learning tasks due to its speed and robustness. One of its key advantages is the adaptive learning rate per parameter, which often leads to good convergence. However, one downside of Adam is that it can sometimes generalize worse than optimizers such as Stochastic Gradient Descent (SGD). Other optimizers are explored in the second tutorial.\\
+
+
+        The loss function is used to measure the difference between the predicted output and the true labels. In this case, the  $Negative Log Likelihood Loss$ is used.
         The model is trained for 10 epochs. In each epoch, it iterates over the training batches and performs the following steps:
 
     \begin{itemize}
@@ -301,15 +290,17 @@ def forward(self, x):
 
 \subsection*{\fontsize{16}{20}\selectfont Second tutorial}
 \addcontentsline{toc}{subsection}{Second tutorial}
+\noindent
 In contrast, the second tutorial adopts a fully quantum model with custom built quantum convolutional and pooling layers.
 The tutorial expands the concepts of pooling layers, creating the pooling and convolution circuits and a custom dataset.\\
 
 
 
 \begin{itemize}
-\item The first step in this tutorial is to define a two bit convolutional circuit. This circuit is used to perform a convolution operation on two qubits, which is a fundamental operation in quantum convolutional neural networks (QCNNs). THis circuit applies a series of quantum gates to the qubits, including rotations and controlled-X (CX) gates, to create a quantum state that represents the convolution operation. The parameters of the circuit are defined as a vector of parameters, which can be optimized during training.
+\item The first step in this tutorial is to define a two bit convolutional circuit wich is used to perform a convolution operation on two qubits. This is done by applying a series of quantum gates to the qubits, including rotations and controlled-X (CX) gates, to create a quantum state that represents the convolution operation. The parameters of the circuit are defined as a vector of parameters, which can be optimized during training.
 {\small
 \begin{verbatim}
+
 def conv_circuit(params):
     target = QuantumCircuit(2)
     target.rz(-np.pi / 2, 1)
@@ -323,57 +314,19 @@ def conv_circuit(params):
     return target
 params = ParameterVector("\theta", length=3)
 circuit = conv_circuit(params)
+
 \end{verbatim}}
     
 
-    \item Convolutional Layer
-    A convolutional layer is constructed by composing multiple convolutional circuits. The result is a quantum circuit that can be applied to the qubits. This layer is used to perform convolution operations on the input data, extracting features from the quantum state.
+    \item A convolutional layer is then constructed by composing multiple convolutional circuits. The result is a quantum circuit that can be applied to the qubits. This layer is used to perform convolution operations on the input data, extracting features from the quantum state.\\
+    
 
-{\small
-\begin{verbatim}
-def conv_layer(num_qubits, param_prefix):
-    qc = QuantumCircuit(
-        num_qubits, name="Convolutional Layer")
-    qubits = list(
-        range(num_qubits))
-    param_index = 0
-    params = ParameterVector(
-        param_prefix
-        , length=num_qubits * 3)
-    for q1, q2 in zip(
-        qubits[0::2], qubits[1::2]):
-        qc = qc.compose(
-            conv_circuit(
-                params[
-                    param_index : (
-                        param_index + 3)])
-                    , [q1, q2])
-        qc.barrier()
-        param_index += 3
-    for q1, q2 in zip(
-        qubits[1::2], qubits[2::2] + [0]):
-        qc = qc.compose(
-            conv_circuit(
-                params[
-                    param_index : (
-                        param_index + 3)])
-                    , [q1, q2])
-        qc.barrier()
-        param_index += 3
-
-    qc_inst = qc.to_instruction()
-
-    qc = QuantumCircuit(num_qubits)
-    qc.append(qc_inst, qubits)
-    return qc
-\end{verbatim}
-}
-
-    \item A pooling circuit is defined. This circuit is used to perform a pooling operation on two qubits, which is another fundamental operation in quantum convolutional neural networks (QCNNs). The pooling operation reduces the dimensionality of the data while retaining important features, wich is similar to classical pooling operations in convolutional neural networks (CNNs). 
+    \item A pooling circuit is defined (\texttt{conv\_layer}). This circuit is used to perform a pooling operation on two qubits, which is another fundamental operation in quantum convolutional neural networks (QCNNs). The pooling operation reduces the dimensionality of the data while retaining important features, wich is similar to classical pooling operations in convolutional neural networks (CNNs). 
 
 
 {\small
 \begin{verbatim}
+
 def pool_circuit(params):
     target = QuantumCircuit(2)
     target.rz(-np.pi / 2, 1)
@@ -383,54 +336,23 @@ def pool_circuit(params):
     target.cx(0, 1)
     target.ry(params[2], 1)
     return target
+
 \end{verbatim}
 }
 
-    \item The pooling layer is created by composing several pooling circuits.
+    \item The pooling layer is created by composing several pooling circuits, \texttt{pool\_layer} function.\\
+
+    
+    \item A synthetic dataset of images is created to train the QCNN. Each image is either a horizontal or vertical line.
+    The images are generated using the \texttt{generate\_dataset} function.\\
+
+
+    \item The dataset is split into training and testing sets. The classifier is then trained using a quantum neural network with the defined convolutional and pooling layers.
 
 {\small
 \begin{verbatim}
-def pool_layer(sources
-, sinks, param_prefix):
-    num_qubits = len(sources) 
-    + len(sinks)
-    qc = QuantumCircuit(num_qubits
-    , name="Pooling Layer")
-    param_index = 0
-    params = ParameterVector(
-        param_prefix
-        , length=num_qubits // 2 * 3)
-    for source
-    , sink in zip(sources, sinks):
-        qc = qc.compose(
-            pool_circuit(
-                params[param_index : (
-                    param_index + 3)])
-                    , [source, sink])
-        qc.barrier()
-        param_index += 3
 
-    qc_inst = qc.to_instruction()
-
-    qc = QuantumCircuit(num_qubits)
-    qc.append(qc_inst
-    , range(num_qubits))
-    return qc
-\end{verbatim}
-}
-
-    \item Dataset Generation
-    A synthetic dataset of images is created to train the QCNN. Each image is either a horizontal or vertical line.
-    The images are generated using the \texttt{generate\_dataset} function.
-
-    \item Model Training and Evaluation
-    The dataset is split into training and testing sets. The classifier is then trained using a quantum neural network with the defined convolutional and pooling layers.
-
-{\small
-\begin{verbatim}
 images, labels = generate_dataset(10)
-
-
 train_images, test_images
 , train_labels
 , test_labels = train_test_split(
@@ -442,71 +364,16 @@ train_images, test_images
 \end{verbatim}
 }
 
-    \item Define the callback function:
-    The callback function is used to track the objective function value during training. It updates the plot of the objective function value against the iteration number.
+    \item The callback function is used to track the objective function value during training. It updates the plot of the objective function value against the iteration number.\\
 
 
-{\small
-\begin{verbatim}
-def callback_graph(
-weights, obj_func_eval):
-    clear_output(wait=True)
-    objective_func_vals.append(
-        obj_func_eval) 
-\end{verbatim}}
-    \item The ZfeatureMap was defined as the feature map.
-
-{\small
-\begin{verbatim}
-feature_map = ZFeatureMap(8)
-feature_map = ZFeatureMap(8)
-ansatz = QuantumCircuit(8, name="Ansatz")
-\end{verbatim}
-}
+    \item The ZfeatureMap was defined as the feature map, with 8 qubits. The ansatz circuit is created with 8 qubits aswell.     The convolutional and pooling layers are defined using the conv\_layer and pool\_layer functions. These layers are composed into the ansatz circuit, which are then used in the quantum neural network.
+    The convolutional layers are applied first, followed by the pooling layers (3 of each) wich  as mentioned before, reduce the dimensionality of the data while retaining important features. The final ansatz circuit is a combination of these layers.
+    Then, the ansatz circuit is combined with the feature map.\\
 
 
-\item Define the pooling and convolutional layers:
-{\small
-\begin{verbatim}
-ansatz.compose(
-    conv_layer(8, "c1")
-    , list(range(8))
-    , inplace=True)
 
-ansatz.compose(
-    pool_layer([0, 1, 2, 3]
-    , [4, 5, 6, 7], "p1")
-    , list(range(8))
-    , inplace=True)
-
-ansatz.compose(
-    conv_layer(4, "c2")
-    , list(range(4, 8))
-    , inplace=True)
-
-ansatz.compose(
-    pool_layer([0, 1], [2, 3], "p2")
-    , list(range(4, 8))
-    , inplace=True)
-
-ansatz.compose(
-    conv_layer(2, "c3")
-    , list(range(6, 8))
-    , inplace=True)
-
-# Third Pooling Layer
-ansatz.compose(pool_layer([0], [1], "p3")
-, list(range(6, 8))
-, inplace=True)
-
-\end{verbatim}}
-
-
-    The convolutional and pooling layers are defined using the conv\_layer and pool\_layer functions. These layers are composed into the ansatz circuit, which are then used in the quantum neural network.
-    The convolutional layers are applied first, followed by the pooling layers wich, as mentioned before, reduce the dimensionality of the data while retaining important features. The final ansatz circuit is a combination of these layers.
-
-    \item Then, the ansatz circuit is combined with the feature map. 
-    The observable is defined as a SparsePauliOp \cite{qiskit_sparsepauliop} with the operator ("Z" + "I" * 7), which will measure the Z component of the state on the first qubit while leaving the others unchanged. This observable is used to extract information from the quantum state after the ansatz has been applied.
+    \item The observable is defined as a SparsePauliOp \cite{qiskit_sparsepauliop} with the operator ("Z" + "I" * 7), which will measure the Z component of the state on the first qubit while leaving the others unchanged. This observable is used to extract information from the quantum state after the ansatz has been applied.
     The circuit is decomposed to avoid data duplication when passed to the quantum neural network (QNN). This ensures the circuit is executed efficiently in the EstimatorQNN \cite{qiskit_estimatorqnn} model.
     
 
@@ -531,9 +398,9 @@ qnn = EstimatorQNN(
     \end{verbatim}}
 
 
-    \item The classifier is then initialized and trained using the training data. 
-    
-    The NeuralNetworkClassifier is initialized with the QNN and the COBYLA optimizer (with a maximum of 200 iterations). This optimer differs from the Adam optimizer used in the first tutorial. //
+    \item The classifier is then initialized and trained using the training data.   
+    The NeuralNetworkClassifier is initialized with the QNN and the COBYLA optimizer (with a maximum of 200 iterations). This optimer differs from the Adam optimizer used in the first tutorial.\\
+
     
     Differenced betweenn Adam and COBYLA:
     \begin{itemize}
@@ -555,20 +422,10 @@ qnn = EstimatorQNN(
         \item \textbf{COBYLA Optimizer}:
         \begin{itemize}
             \item \textbf{Derivative-Free}: COBYLA is a derivative-free optimization method suitable for problems without gradients or where gradient calculation is expensive.
-            \item \textbf{Key Difference from Adam}: Unlike Adam, COBYLA does not rely on gradients, making it suitable for non-differentiable problems.
-        \end{itemize}
-        
-        \item \textbf{Alternative to \texttt{optimizer.zero\_grad(set\_to\_none=True)}}:
-        \begin{itemize}
-            \item COBYLA does not require clearing gradients since it does not use gradients.
-            \item For gradient-based optimizers (like Adam), you typically use \texttt{optimizer.zero\_grad()}, but COBYLA does not need such a step.
-            \item When using COBYLA in frameworks like PyTorch, avoid gradient-based methods entirely and focus on function evaluations.
         \end{itemize}
     \end{itemize}
     
-    
-    
-    A callback function (callback\_graph) is  then passed to track the objective function during training. The classifier is then trained using the training data (x,y).
+    A callback function (callback\_graph) is  then passed to track the objective function during training. The classifier is trained using the training data (x,y).\\
     
 
     During classifier.fit(), the following occurs:
@@ -576,12 +433,12 @@ qnn = EstimatorQNN(
     \begin{itemize}
         \item The NeuralNetworkClassifier performs a forward pass by computing the output for each input image \( x \) in \texttt{train\_images}.
         \item The data is passed through the quantum circuit defined by \texttt{feature\_map} and \texttt{ansatz}, and the output is compared to the true labels \( y \).
-        \item The quantum neural network (qnn) is a parameterized model, and this forward pass generates predictions by applying the quantum operations defined in the ansatz to the data encoded in the quantum feature map.
+        \item The qnn is a parameterized model, and this forward pass generates predictions by applying the quantum operations defined in the ansatz to the data encoded in the quantum feature map.
     \end{itemize}
      
     
 
-    Then ,when doing the backward pass, the gradients of the loss function are calculated the with respect to the parameters (weights) of the network and those parameters are updated in order to minimize the loss. This is where the optimization process happens.
+    Then, when doing the backward pass, the gradients of the loss function are calculated the with respect to the parameters (weights) of the network and those parameters are updated in order to minimize the loss. This is where the optimization process happens.
     
 {\small
 \begin{verbatim}
@@ -593,17 +450,12 @@ classifier = NeuralNetworkClassifier(
     callback=callback_graph,
     initial_point=initial_point,
 )
-
 x = np.asarray(train_images)
 y = np.asarray(train_labels)
-
 objective_func_vals = []
 plt.rcParams["figure.figsize"] = (12, 6)
-
 classifier.fit(x, y)
-
 y_predict = classifier.predict(test_images)
-
 x = np.asarray(test_images)
 y = np.asarray(test_labels)
 
@@ -614,10 +466,11 @@ y = np.asarray(test_labels)
 \section*{\fontsize{16}{20}\selectfont Diferent types of QNN}
 \addcontentsline{toc}{section}{Diferent types of QNN}
 
-The first tutorial focuses on a direct application of a quantum neural network (QNN) in a hybrid classical-quantum neural network, 
+\noindent
+The first tutorial focuses on a direct application of a quantum neural network (QNN) in a hybrid classical-quantum neural network model, 
 using a known dataset like MNIST. The model begins with classical processing (convolutions, pooling, fully connected layers), 
 passes through quantum circuits for feature extraction, and concludes with a classical layer for classification. \\
-
+\noindent
 In contrast, 
 the second tutorial adopts a more experimental approach, where data is processed classically and then converted into a quantum format. 
 The QCNN uses convolutional and pooling layers to extract features, and the NeuralNetworkClassifier trains the model. 
@@ -701,7 +554,10 @@ accuracy & 100\% & 99\% & 100\% & 100\% & 100\% \\
 
 \noindent
 These tests were simulated locally, with a manual seed differing for each test. The accuracy was based on 50 training samples and 50 test samples, with the model trained for 10 epochs (One full pass through the entire training dataset). The final loss was calculated after the training process.\\
-The results show that the model achieved high accuracy across all tests, with the final loss values indicating good convergence. The training progress was visualized, showing a steady decrease in loss as the training progressed.\\
+
+
+\noindent
+The results show that the model achieved high accuracy across all tests, with the final loss values indicating good convergence. The training progress was visualized, showing a steady decrease in loss as the training progressed.
 While all runs achieved high accuracy ($\geq$99\%), the final loss varied, indicating that the model's performance can be sensitive to the initial conditions and the specific training data used. 
 
 
@@ -781,13 +637,17 @@ accuracy & 100\% & 66.67\% & 100\% & 100\% & 33.33\% \\
 \caption{accuracy and final loss of the tests}
 \end{table}
 
+\noindent
 The model was trained using the COBYLA optimizer for a maximum of 200 iterations.
 The results show that the model achieved varying accuracy across different tests, with some tests achieving 100\% accuracy while others had lower performance. The final loss values indicate that the model converged to different levels of performance depending on the test.\\
 The training progress was visualized, showing a decrease in loss as the training progressed, although the convergence was not as smooth as in the first tutorial.\\
-The performance disparity between the two tutorials stems from several architectural and implementation differences. The first tutorial integrates the quantum model as a hybrid layer inside a classical convolutional neural network (CNN), which first extracts spatial features from the MNIST images using two Conv2d layers followed by fully connected layers, before embedding a shallow 2-qubit quantum neural network (QNN) via TorchConnector.
-Conversely, the second tutorial adopts a fully quantum-centric approach with quantum convolutional and pooling circuit architecture that attempts to encode artifical images generated. However, it lacks any form of classical preprocessing or feature extraction, making it harder for the quantum model to generalize from high-dimensional input data. The usage of zfeature map (although with more qubits) in the second tutorial also limits the model's ability to capture complex patterns compared to the first tutorial's classical CNN layers. Additionally, the second tutorial's reliance on a derivative-free optimizer (COBYLA) contrasts with the first tutorial's Adam optimizer, which is more suited for gradient-based learning in hybrid models. These factors contribute to the observed differences in performance and accuracy between the two tutorials.
 
-The first tutorial also found success with the artifical dataset created for the second tutorial.
+
+The performance disparity between the two tutorials stems from several architectural and implementation differences. The second tutorial adopts a fully quantum-centric approach that lacks any form of classical preprocessing or feature extraction, making it harder for the quantum model to generalize from high-dimensional input data. The usage of zfeature map (although with more qubits) in the second tutorial also limits the model's ability to capture complex patterns compared to the first tutorial's classical CNN layers. Additionally, the second tutorial's reliance on a derivative-free optimizer (COBYLA) contrasts with the first tutorial's Adam optimizer, which is more suited for gradient-based learning in hybrid models. These factors contribute to the observed differences in performance and accuracy between the two tutorials.\\
+
+
+\noindent
+The first tutorial also found success with the artifical dataset created for the second tutorial:
 
 
 \begin{tikzpicture}
@@ -859,6 +719,7 @@ accuracy & 99\% & 100\% & 100\% & 100\% & 100\% \\
 \caption{accuracy and final loss of the tests}
 \end{table}
 
+\noindent
 While the second tutorial, when trying to classify the MNIST dataset used in the first one, achived around 50\% accuracy with very little loss convergence. This again may be to the way the second tutorial treats the data in a more quantum-centric manner, meaning that the images need to be resized to fit the quantum model, losing its features and becoming too noisy.
 
 
@@ -933,89 +794,24 @@ Accuracy & 43\% & 75\% & 63\% & 62\% & 54\% \\
 
 \section*{\fontsize{16}{20}\selectfont What works best and creating a custom HCQNN}
 \addcontentsline{toc}{section}{ What works best and creating a custom HCQNN}
-Based on the results obtained from the first two tutorials, a custom hybrid quantum convolutional neural network (HCQNN) that combines the best features of both approaches, while also testing classical image processing techniques was developed.\\
+\noindent
+Based on the results obtained from the first two tutorials, a custom hybrid quantum convolutional neural network (HCQNN) that combines the best features of both approaches was developed.\\
 Like in the first tutorial, the Estimator() and MNIST dataset are loaded.
-After loading the MNIST training set, the transformation to convert images to tensors is applied, like in the first tutorial.
-Then 50 samples are loaded for each of digits 0 and 1 from the test set.
-Aftewards, the HQNN is created, with a function that can use different the encoding methods(NEQR, FRQI or ZZFeatureMap).
+After loading the MNIST training set, the transformation to convert images to tensors is applied.
+50 samples are loaded for each of digits 0 and 1 from the test set.
 
 \subsection*{\fontsize{12}{16}\selectfont Trying to manually process the images using NEQR and FRQI}
 \addcontentsline{toc}{subsection}{Trying to manually process the images using NEQR and FRQI}
 \label {sec:NEQR_FRQI}
-
-Flexible Representation of Quantum Images (FRQI): This method encodes both the color (grayscale intensity) and position of each pixel into a quantum state. Specifically, the intensity information is represented by rotating a qubit to a specific angle, while the pixel positions are mapped using basis states.\\
-Novel Enhanced Quantum Representation (NEQR): Unlike FRQI, NEQR uses multiple qubits to represent the grayscale value of each pixel directly, allowing for a more precise encoding of image information.\\
-I tried to implement the NEQR and FRQI methods in my implementation, instead of using ZZFeatureMap.
-These were the functions used:
-
-{\small
-\begin{verbatim}
-def frqi_encoding(image):
-    n = int(np.log2(len(image)))  
-    qreg = QuantumRegister(n + 1)  
-    qc = QuantumCircuit(qreg)
-    
-    for i in range(n):
-        qc.h(qreg[i])
-    
-    for i, pixel in enumerate(image):
-        theta = 2 * np.arccos(
-            np.sqrt(pixel))
-        bin_index = format(
-            i, f'0{n}b')
-        for j, bit in enumerate(
-            bin_index):
-            if bit == '1':
-                qc.x(qreg[j])
-        qc.cry(theta, qreg[n-1]
-        , qreg[n])
-        for j, bit in enumerate(
-            bin_index):
-            if bit == '1':
-                qc.x(qreg[j])
-    qc.custom_num_qubits = n + 1
-    return qc
-\end{verbatim}
-}
+\noindent
+\textbf{Flexible Representation of Quantum Images (FRQI)} is a method encodes both the color (grayscale intensity) and position of each pixel into a quantum state. Specifically, the intensity information is represented by rotating a qubit to a specific angle, while the pixel positions are mapped using basis states.\\
 
 
+\noindent
+\textbf{Novel Enhanced Quantum Representation (NEQR)}, unlike FRQI, uses multiple qubits to represent the grayscale value of each pixel directly, allowing for a more precise encoding of image information.\\
+The NEQR and FRQI methods were tested in the HCQNN, instead of using ZZFeatureMap or ZfeatureMap.
 
-{\small
-\begin{verbatim}
-    def neqr_encoding(image):
-    n = int(np.log2(len(image)))
-    qreg = QuantumRegister(n + 8) 
-    qc = QuantumCircuit(qreg)
-    
-    for i in range(n):
-        qc.h(qreg[i])
-    
-    for i, pixel in enumerate(image):
-        bin_pixel = format(
-            int(pixel * 255), '08b')
-        bin_index = format(i
-        , f'0{n}b')
-        
-        for j, bit in enumerate(
-            bin_index):
-            if bit == '1':
-                qc.x(qreg[j])
-        
-        for j, bit in enumerate(
-            bin_pixel):
-            if bit == '1':
-                qc.mcx(qreg[:n]
-                , qreg[n + j])
-        
-        for j, bit in enumerate(
-            bin_index):
-            if bit == '1':
-                qc.x(qreg[j])
-    
-    return qc
-\end{verbatim}
-}
-
+\noindent
 The results of using NEQR and FRQI instead of quantum feature maps were not as good as expected.
 The NEQR and FRQI methods are more complex and require careful tuning of parameters, which can lead to longer training times and less intuitive results.
 More experimental strategies were studied, such as QPIE \cite{https://doi.org/10.1038/s41598-023-30575-2www.nature.com/scientificreports} wich is a more structure-aware encoding inspired by polar coordinates and DCT-EFRQI \cite{arXiv:2203.01831v1}, that efficiently takes advantage of classical Discrete Cosine Transform. This would maybe yeild slightly better results but similar results to the other classical encoding methods mentioned.\\
@@ -1025,43 +821,55 @@ Because of this, the decision came down to using the ZFeatureMap or ZZFeatureMap
 \subsection*{\fontsize{12}{16}\selectfont Deciding between zfeaturemap and zzfeaturemap}
 \addcontentsline{toc}{subsection}{Deciding between z and COBYLA}
 
-
+\noindent
 Like mentioned before, the ZFeatureMap is a simpler feature map that encodes classical data into quantum states using single-qubit rotations. It is computationally less expensive and easier to implement, making it suitable for smaller datasets or simpler models. However, it may not capture complex relationships between features as effectively as the ZZFeatureMap.
 The ZZFeatureMap, on the other hand, includes both single-qubit rotations and entangling gates (ZZ interactions) between qubits. This allows the model to capture complex relationships between features, making it more suitable for richer or more structured datasets. However, it is computationally more expensive, but in this case, the dataset is small enough that the computational cost is not a significant issue. Because of this, the ZZFeatureMap was chosen for the model.\\
 
 
 \subsection*{\fontsize{12}{16}\selectfont Deciding between Adam and COBYLA}
 \addcontentsline{toc}{subsection}{Deciding between Adam and COBYLA}
-
-In this hybrid quantum-classical neural network setup, using the Adam optimizer is more appropriate than COBYLA. The model integrates both classical layers (such as convolutional and fully connected layers) and a quantum neural network (QNN) wrapped with TorchConnector, which enables automatic differentiation through PyTorch's autograd system. This setup relies on gradient-based optimization, where the loss.backward() call computes gradients, and optimizer.step() updates the parameters accordingly. In contrast, COBYLA is a gradient-free optimizer from SciPy that does not integrate with PyTorch's autograd and cannot update parameters through backpropagation. Using COBYLA in this context would prevent the model from training properly, as it cannot optimize the classical network components or interface with PyTorch's training loop. Therefore, for training hybrid models end-to-end within PyTorch, gradient-based optimizers like Adam should be used to ensure all components are updated correctly.
+\noindent
+In this hybrid quantum-classical neural network setup, using the Adam optimizer is more appropriate than COBYLA. Like in the first tutorial, he model integrates both classical layers (such as convolutional and fully connected layers) and a quantum neural network (QNN) wrapped with TorchConnector, which enables automatic differentiation through PyTorch's autograd system. This setup relies on gradient-based optimization, where the loss.backward() call computes gradients, and optimizer.step() updates the parameters accordingly. In contrast, COBYLA is a gradient-free optimizer from SciPy that does not integrate with PyTorch's autograd and cannot update parameters through backpropagation. Using COBYLA in this context would prevent the model from training properly, as it cannot optimize the classical network components or interface with PyTorch's training loop. Therefore, for training hybrid models end-to-end within PyTorch, gradient-based optimizers like Adam should be used to ensure all components are updated correctly.
 
 
 
 \subsection*{\fontsize{12}{16}\selectfont Deciding the ansatz}
 \addcontentsline{toc}{subsection}{Deciding the ansatz}
 
+\noindent
 The ansatz is a crucial component of quantum neural networks, as it defines the structure and complexity of the quantum circuit used for feature extraction. The choice of ansatz can significantly impact the performance of the model.\\
-The chosen ansatz, from the ones listed in the first tutorial, was the TwoLocal ansatz. This ansatz is flexible and allows users to specify the types of gates and the connectivity between qubits. It can be tailored to specific problems, making it suitable for a wide range of applications. However, it may require more tuning compared to other ansatzes mentioned like EfficientSU2 or RealAmplitudes.\\
-The parameters chosen were:$ansatz = TwoLocal(num_qubits=2, rotation_blocks='ry', entanglement_blocks='cz', reps=1)$.
+The chosen ansatz, from the ones listed in the first tutorial, was the TwoLocal ansatz. This ansatz is flexible and allows users to specify the types of gates and the connectivity between qubits. It can be tailored to specific problems, making it suitable for a wide range of applications.\\
+The parameters chosen were:
+
+\verb|ansatz = TwoLocal(num_qubits=2,|
+\verb|rotation_blocks='ry',entanglement_blocks='cz',|
+\verb|reps=1)|
 
 
 
 \subsection*{\fontsize{12}{16}\selectfont The output layer}
 \addcontentsline{toc}{subsection}{The output layer}
 
-I used nn.sequential to create the output layer, which is a simple way to stack layers in PyTorch. The output layer consists of a linear layer followed by a softmax activation function. The linear layer maps the output of the quantum neural network (QNN) to the desired number of classes (in this case, 2 for binary classification). The softmax activation function converts the raw output scores into probabilities, making it suitable for multi-class classification tasks.\\
+\noindent
+nn.sequential was used to create the output layer, which is a simple way to stack layers in PyTorch. The output layer consists of a linear layer followed by a softmax activation function. The linear layer maps the output of the quantum neural network (QNN) to the desired number of classes (in this case, 2 for binary classification). Then, the softmax activation function converts the raw output scores into probabilities, making it suitable for multi-class classification tasks.\\
 This is better that the previous approach, where the output was a concatenation of the prediction and its complement. The new approach is more straightforward and aligns better with standard practices in neural network design.
 
 
 \subsection*{\fontsize{12}{16}\selectfont adding evolutionary operators}
 \addcontentsline{toc}{subsection}{adding evolutionary operators}
+\noindent
+To complement the gradient-based optimization performed by the Adam optimizer, evolutionary-inspired strategies were also applied to the model parameters. This hybrid optimization approach introduces stochastic variation through crossover and mutation operators, inspired by genetic algorithms. These operators are applied at the end of each training epoch to promote exploration of the parameter space and potentially escape local minima.\\
 
-To complement the gradient-based optimization performed by the Adam optimizer, evolutionary-inspired strategies were also applied to the model parameters. This hybrid optimization approach introduces stochastic variation through crossover and mutation operators, inspired by genetic algorithms. These operators are applied at the end of each training epoch to promote exploration of the parameter space and potentially escape local minima.
 
-The crossover method used is a single-point crossover, commonly applied in evolutionary algorithms to combine traits from two parent solutions. It works by first flattening both parameter tensors into one-dimensional vectors. A random crossover point is then selected somewhere between the first and last index. At this point, the vectors exchange their tail segments, producing two new offspring vectors that blend characteristics of both parents. These new vectors are subsequently reshaped back into the original tensor dimensions to maintain compatibility with the model. This process enables the model to explore new combinations of parameters, encouraging diversity in the population while preserving useful traits from the previous generation.
+\noindent
+The crossover method used is a single-point crossover, commonly applied in evolutionary algorithms to combine traits from two parent solutions. It works by first flattening both parameter tensors into one-dimensional vectors. A random crossover point is then selected somewhere between the first and last index. At this point, the vectors exchange their tail segments, producing two new offspring vectors that blend characteristics of both parents. These new vectors are subsequently reshaped back into the original tensor dimensions to maintain compatibility with the model. This process enables the model to explore new combinations of parameters, encouraging diversity in the population while preserving useful traits from the previous generation.\\
 
-The mutation method employed is a Gaussian mutation with per-element mutation probability, a standard approach for introducing variability into model parameters. This technique begins by generating a mask tensor of the same shape as the parameter tensor, where each element has a fixed probability (e.g., 5\%) of being selected for mutation. For every element in the tensor, Gaussian noise with zero mean and a specified standard deviation (mutation strength, typically 0.1) is generated. This noise is then selectively added only to those elements flagged by the mask. As a result, a subset of the parameter values is perturbed by small, random amounts, introducing stochastic changes that help the model explore new solutions and avoid premature convergence.
 
+\noindent
+The mutation method employed is a Gaussian mutation with per-element mutation probability, a standard approach for introducing variability into model parameters. This technique begins by generating a mask tensor of the same shape as the parameter tensor, where each element has a fixed probability (e.g., 5\%) of being selected for mutation. For every element in the tensor, Gaussian noise with zero mean and a specified standard deviation (mutation strength, typically 0.1) is generated. This noise is then selectively added only to those elements flagged by the mask. As a result, a subset of the parameter values is perturbed by small, random amounts, introducing stochastic changes that help the model explore new solutions and avoid premature convergence.\\
+
+
+\noindent
 Together, these evolutionary operators create a hybrid learning paradigm, blending backpropagation with biologically inspired stochastic search. While this adds computational overhead, it can improve convergence and robustness in non-convex and high-dimensional optimization settings, especially when combined with noisy quantum components.
 
 
@@ -1102,25 +910,20 @@ Together, these evolutionary operators create a hybrid learning paradigm, blendi
 
 \end{axis}
 \end{tikzpicture}
-
+\noindent
 These results had the same seed, batch size and 500 testing samples with 100 training. The model was trained for 10 epochs, with the final loss calculated after the training process.\\
-The results show that the model achieved high accuracy with evolutionary operators, while the model without them did not improve significantly. The training progress was visualized, showing a steady decrease in loss as the training progressed.\\
-The evolutionary operators significantly improved the model's performance, demonstrating the effectiveness of combining gradient-based optimization with stochastic search methods in hybrid quantum-classical neural networks.
-
-
+The results show that the model achieved high accuracy with evolutionary operators, while the model without them did not improve significantly. The training progress was visualized, showing a steady decrease in loss as the training progressed.
+The evolutionary operators significantly improved the model's performance, demonstrating the possible effectiveness of combining gradient-based optimization with stochastic search methods in hybrid quantum-classical neural networks.
 
 \subsection*{\fontsize{12}{16}\selectfont Pooling and convolution layers}
 \addcontentsline{toc}{subsection}{Pooling and convolution layers}
-
+\noindent
 These were used like in the second tutorial, but for simplicity, only one of each was created.
 
-
-\subsection*{\fontsize{12}{16}\selectfont tests}
+\subsection*{\fontsize{12}{16}\selectfont tests with the first dataset}
 \addcontentsline{toc}{subsection}{tests}
 
-\subsection*{\fontsize{12}{16}\selectfont second dataset}
-\addcontentsline{toc}{subsection}{second dataset}
-
+\noindent
 Since the artifical dataset used in the second tutorial was too easy to classify, the binary classification of the MNIST dataset was used, with the digits 0 and 1. The same test and training size as in the first tutorial were as follows:
 
 \begin{tikzpicture}
@@ -1197,13 +1000,14 @@ accuracy & 100\% & 99\% & 100\% & 100\% & 100\% \\
 \caption{accuracy and final loss of the tests}
 \end{table}
 
+\noindent
 The results show that the model achieved high accuracy across all tests, with final loss values indicating good convergence. The training progress was visualized, showing a steady decrease in loss as the training progressed.\\
 
 \subsection*{\fontsize{12}{16}\selectfont results of the three HQNN with a more chanlenging dataset}
 \addcontentsline{toc}{subsection}{results of the three HQNN with a more chanlenging dataset}
 
+\noindent
 These tests were performed using the fashion MNIST dataset, which is more challenging than the MNIST dataset used in the first tutorial. The same training and testing size was used. A subset of classes (0 and 2, "T-shirt/top" and "Pullover") was selected to keep binary classification.
-
 The results obtained were as follows:
 
 \begin{tikzpicture}
@@ -1361,6 +1165,8 @@ accuracy & 91\% & 94\% & 93\% & 50\% & 93\% \\
 \end{table}
 
 
+
+\noindent
 These results show that the custom HCQNN model performed well on the fashion MNIST dataset, achieving high accuracy across different tests. The final loss values indicate that the model converged to a good solution, with some tests achieving very low loss values. The training progress also shows a steady decrease in loss over the epochs, indicating that the model was learning effectively.
 The results, even with a small testing set, demonstrate the effectiveness of the built custom HCQNN, using the better features of the previous tutorials, while also testing different encoding methods and optimizers. These results were better than the direct comparison with the first tutorial.
 
@@ -1370,24 +1176,36 @@ The results, even with a small testing set, demonstrate the effectiveness of the
 \section*{\fontsize{16}{20}\selectfont Running custom HCQNN on real hardware}
 \addcontentsline{toc}{section}{Running custom HCQNN on real hardware}
 
-When running the custom HCQNN on real hardware, it is necessary to define the backend, which was defined by the least busy available with a minimum of 2 qubits. A pass manager and transpiler were also used in the quantum circuit to transform it using hardware-aware passes, Gradients, shot schedules, and error mitigation are properly handled and no unsupported gate remains before runtime execution.
+\noindent
+When running the custom HCQNN on real hardware, it is necessary to define the backend, which was defined by the least busy available with a minimum of 2 qubits. A pass manager and transpiler were also used in the quantum circuit to transform it using hardware-aware passes (gradients, shot schedules, and error mitigation are properly handled and no unsupported gate remains before runtime execution).
 Even with these optimizations, running the full HCQNN showed aboved depleted the full 10 minutes that come with the free IBM Quantum account. 
-Very few forward passes were executed (one job).\\
-When the new IBM Cloud plataform became available,  a mini version of the HCQNN, with only 20 training samples and 10 testing samples and without any of the evolutionary operators (in the service of simplicity) was tested. Even with the new EstimatorV2 and these changes, the jobs didn't run to completion. But, by analising the jobs that were completed its possible to infer that the model was, on the last jobs, likely correctly infering the classes of the images (handwritten digits), this was inferred by the ev \≈ 0.99 \± 0.014 result obtained in the primitive results from the last job. This indicates the QNN model confidently assigned a class close to 1, with a tight standard error (~1.4\%). This isn't enough to infer global model performance, this could be achieved in future work by addim a rule in the code that includes the true label of the image in the metadata. This could then be retrieved easily form the completed jobs. More minutes would also resolve the root problem.
+Very few forward passes (one job) were executed .\\
+
+\noindent
+When the new IBM Cloud plataform became available,  a mini version of the HCQNN, with only 20 training samples and 10 testing samples and without any of the evolutionary operators (in the service of simplicity) was tested. Even with the new EstimatorV2 and these changes, the jobs didn't run to completion. By analising the jobs that were completed its possible to infer that the model was, on the last jobs, likely correctly infering the classes of the images (handwritten digits), this was inferred by the
+\texttt{ev} $\approx 0.99 \pm 0.014$
+result obtained in the primitive results from the last job. This indicates the QNN model confidently assigned a class close to 1, with a tight standard error (~1.4\%). As this isn't enough to infer global model performance, in future work this could possibly be achieved by adding a rule in the code that includes the true label of the image in the metadata. This could then be retrieved easily form the completed jobs. More minutes would also resolve the root problem.
 \section*{\fontsize{16}{20}\selectfont Conclusion}
 \addcontentsline{toc}{section}{Conclusion}
-
-In this report, The implementation of hybrid quantum convolutional neural networks (HCQNNs) using Qiskit and PyTorch  was explored by understanding the basics of quantum neural networks (QNNs) and their applications in image classification tasks. Through hands-on tutorials, it was learned how to construct QNNs, integrate them with classical layers, and train them on datasets like MNIST. Advanced concepts such as feature mapping, ansatz design, and the use of different optimizers were explored. Finally, the comparison was made of various QNN architectures and  a built custom HCQNN that leverages the strengths of both classical and quantum computing for improved performance in image classification tasks.
+\noindent
+In this report, The implementation of hybrid quantum convolutional neural networks (HCQNNs) using Qiskit and PyTorch  was explored by understanding the basics of quantum neural networks (QNNs) and their applications in image classification tasks. Through hands-on tutorials, it was learned how to construct QNNs, integrate them with classical layers, and train them on datasets like MNIST. Advanced concepts such as feature mapping, ansatz design, and the use of different optimizers were explored. Finally, the comparison was made of various QNN architectures and a custom-built HCQNN that leverages the strengths of both tutorials at using classical and quantum computing for good performance in image classification tasks.
 The results obtained from the experiments demonstrated the potential of HCQNNs in achieving competitive accuracy on image classification tasks. The combination of classical and quantum layers allows for efficient feature extraction and representation learning, making HCQNNs a promising avenue for future research in quantum machine learning. 
 
 
 \section*{\fontsize{16}{20}\selectfont Future work}
 \addcontentsline{toc}{section}{Future work}
 
-HQNN for binary classification tasks were the ones explored in the tutorials, so when doing the custom HCQNN, the focus was on binary classification tasks. However, future work could involve extending the HCQNN to multi-class classification tasks, where the model can learn to classify images into multiple categories (using the MNIST datasets for example). This would require modifications to the output layer and loss function to accommodate multi-class outputs.\\
+\noindent
+HQNN's for binary classification tasks were the ones explored in the tutorials, so when doing the custom HCQNN, the focus was on binary classification tasks. However, future work could involve extending the HCQNN to multi-class classification tasks, where the model can learn to classify images into multiple categories (using the MNIST datasets for example). This would require modifications to the output layer and loss function to accommodate multi-class outputs.\\
+
+\noindent
 Also, as mentioned before, the NEQR and FRQI methods were not as effective as expected, so future work could involve exploring more advanced encoding techniques, such as QPIE or DCT-EFRQI, to improve the performance of the HCQNN on more complex datasets.\\
+
+\noindent
 Running the HCQNN on real quantum hardware was not successful due to time constraints and the limitations of the free IBM Quantum account. Future work could involve optimizing the HCQNN for better performance on real hardware, such as reducing the number of qubits used or simplifying the model architecture to fit within the available resources. Additionally, exploring different quantum backends and hardware configurations could lead to improved results.\\
-Finally, further research could be conducted on the integration of evolutionary-inspired optimization techniques with HCQNNs, as this approach showed promising results in improving model performance. Exploring different evolutionary operators and their impact on training dynamics could lead to more robust and efficient HCQNNs.
+
+\noindent
+Finally, further research could be conducted on the integration of evolutionary-inspired optimization techniques with HCQNNs, as this approach showed promising results in improving model performance. Exploring different evolutionary operators and their impact on training dynamics could lead to more robust and efficient HCQNNs. Comparing the performance of HCQNNs with these features and classical neural networks on various datasets could also provide insights into the advantages and limitations of quantum machine learning approaches.\\
 
 
 

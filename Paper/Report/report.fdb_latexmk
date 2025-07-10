@@ -1,19 +1,17 @@
 # Fdb version 4
-["bibtex report"] 0 "report.aux" "report.bbl" "report" 0 -1
+["bibtex report"] 0 "report.aux" "report.bbl" "report" 1752115604.19829 -1
   "./references.bib" 1748995604.56913 5034 83b3dbd18e1be0002f22761ca954f39a ""
   "/usr/share/texlive/texmf-dist/bibtex/bst/ieeetran/IEEEtran.bst" 1440712899 57748 7c8250ecf02814ce6ddc0cdbb63df1dd ""
-  "report.aux" 1752020770.59952 5302 d7944e3ef8ee96b528df62e8dbf2aa39 "pdflatex"
+  "report.aux" 1752115604.06851 5164 96869ccc6303c6e9ea9d39e01fd4d75d "pdflatex"
   (generated)
   "report.bbl"
   "report.blg"
   (rewritten before read)
-["pdflatex"] 1752020767.77831 "/home/castela/Documents/GitHub/Quantica/Paper/Report/report.tex" "report.pdf" "report" 1752020770.78669 2
+["pdflatex"] 1752115602.16641 "/home/castela/Documents/GitHub/Quantica/Paper/Report/report.tex" "report.pdf" "report" 1752115604.19847 0
   "/etc/texmf/web2c/texmf.cnf" 1733106275.85044 475 c0e671620eb5563b2130f56340a5fde8 ""
-  "/home/castela/Documents/GitHub/Quantica/Paper/Report/report.tex" 1752020764.7594 62270 e6a7363c0b07fa8c8f48b269b00584e0 ""
+  "/home/castela/Documents/GitHub/Quantica/Paper/Report/report.tex" 1752115601.8645 56498 80875e06a938fa7c3386451ea015d386 ""
   "/usr/share/texlive/texmf-dist/fonts/enc/dvips/base/8r.enc" 1165713224 4850 80dc9bab7f31fb78a000ccfed0e27cab ""
   "/usr/share/texlive/texmf-dist/fonts/map/fontname/texfonts.map" 1577235249 3524 cb3e574dea2d1052e39280babc910dc8 ""
-  "/usr/share/texlive/texmf-dist/fonts/tfm/adobe/courier/pcrb7t.tfm" 1136768653 960 4ab65358b8406f30ef5496c8c096d22b ""
-  "/usr/share/texlive/texmf-dist/fonts/tfm/adobe/courier/pcrb8r.tfm" 1136768653 1292 3059476c50a24578715759f22652f3d0 ""
   "/usr/share/texlive/texmf-dist/fonts/tfm/adobe/courier/pcrr7t.tfm" 1136768653 960 379cc0019370a9e0208a0a3f949f847a ""
   "/usr/share/texlive/texmf-dist/fonts/tfm/adobe/courier/pcrr8r.tfm" 1136768653 1292 bd42be2f344128bff6d35d98474adfe3 ""
   "/usr/share/texlive/texmf-dist/fonts/tfm/adobe/times/ptmb7t.tfm" 1136768653 2172 fd0c924230362ff848a33632ed45dc23 ""
@@ -47,12 +45,10 @@
   "/usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb" 1248133631 35752 024fb6c41858982481f6968b5fc26508 ""
   "/usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb" 1248133631 32569 5e5ddc8df908dea60932f3c484a54c0d ""
   "/usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy7.pfb" 1248133631 32716 08e384dc442464e7285e891af9f45947 ""
-  "/usr/share/texlive/texmf-dist/fonts/type1/urw/courier/ucrb8a.pfb" 1136849748 50493 4ed1f7e9eba8f1f3e1ec25195460190d ""
   "/usr/share/texlive/texmf-dist/fonts/type1/urw/courier/ucrr8a.pfb" 1136849748 45758 19968a0990191524e34e1994d4a31cb6 ""
   "/usr/share/texlive/texmf-dist/fonts/type1/urw/times/utmb8a.pfb" 1136849748 44729 811d6c62865936705a31c797a1d5dada ""
   "/usr/share/texlive/texmf-dist/fonts/type1/urw/times/utmr8a.pfb" 1136849748 46026 6dab18b61c907687b520c72847215a68 ""
   "/usr/share/texlive/texmf-dist/fonts/type1/urw/times/utmri8a.pfb" 1136849748 45458 a3faba884469519614ca56ba5f6b1de1 ""
-  "/usr/share/texlive/texmf-dist/fonts/vf/adobe/courier/pcrb7t.vf" 1136768653 1344 c590fc3b8640445e169e64e330afb3d5 ""
   "/usr/share/texlive/texmf-dist/fonts/vf/adobe/courier/pcrr7t.vf" 1136768653 1344 6ff472164bf9de0fb2e864b28ac156d9 ""
   "/usr/share/texlive/texmf-dist/fonts/vf/adobe/times/ptmb7t.vf" 1136768653 1372 788387fea833ef5963f4c5bffe33eb89 ""
   "/usr/share/texlive/texmf-dist/fonts/vf/adobe/times/ptmr7t.vf" 1136768653 1380 0ea3a3370054be6da6acd929ec569f06 ""
@@ -226,10 +222,10 @@
   "/usr/share/texmf/web2c/texmf.cnf" 1707919699 40399 f2c302f7d2af602abb742093540a5834 ""
   "/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map" 1733107137.99265 128028 f533b797fba58d231669ea19e894e23e ""
   "/var/lib/texmf/web2c/pdftex/pdflatex.fmt" 1733922934 6800790 4f44c5be00cf6bb5c5639010e479b2cb ""
-  "report.aux" 1752020770.59952 5302 d7944e3ef8ee96b528df62e8dbf2aa39 "pdflatex"
-  "report.bbl" 1751934943.67402 4392 14cc1f712cc2c26a1be3d9a8b4623822 "bibtex report"
-  "report.out" 1752020770.60052 4365 7489bcc4f8c7b2b3b5e55df26dc05aba "pdflatex"
-  "report.tex" 1752020764.7594 62270 e6a7363c0b07fa8c8f48b269b00584e0 ""
+  "report.aux" 1752115604.06851 5164 96869ccc6303c6e9ea9d39e01fd4d75d "pdflatex"
+  "report.bbl" 1752115511.53104 4228 36151f5fbcf3b98e4836435194caee01 "bibtex report"
+  "report.out" 1752115604.06951 4235 302ce22ab694ff75096f7251390e37c8 "pdflatex"
+  "report.tex" 1752115601.8645 56498 80875e06a938fa7c3386451ea015d386 ""
   (generated)
   "report.aux"
   "report.log"
