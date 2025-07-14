@@ -1,8 +1,0 @@
-- correr testes em hardware real!!!!!!!!!!!!!
-- fazer um notebook com a custom HQNN
-- meter referencias na drive
-- explicar o hybrid no relatorio
-
-
-
-
