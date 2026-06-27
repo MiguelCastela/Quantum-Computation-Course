@@ -1,1 +1,24 @@
+# Secrets
+.env
+*.env
+
+# Python
 myenv/
+__pycache__/
+*.pyc
+.ipynb_checkpoints/
+
+# Datasets (auto-downloaded by the code)
+data/
+**/data/MNIST/
+**/data/FashionMNIST/
+
+# LaTeX build artifacts
+*.aux
+*.bbl
+*.blg
+*.fdb_latexmk
+*.fls
+*.log
+*.out
+*.synctex.gz
