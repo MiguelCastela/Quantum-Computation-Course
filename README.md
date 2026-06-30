@@ -3,8 +3,6 @@
 Final paper and poster for the Curso de Formacao Especializada em Computacao e
 Tecnologias Quanticas (QCML2), Universidade de Coimbra.
 
-**Authors:** Miguel Castela (DEI, Universidade de Coimbra) and Professor Jorge Lobo (ISR, Universidade de Coimbra)
-
 This project explores Hybrid Quantum Convolutional Neural Networks (HQCNNs) for
 image classification on the MNIST dataset, combining classical PyTorch layers with
 quantum circuits built in Qiskit (via `TorchConnector` / `EstimatorQNN`). It also
@@ -76,3 +74,9 @@ via a local `.env` file:
 ```
 QISKIT_TOKEN=your_token_here
 ```
+
+## Authors
+
+- Miguel Castela (DEI, Universidade de Coimbra)
+
+Supervised by Professor Jorge Lobo (ISR, Universidade de Coimbra).
