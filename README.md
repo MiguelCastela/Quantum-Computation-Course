@@ -22,6 +22,7 @@ under ideal simulation, noise, and real IBM Quantum hardware.
 
 ```
 paper/        LaTeX source (report.tex, references.bib) and report_final.pdf
+  drafts/     earlier report versions (initial, v2, v3)
 poster/       poster_final.pdf  +  archive/ (earlier drafts)
 src/          HQCNN implementation
   hybrid_qcnn.py          main hybrid CNN model
@@ -36,7 +37,7 @@ src/          HQCNN implementation
   hybrid_qcnn.ipynb       exploratory notebook
   models/                 saved checkpoints (*.pt)
   results/                generated figures
-  sandbox/                Qiskit-tutorial follow-alongs, scratch scripts, notes
+  sandbox/                Qiskit-tutorial follow-alongs (incl. qcnn_tutorial2.py), scratch scripts, notes
 docs/references/          papers and project briefs cited in the report
 coursework/               secondary course assignments (see below)
 ```
